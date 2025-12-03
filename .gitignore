@@ -1,0 +1,25 @@
+# Config local (jamais en Git)
+/config/config.php
+
+# Environnement
+.env
+
+# Vendors (si utilisés)
+/vendor/
+/node_modules/
+
+# IDE & système
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs & caches
+*.log
+cache/
+tmp/
+
+# Assets générés
+public/assets/css/*.map
+public/assets/js/*.map
