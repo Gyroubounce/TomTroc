@@ -15,4 +15,9 @@ $router->add('/', 'HomeController', 'index');
 $router->add('/inscription', 'AuthController', 'register');
 $router->add('/connexion', 'AuthController', 'login');
 
+require __DIR__ . '/../app/controllers/BookController.php';
+
+$router->add('/books', 'BookController', 'index');
+
+
 $router->dispatch($_SERVER['REQUEST_URI']);

@@ -11,9 +11,9 @@
   <nav>
     <ul class="nav">
       <li><a href="/">Accueil</a></li>
-      <li><a href="/livres">Nos livres</a></li>
-      <li><a href="/messagerie">Messagerie</a></li>
-      <li><a href="/mon-compte">Mon compte</a></li>
+      <li><a href="/books">Nos Livres</a></li>
+      <li><a href="/messages">Messagerie</a></li>
+      <li><a href="/account">Mon compte</a></li>
       <li><a href="/connexion">Connexion</a></li>
     </ul>
   </nav>
