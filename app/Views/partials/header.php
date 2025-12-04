@@ -6,16 +6,23 @@
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-<header class="navbar">
-  <div class="logo">TomTroc</div>
-  <nav>
-    <ul class="nav">
-      <li><a href="/">Accueil</a></li>
-      <li><a href="/books">Nos Livres</a></li>
-      <li><a href="/messages">Messagerie</a></li>
-      <li><a href="/account">Mon compte</a></li>
-      <li><a href="/connexion">Connexion</a></li>
-    </ul>
-  </nav>
+<header class="site-header">
+    <div class="logo"></div>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/books">Nos livres à l’échange</a></li>
+        </ul>
+    </nav>
+
+    <nav class="user-nav">
+        <ul>
+            <li><a href="/messages">Messagerie</a></li>
+            <li><a href="/account">Mon compte</a></li>
+            <li><a href="/login">Connexion</a></li>
+        </ul>
+    </nav>
 </header>
+
 <main>

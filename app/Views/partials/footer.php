@@ -1,6 +1,4 @@
-</main>
-<footer class="footer">
-  <p>© TomTroc — Mentions légales — Politique de confidentialité</p>
+<footer class="site-footer">
+    <p>&copy; 2025 TomTroc - Politique de confidentialité - Mentions légales</p>
 </footer>
-</body>
-</html>
+

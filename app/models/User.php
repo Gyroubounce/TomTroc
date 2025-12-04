@@ -1,6 +1,8 @@
 <?php
 class User {
-    public $id;
-    public $name;
-    public $email;
+    public int $id;
+    public string $username;
+    public string $email;
+    public string $password;
+    public string $created_at;
 }
