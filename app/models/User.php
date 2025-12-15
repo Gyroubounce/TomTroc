@@ -5,4 +5,5 @@ class User {
     public string $email;
     public string $password;
     public string $created_at;
+    public string $profile;
 }

@@ -14,7 +14,7 @@
         <?php foreach ($books as $book): ?>
             <a href="/books/<?= $book->id ?>" class="book-card">
                 <?php if (!empty($book->image)): ?>
-                    <img src="/uploads/<?= htmlspecialchars($book->image) ?>"
+                    <img src="<?= htmlspecialchars($book->image) ?>"
                          alt="<?= htmlspecialchars($book->title) ?>"
                          class="book-cover">
                 <?php endif; ?>
