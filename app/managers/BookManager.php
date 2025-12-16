@@ -128,4 +128,33 @@ class BookManager {
         $stmt = $this->db->prepare("DELETE FROM books WHERE id = ?");
         $stmt->execute([$id]);
     }
+
+    /**
+     * Récupère les derniers livres ajoutés (disponibles)
+     */
+    public function findLatest(int $limit = 4): array
+    {
+        $sql = "
+            SELECT b.*, u.id AS user_id, u.username, u.email, u.profile
+            FROM books b
+            JOIN users u ON b.user_id = u.id
+            WHERE b.status = 'disponible'
+            ORDER BY b.id DESC
+            LIMIT ?
+        ";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(1, $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $books = [];
+        foreach ($rows as $row) {
+            $books[] = $this->hydrateBook($row);
+        }
+
+        return $books;
+    }
+
 }

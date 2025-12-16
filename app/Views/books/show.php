@@ -1,31 +1,33 @@
-<div class="book-detail">
-    <?php if ($book->image): ?>
-        <img src="<?= htmlspecialchars($book->image) ?>" 
-             alt="<?= htmlspecialchars($book->title) ?>" 
-             class="book-cover-detail">
-    <?php endif; ?>
-
-    <div class="book-info">
-        <h1><?= htmlspecialchars($book->title) ?></h1>
-        <p class="author">par <?= htmlspecialchars($book->author) ?></p>
-
-        <hr class="separator">
-
-        <p class="description-label">Description</p>
-        <p class="description-text"><?= nl2br(htmlspecialchars($book->description)) ?></p>
-
-        <p class="status"><strong>Status :</strong> <?= htmlspecialchars($book->status) ?></p>
-
-          <div class="owner">
-        <p>Propriétaire :</p>
-        <?php if ($user && $user->profile): ?>
-            <img src="/assets/uploads/profile/<?= htmlspecialchars($user->profile) ?>" 
-                 alt="<?= htmlspecialchars($user->username) ?>" 
-                 class="owner-photo">
+<main>
+    <div class="book-detail">
+        <?php if ($book->image): ?>
+            <img src="<?= htmlspecialchars($book->image) ?>" 
+                alt="<?= htmlspecialchars($book->title) ?>" 
+                class="book-cover-detail">
         <?php endif; ?>
-        <span class="owner-name"><?= htmlspecialchars($user->username ?? 'Inconnu') ?></span>
-    </div>
 
-        <a href="/books" class="btn">Retour à la liste des livres</a>
+        <div class="book-info">
+            <h1><?= htmlspecialchars($book->title) ?></h1>
+            <p class="author">par <?= htmlspecialchars($book->author) ?></p>
+
+            <hr class="separator">
+
+            <p class="description-label">Description</p>
+            <p class="description-text"><?= nl2br(htmlspecialchars($book->description)) ?></p>
+
+            <p class="status"><strong>Status :</strong> <?= htmlspecialchars($book->status) ?></p>
+
+            <div class="owner">
+            <p>Propriétaire :</p>
+            <?php if ($user && $user->profile): ?>
+                <img src="/assets/uploads/profile/<?= htmlspecialchars($user->profile) ?>" 
+                    alt="<?= htmlspecialchars($user->username) ?>" 
+                    class="owner-photo">
+            <?php endif; ?>
+            <span class="owner-name"><?= htmlspecialchars($user->username ?? 'Inconnu') ?></span>
+        </div>
+
+            <a href="/books" class="btn">Retour à la liste des livres</a>
+        </div>
     </div>
-</div>
+</main>

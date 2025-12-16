@@ -15,16 +15,17 @@ class Router {
             return $instance->$method();
         }
             foreach ($this->routes as $route => [$controller, $method]) {
-        $pattern = preg_replace('#:id#', '([0-9]+)', $route);
-        if (preg_match('#^' . $pattern . '$#', $path, $matches)) {
-            $instance = new $controller();
-            if (isset($matches[1])) {
-                $instance->$method($matches[1]); // passe l’ID
-            } else {
-                $instance->$method();
-            }
-            return;
-        }
+                $pattern = preg_replace('#:id#', '([0-9]+)', $route);
+                
+                if (preg_match('#^' . $pattern . '$#', $path, $matches)) {
+                    $instance = new $controller();
+                    if (isset($matches[1])) {
+                        $instance->$method($matches[1]); // passe l’ID
+                    } else {
+                        $instance->$method();
+                    }
+                    return;
+                }
     }
            // Si aucune route ne correspond → ErrorController
         $error = new ErrorController();
