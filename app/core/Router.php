@@ -2,32 +2,31 @@
 class Router {
     private $routes = [];
 
-    public function add($path, $controller, $method) {
-        $this->routes[$path] = [$controller, $method];
+    public function add($path, $controller, $method, $httpMethod = 'GET') {
+        $this->routes[] = [
+            'path'       => $path,
+            'controller' => $controller,
+            'method'     => $method,
+            'httpMethod' => strtoupper($httpMethod)
+        ];
     }
 
     public function dispatch($uri) {
         $path = parse_url($uri, PHP_URL_PATH);
-        
-        if (isset($this->routes[$path])) {
-            [$controller, $method] = $this->routes[$path];
-            $instance = new $controller();
-            return $instance->$method();
-        }
-            foreach ($this->routes as $route => [$controller, $method]) {
-                $pattern = preg_replace('#:id#', '([0-9]+)', $route);
-                
-                if (preg_match('#^' . $pattern . '$#', $path, $matches)) {
-                    $instance = new $controller();
-                    if (isset($matches[1])) {
-                        $instance->$method($matches[1]); // passe l’ID
-                    } else {
-                        $instance->$method();
-                    }
-                    return;
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+        foreach ($this->routes as $route) {
+            $pattern = preg_replace('#:id#', '([0-9]+)', $route['path']);
+
+            if (preg_match('#^' . $pattern . '$#', $path, $matches) && $route['httpMethod'] === $requestMethod) {
+                $instance = new $route['controller']();
+                if (isset($matches[1])) {
+                    return $instance->{$route['method']}($matches[1]);
                 }
-    }
-           // Si aucune route ne correspond → ErrorController
+                return $instance->{$route['method']}();
+            }
+        }
+
         $error = new ErrorController();
         $error->notFound();
         exit;

@@ -22,7 +22,7 @@
 
                     <h2 class="book-title"><?= htmlspecialchars($book->title) ?></h2>
                     <p class="book-author"><?= htmlspecialchars($book->author) ?></p>
-                    <p class="book-seller">Vendu par : <?= htmlspecialchars($book->seller ?? 'Inconnu') ?></p>
+                    <p class="book-seller">Vendu par : <?= htmlspecialchars($book->user->username ?? 'Inconnu') ?></p>
                 </a>
             <?php endforeach; ?>
         </section>

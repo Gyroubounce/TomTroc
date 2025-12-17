@@ -7,5 +7,7 @@ class Book {
     public string $status;        // 'disponible' ou 'non dispo'
     public ?string $image;        // peut être NULL
     public int $user_id;
+
+    public ?User $user = null;
 }
 

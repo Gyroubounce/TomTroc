@@ -1,27 +1,37 @@
 <?php
-    require __DIR__ . '/../app/core/Database.php';
-    require __DIR__ . '/../app/core/Installer.php';
-    require __DIR__ . '/../app/core/Router.php';
+// Front controller : point d’entrée unique
 
-    // Exécute l’installation si nécessaire
-    Installer::run();
+// 1. Config & session
+require __DIR__ . '/../app/core/Session.php';
+Session::start();
 
-    // Ensuite, ton router
-    require __DIR__ . '/../app/controllers/HomeController.php';
-    require __DIR__ . '/../app/controllers/AuthController.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-    $router = new Router();
-    $router->add('/', 'HomeController', 'index');
-    $router->add('/inscription', 'AuthController', 'register');
-    $router->add('/connexion', 'AuthController', 'login');
+// 2. Autoload
+require __DIR__ . '/../app/core/autoload.php';
 
-    require __DIR__ . '/../app/controllers/ErrorController.php';
-    require __DIR__ . '/../app/controllers/BookController.php';
+// 3. Installer (si nécessaire)
+Installer::run();
 
-    $router->add('/books', 'BookController', 'index');
-    $router->add('/books/:id', 'BookController', 'show');
+// 4. Router
+$router = new Router();
 
-    $router->dispatch($_SERVER['REQUEST_URI']);
+// Définition des routes
+$router->add('/', 'HomeController', 'index');
 
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+// Authentification
+$router->add('/inscription', 'AuthController', 'register');
+$router->add('/connexion', 'AuthController', 'login', 'GET');   // affiche le formulaire
+$router->add('/auth', 'AuthController', 'authenticate', 'POST'); // traite le formulaire
+$router->add('/logout', 'AuthController', 'logout', 'GET');      // déconnexion
+
+// Mon compte
+$router->add('/mon-compte', 'UserController', 'account');
+
+// Livres
+$router->add('/books', 'BookController', 'index');
+$router->add('/books/:id', 'BookController', 'show');
+
+// 5. Dispatch
+$router->dispatch($_SERVER['REQUEST_URI']);

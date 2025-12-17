@@ -1,9 +1,8 @@
 <?php
-require_once __DIR__ . '/../core/Database.php';
-require_once __DIR__ . '/../models/User.php';
+
 
 class UserManager {
-    private $db;
+    private PDO $db;
 
     public function __construct() {
         $this->db = Database::getConnection();
@@ -11,6 +10,7 @@ class UserManager {
 
     /**
      * Récupère tous les utilisateurs
+     * @return User[]
      */
     public function findAll(): array {
         $stmt = $this->db->query("SELECT * FROM users");
@@ -23,7 +23,8 @@ class UserManager {
     public function findById(int $id): ?User {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = ?");
         $stmt->execute([$id]);
-        return $stmt->fetchObject(User::class) ?: null;
+        $user = $stmt->fetchObject(User::class);
+        return $user ?: null;
     }
 
     /**
@@ -32,8 +33,33 @@ class UserManager {
     public function findByUsername(string $username): ?User {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->execute([$username]);
-        return $stmt->fetchObject(User::class) ?: null;
+        $user = $stmt->fetchObject(User::class);
+        return $user ?: null;
     }
+
+    /**
+     * Récupère un utilisateur par son email
+     */
+    public function findByEmail(string $email): ?User {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetchObject(User::class);
+        return $user ?: null;
+    }
+
+    public function findByUsernameAndEmail(string $username, string $email): ?object {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE username = :username AND email = :email");
+        $stmt->execute([
+            'username' => $username,
+            'email'    => $email
+        ]);
+
+        $user = $stmt->fetchObject(User::class);
+
+
+        return $user ?: null;
+    }
+
 
     /**
      * Crée un nouvel utilisateur
@@ -53,7 +79,7 @@ class UserManager {
     /**
      * Met à jour la photo de profil d’un utilisateur
      */
-    public function updateProfile(int $id, string $profile): void {
+    public function updateProfile(int $id, ?string $profile): void {
         $stmt = $this->db->prepare("UPDATE users SET profile = ? WHERE id = ?");
         $stmt->execute([$profile, $id]);
     }

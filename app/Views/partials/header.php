@@ -20,8 +20,8 @@
   <nav class="user-nav">
     <ul>
       <li><a href="/messages">Messagerie</a></li>
-      <li><a href="/account">Mon compte</a></li>
-      <li><a href="/login">Connexion</a></li>
+      <li><a href="/mon-compte">Mon compte</a></li>
+      <li><a href="/inscription">Connexion</a></li>
     </ul>
   </nav>
 </header>

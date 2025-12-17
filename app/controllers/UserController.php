@@ -1,85 +1,50 @@
 <?php
-require_once __DIR__ . '/../models/UserManager.php';
 
 class UserController {
-    private $manager;
+    private UserManager $manager;
 
     public function __construct() {
         $this->manager = new UserManager();
     }
 
     /**
-     * Liste tous les utilisateurs
+     * Liste tous les utilisateurs (admin)
      */
-    public function index() {
+    public function index(): void {
         $users = $this->manager->findAll();
-        require __DIR__ . '/../views/users/index.php';
+        View::render('users/index', ['users' => $users]);
     }
 
     /**
      * Affiche un utilisateur par ID
      */
-    public function show($id) {
+    public function show(int $id): void {
         $user = $this->manager->findById($id);
         if (!$user) {
             http_response_code(404);
             echo "Utilisateur introuvable";
             return;
         }
-        require __DIR__ . '/../views/users/show.php';
+        View::render('users/show', ['user' => $user]);
     }
 
     /**
-     * Formulaire de création
+     * Formulaire d’édition (admin)
      */
-    public function create() {
-        require __DIR__ . '/../views/users/create.php';
-    }
-
-    /**
-     * Enregistre un nouvel utilisateur
-     */
-    public function store() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = trim($_POST['username'] ?? '');
-            $email    = trim($_POST['email'] ?? '');
-            $password = $_POST['password'] ?? '';
-
-            // Gestion de l'upload de l'image de profil
-            $profile = null;
-            if (!empty($_FILES['profile']['name'])) {
-                $uploadDir = __DIR__ . '/../../public/assets/uploads/profile/';
-                $fileName = basename($_FILES['profile']['name']);
-                $targetPath = $uploadDir . $fileName;
-
-                if (move_uploaded_file($_FILES['profile']['tmp_name'], $targetPath)) {
-                    $profile = $fileName;
-                }
-            }
-
-            $this->manager->create($username, $email, $password, $profile);
-            header('Location: /users');
-            exit;
-        }
-    }
-
-    /**
-     * Formulaire d’édition
-     */
-    public function edit($id) {
+    public function edit(int $id): void {
         $user = $this->manager->findById($id);
         if (!$user) {
             http_response_code(404);
             echo "Utilisateur introuvable";
             return;
         }
-        require __DIR__ . '/../views/users/edit.php';
+        View::render('users/edit', ['user' => $user]);
     }
 
     /**
-     * Met à jour un utilisateur
+     * Met à jour un utilisateur (admin)
      */
-    public function update($id) {
+    public function update(int $id): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $profile = null;
             if (!empty($_FILES['profile']['name'])) {
@@ -101,11 +66,42 @@ class UserController {
     }
 
     /**
-     * Supprime un utilisateur
+     * Supprime un utilisateur (admin)
      */
-    public function delete($id) {
+    public function delete(int $id): void {
         $this->manager->delete($id);
         header('Location: /users');
         exit;
     }
+
+    /**
+     * Affiche le compte de l’utilisateur connecté
+     */
+    public function account(): void {
+        if (!Session::has('user_id')) {
+            header('Location: /connexion');
+            exit;
+        }
+
+        $userId = Session::get('user_id');
+        $user = $this->manager->findById($userId);
+
+        if (!$user) {
+            http_response_code(404);
+            echo "Utilisateur introuvable";
+            return;
+        }
+
+        // ⚡ Récupérer les livres du user connecté
+        $bookManager = new BookManager();
+        $books = $bookManager->findByUserId($userId);
+
+        // Rendre la vue avec user + livres
+        View::render('users/account', [
+            'user'  => $user,
+            'books' => $books
+        ]);
+    }
+
 }
+

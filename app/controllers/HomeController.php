@@ -1,6 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../managers/BookManager.php';
 class HomeController {
     private $bookManager;
     private $userManager;
@@ -14,9 +13,7 @@ class HomeController {
     public function index() {
 
         $books = $this->bookManager->findLatest(4);
-        
-        include __DIR__ . '/../views/partials/header.php';
-        include __DIR__ . '/../views/home/index.php';
-        include __DIR__ . '/../views/partials/footer.php';
+
+        View::render('home/index', ['books' => $books]);
     }
 }

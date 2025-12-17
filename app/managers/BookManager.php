@@ -1,10 +1,7 @@
 <?php
-require_once __DIR__ . '/../core/Database.php';
-require_once __DIR__ . '/../models/Book.php';
-require_once __DIR__ . '/../models/User.php';
 
 class BookManager {
-    private $db;
+    private PDO $db;
 
     public function __construct() {
         $this->db = Database::getConnection();
@@ -30,6 +27,8 @@ class BookManager {
         $user->email = $row['email'];
         $user->profile = $row['profile'];
 
+        // ⚠️ Correction : on rattache l’objet User au Book
+        $book->user = $user;
 
         return $book;
     }
@@ -44,11 +43,7 @@ class BookManager {
         $stmt = $this->db->query($sql);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $books = [];
-        foreach ($rows as $row) {
-            $books[] = $this->hydrateBook($row);
-        }
-        return $books;
+        return array_map(fn($row) => $this->hydrateBook($row), $rows);
     }
 
     /**
@@ -62,11 +57,7 @@ class BookManager {
         $stmt = $this->db->query($sql);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $books = [];
-        foreach ($rows as $row) {
-            $books[] = $this->hydrateBook($row);
-        }
-        return $books;
+        return array_map(fn($row) => $this->hydrateBook($row), $rows);
     }
 
     /**
@@ -96,11 +87,7 @@ class BookManager {
         $stmt->execute(['%' . $title . '%']);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $books = [];
-        foreach ($rows as $row) {
-            $books[] = $this->hydrateBook($row);
-        }
-        return $books;
+        return array_map(fn($row) => $this->hydrateBook($row), $rows);
     }
 
     /**
@@ -132,29 +119,26 @@ class BookManager {
     /**
      * Récupère les derniers livres ajoutés (disponibles)
      */
-    public function findLatest(int $limit = 4): array
-    {
-        $sql = "
-            SELECT b.*, u.id AS user_id, u.username, u.email, u.profile
-            FROM books b
-            JOIN users u ON b.user_id = u.id
-            WHERE b.status = 'disponible'
-            ORDER BY b.id DESC
-            LIMIT ?
-        ";
-
+    public function findLatest(int $limit = 4): array {
+        $sql = "SELECT b.*, u.id AS user_id, u.username, u.email, u.profile
+                FROM books b
+                JOIN users u ON b.user_id = u.id
+                WHERE b.status = 'disponible'
+                ORDER BY b.id DESC
+                LIMIT ?";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(1, $limit, PDO::PARAM_INT);
         $stmt->execute();
-
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $books = [];
-        foreach ($rows as $row) {
-            $books[] = $this->hydrateBook($row);
-        }
+        return array_map(fn($row) => $this->hydrateBook($row), $rows);
+    }
 
-        return $books;
+    public function findByUserId(int $userId): array {
+        $stmt = $this->db->prepare("SELECT * FROM books WHERE user_id = :user_id");
+        $stmt->execute(['user_id' => $userId]);
+        
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
 }
