@@ -141,4 +141,18 @@ class BookManager {
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+        // Récupérer tous les livres d’un utilisateur
+    public function findByUser(int $userId): array {
+        $stmt = $this->db->prepare("
+            SELECT b.*, u.username
+            FROM books b
+            JOIN users u ON b.user_id = u.id
+            WHERE b.user_id = :userId
+            ORDER BY b.id DESC
+        ");
+        $stmt->execute(['userId' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+
 }

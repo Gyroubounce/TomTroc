@@ -102,6 +102,18 @@ class UserController {
             'books' => $books
         ]);
     }
+    /**    * Affiche le profil public d’un utilisateur
+     */
+        public function profil(int $userId): void {
+        $user  = (new UserManager())->findById($userId);
+        $books = (new BookManager())->findByUser($userId);
+
+        View::render('users/profil', [
+            'user'  => $user,
+            'books' => $books
+        ]);
+    }
+
 
 }
 

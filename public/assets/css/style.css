@@ -231,7 +231,6 @@ footer {
 }
 
 
-
 /* Page Livre détaillé */
 .book-detail {
   display: flex;
@@ -645,4 +644,302 @@ footer {
   text-decoration: underline;
   color: #0077cc;
   font-size: 14px;
+}
+
+/* Page d'édition de livre */
+
+.edit-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.edit-block {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.edit-left {
+  width: 40%;
+  text-align: center;
+}
+
+.edit-book-pic {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+.edit-right {
+  width: 55%;
+}
+
+.edit-form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  background: #f0f0f0; /* gris clair */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-form textarea {
+  min-height: 100px;
+}
+
+.edit-submit {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-submit:hover {
+  background: #0056b3;
+}
+
+/* Page profil */
+/* Conteneur principal */
+.profil-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+/* Blocs génériques */
+.profil-block {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Bloc gauche (profil) */
+.profil-left {
+  width: 30%;
+  text-align: center;
+}
+
+.profil-photo {
+  max-width: 150px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.profil-username {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.profil-member-since,
+.profil-library {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.profil-cta {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #007bff;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.profil-cta:hover {
+  background: #0056b3;
+}
+
+/* Bloc droit (tableau des livres) */
+.profil-right {
+  width: 65%;
+}
+
+.profil-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.profil-table th,
+.profil-table td {
+  padding: 12px;
+  text-align: left;
+}
+
+.profil-table th {
+  background: #f8f8f8;
+}
+
+.profil-table tr {
+  cursor: pointer;
+}
+
+.profil-table tr.row-grey {
+  background: #f0f0f0;
+}
+
+.profil-book-pic {
+  max-width: 60px;
+  border-radius: 4px;
+}
+
+
+.messagerie-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.messagerie-block {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Bloc gauche */
+.messagerie-left {
+  width: 30%;
+}
+
+.conversation-card {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.conversation-card:hover {
+  background: #f9f9f9;
+}
+
+.conversation-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.conversation-info {
+  flex: 1;
+}
+
+.conversation-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.conversation-preview {
+  color: #666;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+/* Bloc droit */
+.messagerie-right {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.discussion-thread {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.discussion-message {
+  max-width: 70%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.discussion-message.sent {
+  background: #007bff;
+  color: #fff;
+  margin-left: auto;
+}
+
+.discussion-message.received {
+  background: #f0f0f0;
+  color: #000;
+  margin-right: auto;
+}
+
+.discussion-date {
+  display: block;
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 5px;
+}
+
+.discussion-form {
+  display: flex;
+  gap: 10px;
+}
+
+.discussion-form textarea {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.discussion-form button {
+  padding: 10px 15px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.discussion-form button:hover {
+  background: #0056b3;
+}
+
+.messagerie-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.messagerie-left {
+  width: 30%;
+}
+
+.messagerie-right {
+  width: 70%;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .messagerie-container {
+    flex-direction: column;
+  }
+  .messagerie-left, .messagerie-right {
+    width: 100%;
+  }
 }

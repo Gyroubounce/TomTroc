@@ -24,10 +24,12 @@
                     alt="<?= htmlspecialchars($user->username) ?>" 
                     class="owner-photo">
             <?php endif; ?>
-            <span class="owner-name"><?= htmlspecialchars($user->username ?? 'Inconnu') ?></span>
+            <a href="/users/profil/<?= $book->user_id ?>"><?= htmlspecialchars($book->user->username ?? 'Inconnu') ?></a>
+
+
         </div>
 
-            <a href="/books" class="btn">Retour à la liste des livres</a>
+            <a href="/messages/conversation/<?= $user->id ?>" class="btn">Envoyer un message</a>
         </div>
     </div>
 </main>

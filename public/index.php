@@ -17,21 +17,48 @@ Installer::run();
 // 4. Router
 $router = new Router();
 
-// Définition des routes
+// ----------------------
+// Routes principales
+// ----------------------
+
+// Accueil
 $router->add('/', 'HomeController', 'index');
 
+// ----------------------
 // Authentification
-$router->add('/inscription', 'AuthController', 'register');
-$router->add('/connexion', 'AuthController', 'login', 'GET');   // affiche le formulaire
-$router->add('/auth', 'AuthController', 'authenticate', 'POST'); // traite le formulaire
-$router->add('/logout', 'AuthController', 'logout', 'GET');      // déconnexion
+// ----------------------
+$router->add('/inscription', 'AuthController', 'register', 'GET');   // formulaire inscription
+$router->add('/connexion', 'AuthController', 'login', 'GET');        // formulaire connexion
+$router->add('/auth', 'AuthController', 'authenticate', 'POST');     // traitement connexion
+$router->add('/logout', 'AuthController', 'logout', 'GET');          // déconnexion
 
-// Mon compte
-$router->add('/mon-compte', 'UserController', 'account');
+// ----------------------
+// Utilisateurs
+// ----------------------
+$router->add('/mon-compte', 'UserController', 'account', 'GET');     // espace perso
+$router->add('/users/profil/:id', 'UserController', 'profil', 'GET');// profil public
 
+// ----------------------
 // Livres
-$router->add('/books', 'BookController', 'index');
-$router->add('/books/:id', 'BookController', 'show');
+// ----------------------
+$router->add('/books', 'BookController', 'index', 'GET');            // liste des livres
+$router->add('/books/:id', 'BookController', 'show', 'GET');         // détail d’un livre
+$router->add('/books/edit/:id', 'BookController', 'edit', 'GET');    // formulaire édition
+$router->add('/books/update/:id', 'BookController', 'update', 'POST');// traitement édition
 
-// 5. Dispatch
+// ----------------------
+// Messagerie
+// ----------------------
+// 1. Page d’accueil messagerie (liste des conversations)
+$router->add('/messages', 'MessageController', 'index', 'GET');
+
+// 2. Fil de discussion (mobile ou URL directe)
+$router->add('/messages/conversation/:id', 'MessageController', 'conversation', 'GET');
+
+// 3. Envoi d’un message
+$router->add('/messages/send/:id', 'MessageController', 'send', 'POST');
+
+// ----------------------
+// Dispatch
+// ----------------------
 $router->dispatch($_SERVER['REQUEST_URI']);

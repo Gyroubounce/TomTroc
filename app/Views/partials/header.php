@@ -21,10 +21,19 @@
     <ul>
       <li><a href="/messages">Messagerie</a></li>
       <li><a href="/mon-compte">Mon compte</a></li>
+        <?php if (Session::has('user_id')): ?>
+      <!-- Utilisateur connecté -->
+      <li><a href="/logout">Déconnexion</a></li>
+      <?php $user = (new UserManager())->findById(Session::get('user_id')); ?>
+      <span>Bienvenue, <?= htmlspecialchars($user->username) ?></span>
+    <?php else: ?>
+      <!-- Utilisateur non connecté -->
       <li><a href="/inscription">Connexion</a></li>
+    <?php endif; ?>
     </ul>
   </nav>
 </header>
+
 
 
 <main>

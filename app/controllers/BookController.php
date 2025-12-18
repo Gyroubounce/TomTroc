@@ -125,13 +125,20 @@ class BookController {
                 exit;
             }
 
-            $status = $_POST['status'] ?? 'disponible';
-            $this->bookManager->updateStatus($id, $status);
+            $title       = trim($_POST['title'] ?? '');
+            $author      = trim($_POST['author'] ?? '');
+            $description = trim($_POST['description'] ?? '');
+            $status      = $_POST['status'] ?? 'disponible';
 
+            // ⚡ Appel à BookManager pour mettre à jour toutes les infos
+            $this->bookManager->update($id, $title, $author, $description, $status);
+
+            // Redirection vers la page du livre
             header('Location: /books/' . $id);
             exit;
         }
     }
+
 
     /**
      * Supprime un livre
