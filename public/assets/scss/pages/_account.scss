@@ -1,0 +1,105 @@
+
+/* account */
+.account-profile-pic {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.account-edit-link {
+  color: #888;
+  text-decoration: underline;
+  font-size: 14px;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.account-username {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.account-member-since {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.account-section-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Formulaire */
+.account-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+.account-form input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.account-form button {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Tableau bibliothèque */
+.account-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+.account-table th, .account-table td {
+  padding: 0.8rem;
+  text-align: left;
+}
+.account-table th {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #555;
+}
+.account-table tr:nth-child(even) {
+  background: #f2f2f2;
+}
+.account-book-pic {
+  width: 50px;
+  height: auto;
+}
+.account-status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+}
+.account-available {
+  background: #e0f7e9;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+}
+.account-unavailable {
+  background: #fde0e0;
+  color: #c62828;
+  border: 1px solid #c62828;
+}
+.account-action-links a {
+  margin-right: 1rem;
+  text-decoration: underline;
+  color: #0077cc;
+  font-size: 14px;
+}

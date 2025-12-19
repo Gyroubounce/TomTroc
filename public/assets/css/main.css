@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --color-primary: #00AC66;
   --color-title: #000000;
@@ -6,7 +7,6 @@
   --color-menu: #F5F3EF;
   --color-footer: #FFFFFF;
   --color-background: #FAF9F7;
-
   --font-title: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
 }
@@ -38,8 +38,8 @@ header {
   justify-content: space-around; /* logo à gauche, user-nav à droite */
   align-items: center;
   background-color: var(--color-menu);
-   max-width: 1440px;       /* limite la largeur max */
-  width: 100%;  
+  max-width: 1440px; /* limite la largeur max */
+  width: 100%;
   height: 80px;
   margin: 0px auto; /* centre le header horizontalement */
   padding: 0 2rem; /* ajoute un peu d’espace intérieur */
@@ -83,21 +83,9 @@ header nav a {
   font-size: 14px;
 }
 
-
 header nav a:hover {
   color: var(--color-title);
-  font-weight:lighter;
-}
-
-/* Footer */
-footer {
-  background-color: var(--color-footer);
-  color: var(--color-text);
-  padding: 1rem 2rem;
-  text-align: right;
-  border-top: 1px solid #eee;
-  font-family: var(--font-body);
-  margin-top: 2rem; /* espace avant le footer */
+  font-weight: lighter;
 }
 
 /* Boutons */
@@ -116,10 +104,136 @@ footer {
   background-color: #008c52; /* variante plus sombre du vert */
 }
 
+/* Page d'accueil */
+.home {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Page d'accueil / section 1*/
+.home-hero {
+  padding: 80px 2rem;
+}
+
+.home-hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4rem;
+}
+
+.home-hero-text {
+  max-width: 520px;
+}
+
+.home-hero-text h1 {
+  font-size: 48px;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.home-hero-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.home-hero-image img {
+  display: block;
+}
+
+/* Page d'accueil / section 2*/
+.home-latest-books {
+  padding: 80px 0;
+}
+
+.home-latest-books h2 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 3rem;
+}
+
+.home-books-cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* Page d'accueil / section 3*/
+.home-how-it-works {
+  padding: 80px 2rem;
+  text-align: center;
+}
+
+.home-how-it-works h2 {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.home-how-description {
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+}
+
+.home-how-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.home-how-step {
+  background-color: #fff;
+  padding: 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.home-how-step p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Page d'accueil / bandeau*/
+.home-banner {
+  margin: 80px 0;
+}
+
+.home-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Page d'accueil / section 4*/
+.home-values {
+  padding: 80px 2rem;
+  text-align: center;
+}
+
+.home-values h2 {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.home-values-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.home-values-content p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
 /* Livres à  */
 .page-container {
-   max-width: 1440px;       /* limite la largeur max */
-  width: 100%;  
+  max-width: 1440px; /* limite la largeur max */
+  width: 100%;
   margin: 80px auto 0 auto;
   background-color: var(--color-background);
   padding-bottom: 2rem;
@@ -130,7 +244,7 @@ footer {
   display: flex;
   justify-content: space-between; /* titre à gauche, search à droite */
   align-items: center;
-  width: calc(200px * 4 + 20px * 3); /* largeur des 4 cards + 3 gaps */
+  width: 860px; /* largeur des 4 cards + 3 gaps */
   margin: 0 auto 2rem auto; /* centré comme la grille */
 }
 
@@ -169,13 +283,12 @@ footer {
   color: var(--color-primary);
 }
 
-
 /* Grille des livres */
 .books-grid {
   display: grid;
   grid-template-columns: repeat(4, 200px);
   gap: 40px;
-  width: calc(200px * 4 + 20px * 3); /* même largeur que le header */
+  width: 860px; /* même largeur que le header */
   margin: 0 auto;
 }
 
@@ -184,7 +297,7 @@ footer {
   width: 200px;
   height: auto; /* hauteur auto pour s’adapter au contenu */
   background: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
@@ -193,7 +306,7 @@ footer {
 
 .book-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* Image au-dessus du texte */
@@ -230,7 +343,6 @@ footer {
   text-align: left;
 }
 
-
 /* Page Livre détaillé */
 .book-detail {
   display: flex;
@@ -241,7 +353,7 @@ footer {
   background: #fff;
   padding: 2rem;
   border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .book-cover-detail {
@@ -319,396 +431,9 @@ footer {
 }
 
 .book-detail .btn {
-  align-self: center; 
-  width: fit-content;    
-  margin-top: auto; 
-}
-
-/* Page d'accueil */
-.home {
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
-/* Page d'accueil / section 1*/
-
-.home-hero {
-  padding: 80px 2rem;
-}
-
-.home-hero-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 4rem;
-}
-
-.home-hero-text {
-  max-width: 520px;
-}
-
-.home-hero-text h1 {
-  font-size: 48px;
-  font-weight: 400;
-  margin-bottom: 1.5rem;
-}
-
-.home-hero-text p {
-  font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-.home-hero-image img {
-  display: block;
-}
-
-/* Page d'accueil / section 2*/
-
-.home-latest-books {
-  padding: 80px 0;
-}
-
-.home-latest-books h2 {
-  text-align: center;
-  font-size: 36px;
-  font-weight: 400;
-  margin-bottom: 3rem;
-}
-
-.home-books-cta {
-  text-align: center;
-  margin-top: 3rem;
-}
-
-/* Page d'accueil / section 3*/
-
-.home-how-it-works {
-  padding: 80px 2rem;
-  text-align: center;
-}
-
-.home-how-it-works h2 {
-  font-size: 36px;
-  font-weight: 400;
-  margin-bottom: 1rem;
-}
-
-.home-how-description {
-  font-size: 16px;
-  max-width: 600px;
-  margin: 0 auto 3rem auto;
-}
-
-.home-how-steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.home-how-step {
-  background-color: #fff;
-  padding: 2rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-}
-
-.home-how-step p {
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-/* Page d'accueil / bandeau*/
-.home-banner {
-  margin: 80px 0;
-}
-
-.home-banner img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-
-/* Page d'accueil / section 4*/
-
-.home-values {
-  padding: 80px 2rem;
-  text-align: center;
-}
-
-.home-values h2 {
-  font-size: 36px;
-  font-weight: 400;
-  margin-bottom: 2rem;
-}
-
-.home-values-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.home-values-content p {
-  font-size: 16px;
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-
-/* Page de connexion */
-.auth-container {
-    display: flex;
-    min-height: 100vh;
-}
-
-.auth-left, .auth-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 3rem;
-}
-
-.auth-left {
-    background-color: #f9f9f9;
-}
-
-.auth-left h1 {
-    margin-bottom: 2rem;
-    font-size: 2rem;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.cta {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background-color: #0077cc;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.switch-auth {
-    margin-top: 1rem;
-}
-
-.switch-auth a {
-    text-decoration: underline;
-    color: #0077cc;
-}
-
-
-.account-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 2rem;
-  background: #f9f9f9;
-}
-
-.account-title {
-  font-size: 28px;
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.account-container {
-  max-width: 1440px;
-  margin: auto;
-  display: flex;
-  gap: 2rem;
-}
-
-.account-block {
-  flex: 1;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-}
-
-/* Profil */
-.account-profile-pic {
-  width: 135px;
-  height: 135px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.account-edit-link {
-  color: #888;
-  text-decoration: underline;
-  font-size: 14px;
-  margin-bottom: 1rem;
-  display: inline-block;
-}
-
-.account-username {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.account-member-since {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 1.5rem;
-}
-
-.account-section-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-/* Formulaire */
-.account-form label {
-  display: block;
-  margin-top: 1rem;
-  font-weight: bold;
-}
-.account-form input {
-  width: 100%;
-  padding: 0.6rem;
-  margin-top: 0.3rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.account-form button {
-  margin-top: 1.5rem;
-  padding: 0.8rem 1.2rem;
-  background: #0077cc;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* Tableau bibliothèque */
-.account-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 2rem;
-}
-.account-table th, .account-table td {
-  padding: 0.8rem;
-  text-align: left;
-}
-.account-table th {
-  text-transform: uppercase;
-  font-size: 12px;
-  color: #555;
-}
-.account-table tr:nth-child(even) {
-  background: #f2f2f2;
-}
-.account-book-pic {
-  width: 50px;
-  height: auto;
-}
-.account-status {
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: bold;
-  display: inline-block;
-}
-.account-available {
-  background: #e0f7e9;
-  color: #2e7d32;
-  border: 1px solid #2e7d32;
-}
-.account-unavailable {
-  background: #fde0e0;
-  color: #c62828;
-  border: 1px solid #c62828;
-}
-.account-action-links a {
-  margin-right: 1rem;
-  text-decoration: underline;
-  color: #0077cc;
-  font-size: 14px;
-}
-
-/* Page d'édition de livre */
-
-.edit-container {
-  display: flex;
-  justify-content: space-between;
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
-.edit-block {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.edit-left {
-  width: 40%;
-  text-align: center;
-}
-
-.edit-book-pic {
-  max-width: 100%;
-  border-radius: 6px;
-}
-
-.edit-right {
-  width: 55%;
-}
-
-.edit-form label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-.edit-form input,
-.edit-form textarea,
-.edit-form select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  background: #f0f0f0; /* gris clair */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.edit-form textarea {
-  min-height: 100px;
-}
-
-.edit-submit {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.edit-submit:hover {
-  background: #0056b3;
+  align-self: center;
+  width: fit-content;
+  margin-top: auto;
 }
 
 /* Page profil */
@@ -726,7 +451,7 @@ footer {
   background: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Bloc gauche (profil) */
@@ -812,7 +537,7 @@ footer {
   background: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Bloc gauche */
@@ -943,3 +668,268 @@ footer {
     width: 100%;
   }
 }
+/* Page de connexion */
+.auth-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.auth-left, .auth-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.auth-left {
+  background-color: #f9f9f9;
+}
+
+.auth-left h1 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cta {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.switch-auth {
+  margin-top: 1rem;
+}
+
+.switch-auth a {
+  text-decoration: underline;
+  color: #0077cc;
+}
+
+.account-body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 2rem;
+  background: #f9f9f9;
+}
+
+.account-title {
+  font-size: 28px;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.account-container {
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+  gap: 2rem;
+}
+
+.account-block {
+  flex: 1;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+/* Page d'édition de livre */
+.edit-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.edit-block {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-left {
+  width: 40%;
+  text-align: center;
+}
+
+.edit-book-pic {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+.edit-right {
+  width: 55%;
+}
+
+.edit-form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  background: #f0f0f0; /* gris clair */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-form textarea {
+  min-height: 100px;
+}
+
+.edit-submit {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-submit:hover {
+  background: #0056b3;
+}
+
+/* account */
+.account-profile-pic {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.account-edit-link {
+  color: #888;
+  text-decoration: underline;
+  font-size: 14px;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.account-username {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.account-member-since {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.account-section-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Formulaire */
+.account-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.account-form input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.account-form button {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Tableau bibliothèque */
+.account-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+.account-table th, .account-table td {
+  padding: 0.8rem;
+  text-align: left;
+}
+
+.account-table th {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #555;
+}
+
+.account-table tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+.account-book-pic {
+  width: 50px;
+  height: auto;
+}
+
+.account-status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.account-available {
+  background: #e0f7e9;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+}
+
+.account-unavailable {
+  background: #fde0e0;
+  color: #c62828;
+  border: 1px solid #c62828;
+}
+
+.account-action-links a {
+  margin-right: 1rem;
+  text-decoration: underline;
+  color: #0077cc;
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=main.css.map */

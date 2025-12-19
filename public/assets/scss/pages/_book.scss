@@ -1,0 +1,93 @@
+
+/* Page Livre détaillé */
+.book-detail {
+  display: flex;
+  align-items: stretch;
+  gap: 2rem;
+  max-width: 1440px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.book-cover-detail {
+  width: 720px;
+  height: auto;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.book-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* contenu vertical */
+  gap: 1rem;
+}
+
+.book-info h1 {
+  margin-top: 0;
+  font-size: 36px;
+  color: var(--color-title);
+  font-family: var(--font-title);
+}
+
+.book-info .author {
+  color: #A6A6A6;
+  font-size: 16px;
+  margin: 0.5rem 0;
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 40px 0; /* ligne de séparation de 50px */
+  width: 50px;
+}
+
+.description-label {
+  font-size: 8px;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.description-text {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.status {
+  font-size: 14px;
+  margin: 1rem 0;
+}
+
+.owner-label {
+  font-size: 8px;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.owner-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.owner-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* ✅ photo ronde */
+  object-fit: cover;
+}
+
+.owner-name {
+  font-size: 14px;
+}
+
+.book-detail .btn {
+  align-self: center; 
+  width: fit-content;    
+  margin-top: auto; 
+}

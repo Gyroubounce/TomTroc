@@ -1,0 +1,55 @@
+/* Header */
+header {
+  display: flex;
+  justify-content: space-around; /* logo à gauche, user-nav à droite */
+  align-items: center;
+  background-color: var(--color-menu);
+  max-width: 1440px; /* limite la largeur max */
+  width: 100%;
+  height: 80px;
+  margin: 0px auto; /* centre le header horizontalement */
+  padding: 0 2rem; /* ajoute un peu d’espace intérieur */
+}
+
+.left-block {
+  display: flex;
+  align-items: center;
+  gap: 2rem; /* espace entre logo et main-nav */
+}
+
+.logo {
+  background-image: url("/assets/img/logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 155px;
+  height: 51px;
+  display: inline-block;
+}
+
+.brand {
+  color: var(--color-primary);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.main-nav ul,
+.user-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+header nav a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+header nav a:hover {
+  color: var(--color-title);
+  font-weight: lighter;
+}
