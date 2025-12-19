@@ -58,7 +58,7 @@
   display: grid;
   grid-template-columns: repeat(4, 200px);
   gap: 40px;
-  width: calc(200px * 4 + 20px * 3); /* même largeur que le header */
+  width: fit-content; 
   margin: 0 auto;
 }
 
@@ -84,7 +84,6 @@
   width: 200px;
   height: 200px;
   object-fit: cover;
-  border-radius: 4px;
   margin-bottom: 10px; /* espace entre image et texte */
 }
 
@@ -94,6 +93,7 @@
   font-family: var(--font-title);
   margin-left: 15px;
   text-align: left;
+  margin-bottom: 10px;
 }
 
 .book-author {
@@ -109,6 +109,5 @@
   font-style: italic;
   color: var(--color-min);
   margin-left: 15px;
-  margin-bottom: 30px;
   text-align: left;
 }

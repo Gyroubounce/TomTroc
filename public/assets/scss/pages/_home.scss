@@ -1,25 +1,32 @@
+/* ----------------------------- */
+/*  GLOBAL CONTAINER 1140px     */
+/* ----------------------------- */
 
-/* Page d'accueil */
-.home {
-  max-width: 1440px;
+.container {
+  width: 100%;
+  max-width: 1140px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
-/* Page d'accueil / section 1*/
+/* ----------------------------- */
+/*  SECTION 1 : HERO             */
+/* ----------------------------- */
 
 .home-hero {
-  padding: 80px 2rem;
+  padding: 80px 0;
+  background-color: var(--color-menu); // couleur section 1
 }
 
 .home-hero-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 4rem;
 }
 
 .home-hero-text {
-  max-width: 520px;
+  max-width: 380px;
 }
 
 .home-hero-text h1 {
@@ -34,32 +41,68 @@
   margin-bottom: 2rem;
 }
 
+/* Bouton Découvrir : 152x63 */
+.btn-hero {
+  width: 152px;
+  height: 63px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image + crédit Hamza */
 .home-hero-image img {
   display: block;
 }
 
-/* Page d'accueil / section 2*/
+.hero-credit {
+  margin-top: 0.5rem;
+  font-size: 12px;
+  color: #b3b3b3;
+  text-align: right;
+}
+
+/* ----------------------------- */
+/*  SECTION 2 : DERNIERS LIVRES  */
+/* ----------------------------- */
 
 .home-latest-books {
-  padding: 80px 0;
+  padding: 50px 0;
+  background-color: #FAF9F7;
 }
 
 .home-latest-books h2 {
   text-align: center;
   font-size: 36px;
   font-weight: 400;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
+}
+
+/* Bouton Voir tous les livres : 218x63 */
+.btn-large {
+  width: 218px;
+  height: 63px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-books-cta {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 3rem;
+  margin-bottom: 1rem;
 }
 
-/* Page d'accueil / section 3*/
+
+/* ----------------------------- */
+/*  SECTION 3 : COMMENT ÇA MARCHE */
+/* ----------------------------- */
 
 .home-how-it-works {
-  padding: 80px 2rem;
+  padding: 50px 0;
+  background-color: var(--color-menu); // même fond que section 1
   text-align: center;
 }
 
@@ -71,33 +114,53 @@
 
 .home-how-description {
   font-size: 16px;
-  max-width: 600px;
-  margin: 0 auto 3rem auto;
+  font-weight: 300;
+  max-width: 400px;
+  margin: 1.5rem auto 3rem auto;
 }
 
+/* Grille 4 colonnes */
 .home-how-steps {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
+  grid-template-columns: repeat(4, 250px);
+  justify-content: center;
 }
 
+/* Blocs 215x139 */
 .home-how-step {
   background-color: #fff;
-  padding: 2rem;
+  width: 215px;
+  height: 139px;
+  margin: 0 auto;
   box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .home-how-step p {
   font-size: 14px;
-  line-height: 1.5;
+  width: 80%;
 }
 
-/* Page d'accueil / bandeau*/
-.home-banner {
-  margin: 80px 0;
+/* Bouton transparent bordure verte */
+.btn-outline {
+  width: 218px;
+  height: 63px;
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
 }
+
+/* ----------------------------- */
+/*  SECTION 4 : BANDEAU          */
+/* ----------------------------- */
+
 
 .home-banner img {
   width: 100%;
@@ -105,27 +168,61 @@
   display: block;
 }
 
-
-/* Page d'accueil / section 4*/
+/* ----------------------------- */
+/*  SECTION 5 : NOS VALEURS      */
+/* ----------------------------- */
 
 .home-values {
-  padding: 80px 2rem;
-  text-align: center;
+  padding: 50px 0;
+  background-color: var(--color-menu);
 }
 
+/* Container interne 1140px */
+.home-values .container {
+  max-width: 392px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: left; /* texte aligné à gauche */
+}
+
+/* Titre */
 .home-values h2 {
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 2rem;
+  text-align: left; /* important */
 }
 
+/* Paragraphes */
 .home-values-content {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 800px; /* largeur du bloc texte */
 }
 
 .home-values-content p {
   font-size: 16px;
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+  text-align: left;
 }
+
+/* L’équipe + cœur */
+
+.home-equipe-text p {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-style: italic;
+  color: #A6A6A6;
+}
+
+.home-equipe-icon {
+  display: flex;
+  align-items: center;   /* garantit l’alignement vertical */
+}
+
+.equipe-heart {
+  width: 120px;
+  height: auto;
+  display: block;
+}
+

@@ -1,0 +1,39 @@
+/* Footer plein écran */
+.site-footer {
+  width: 100%;
+  background-color: var(--color-menu);
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Container interne limité à 1140px */
+.footer-container {
+  width: 100%;
+  display: flex;
+  justify-content: right; /* centre tout */
+  padding: 0 1rem;
+}
+
+/* Liens */
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* espace entre les 4 éléments */
+}
+
+.footer-links a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  color: var(--color-title);
+}
+
+/* Logo */
+.footer-logo img {
+  width: auto;
+  display: block;
+}

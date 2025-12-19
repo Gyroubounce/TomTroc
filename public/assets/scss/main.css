@@ -1,0 +1,1080 @@
+@charset "UTF-8";
+:root {
+  --color-primary: #00AC66;
+  --color-title: #000000;
+  --color-text: #292929;
+  --color-min: #A6A6A6;
+  --color-menu: #F5F3EF;
+  --color-footer: #FFFFFF;
+  --color-background: #FAF9F7;
+  --font-title: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+/* Reset simple */
+body {
+  margin: 0;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* prend tout l’espace disponible */
+}
+
+/* Titres */
+h1, h2, h3 {
+  color: var(--color-title);
+  font-family: var(--font-title);
+}
+
+/* Header plein écran */
+.site-header {
+  width: 100%;
+  height: 80px;
+  background-color: var(--color-menu);
+  display: flex;
+  justify-content: center; /* centre le container interne */
+}
+
+/* Container interne limité à 1140px */
+.header-container {
+  width: 100%;
+  max-width: 1140px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between; /* logo à gauche / nav à droite */
+  align-items: center;
+  padding: 0 1rem;
+}
+
+/* Bloc gauche */
+.left-block {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+}
+
+/* Logo */
+.logo {
+  background-image: url("/assets/img/logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 155px;
+  height: 51px;
+}
+
+/* Navigation */
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.user-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 70px;
+  margin: 0;
+  padding: 0;
+}
+
+header nav a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+header nav a:hover {
+  color: var(--color-title);
+  font-weight: lighter;
+}
+
+/* Footer plein écran */
+.site-footer {
+  width: 100%;
+  background-color: var(--color-menu);
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Container interne limité à 1140px */
+.footer-container {
+  width: 100%;
+  display: flex;
+  justify-content: right; /* centre tout */
+  padding: 0 1rem;
+}
+
+/* Liens */
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* espace entre les 4 éléments */
+}
+
+.footer-links a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  color: var(--color-title);
+}
+
+/* Logo */
+.footer-logo img {
+  width: auto;
+  display: block;
+}
+
+/* Boutons */
+.btn, .btn-primary {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  transition: background 0.2s;
+}
+
+.btn:hover, .btn-primary:hover {
+  background-color: #008c52; /* variante plus sombre du vert */
+  color: #fff;
+}
+
+/* ----------------------------- */
+/*  GLOBAL CONTAINER 1140px     */
+/* ----------------------------- */
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ----------------------------- */
+/*  SECTION 1 : HERO             */
+/* ----------------------------- */
+.home-hero {
+  padding: 80px 0;
+  background-color: var(--color-menu);
+}
+
+.home-hero-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+
+.home-hero-text {
+  max-width: 380px;
+}
+
+.home-hero-text h1 {
+  font-size: 48px;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.home-hero-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Bouton Découvrir : 152x63 */
+.btn-hero {
+  width: 152px;
+  height: 63px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image + crédit Hamza */
+.home-hero-image img {
+  display: block;
+}
+
+.hero-credit {
+  margin-top: 0.5rem;
+  font-size: 12px;
+  color: #b3b3b3;
+  text-align: right;
+}
+
+/* ----------------------------- */
+/*  SECTION 2 : DERNIERS LIVRES  */
+/* ----------------------------- */
+.home-latest-books {
+  padding: 50px 0;
+  background-color: #FAF9F7;
+}
+
+.home-latest-books h2 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 5rem;
+}
+
+/* Bouton Voir tous les livres : 218x63 */
+.btn-large {
+  width: 218px;
+  height: 63px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-books-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* ----------------------------- */
+/*  SECTION 3 : COMMENT ÇA MARCHE */
+/* ----------------------------- */
+.home-how-it-works {
+  padding: 50px 0;
+  background-color: var(--color-menu);
+  text-align: center;
+}
+
+.home-how-it-works h2 {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.home-how-description {
+  font-size: 16px;
+  font-weight: 300;
+  max-width: 400px;
+  margin: 1.5rem auto 3rem auto;
+}
+
+/* Grille 4 colonnes */
+.home-how-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 250px);
+  justify-content: center;
+}
+
+/* Blocs 215x139 */
+.home-how-step {
+  background-color: #fff;
+  width: 215px;
+  height: 139px;
+  margin: 0 auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-how-step p {
+  font-size: 14px;
+  width: 80%;
+}
+
+/* Bouton transparent bordure verte */
+.btn-outline {
+  width: 218px;
+  height: 63px;
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* ----------------------------- */
+/*  SECTION 4 : BANDEAU          */
+/* ----------------------------- */
+.home-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ----------------------------- */
+/*  SECTION 5 : NOS VALEURS      */
+/* ----------------------------- */
+.home-values {
+  padding: 50px 0;
+  background-color: var(--color-menu);
+}
+
+/* Container interne 1140px */
+.home-values .container {
+  max-width: 392px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: left; /* texte aligné à gauche */
+}
+
+/* Titre */
+.home-values h2 {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  text-align: left; /* important */
+}
+
+/* Paragraphes */
+.home-values-content {
+  max-width: 800px; /* largeur du bloc texte */
+}
+
+.home-values-content p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+/* L’équipe + cœur */
+.home-equipe-text p {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-style: italic;
+  color: #A6A6A6;
+}
+
+.home-equipe-icon {
+  display: flex;
+  align-items: center; /* garantit l’alignement vertical */
+}
+
+.equipe-heart {
+  width: 120px;
+  height: auto;
+  display: block;
+}
+
+/* Livres à  */
+.page-container {
+  max-width: 1440px; /* limite la largeur max */
+  width: 100%;
+  margin: 80px auto 0 auto;
+  background-color: var(--color-background);
+  padding-bottom: 2rem;
+}
+
+/* Header de la page */
+.page-header-content {
+  display: flex;
+  justify-content: space-between; /* titre à gauche, search à droite */
+  align-items: center;
+  width: 860px; /* largeur des 4 cards + 3 gaps */
+  margin: 0 auto 2rem auto; /* centré comme la grille */
+}
+
+/* Titre */
+.page-header-content h1 {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: 36px;
+  margin: 0;
+}
+
+.search-bar {
+  position: relative;
+  width: 322px;
+  height: 50px;
+}
+
+.search-bar input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  padding: 0 10px 0 50px; /* espace à droite pour la loupe */
+}
+
+.search-bar .search-btn {
+  position: absolute;
+  left: 5px;
+  top: 55%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px; /* taille de la loupe */
+  color: var(--color-primary);
+}
+
+/* Grille des livres */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 200px);
+  gap: 40px;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* Carte livre */
+.book-card {
+  width: 200px;
+  height: auto; /* hauteur auto pour s’adapter au contenu */
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Image au-dessus du texte */
+.book-card img.book-cover {
+  width: 200px;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-bottom: 10px; /* espace entre image et texte */
+}
+
+/* Texte */
+.book-title {
+  font-size: 16px;
+  font-family: var(--font-title);
+  margin-left: 15px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.book-author {
+  font-size: 14px;
+  color: var(--color-min);
+  margin-left: 15px;
+  margin-top: 0;
+  text-align: left;
+}
+
+.book-seller {
+  font-size: 10px;
+  font-style: italic;
+  color: var(--color-min);
+  margin-left: 15px;
+  text-align: left;
+}
+
+/* Page Livre détaillé */
+.book-detail {
+  display: flex;
+  align-items: stretch;
+  gap: 2rem;
+  max-width: 1440px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.book-cover-detail {
+  width: 720px;
+  height: auto;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.book-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* contenu vertical */
+  gap: 1rem;
+}
+
+.book-info h1 {
+  margin-top: 0;
+  font-size: 36px;
+  color: var(--color-title);
+  font-family: var(--font-title);
+}
+
+.book-info .author {
+  color: #A6A6A6;
+  font-size: 16px;
+  margin: 0.5rem 0;
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 40px 0; /* ligne de séparation de 50px */
+  width: 50px;
+}
+
+.description-label {
+  font-size: 8px;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.description-text {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.status {
+  font-size: 14px;
+  margin: 1rem 0;
+}
+
+.owner-label {
+  font-size: 8px;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.owner-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.owner-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* ✅ photo ronde */
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.owner-name {
+  font-size: 14px;
+}
+
+.book-detail .btn {
+  align-self: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: auto;
+}
+
+/* Page profil */
+/* Conteneur principal */
+.profil-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+/* Blocs génériques */
+.profil-block {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Bloc gauche (profil) */
+.profil-left {
+  width: 30%;
+  text-align: center;
+}
+
+.profil-photo {
+  max-width: 150px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.profil-username {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.profil-member-since,
+.profil-library {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.profil-cta {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #007bff;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.profil-cta:hover {
+  background: #0056b3;
+}
+
+/* Bloc droit (tableau des livres) */
+.profil-right {
+  width: 65%;
+}
+
+.profil-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.profil-table th,
+.profil-table td {
+  padding: 12px;
+  text-align: left;
+}
+
+.profil-table th {
+  background: #f8f8f8;
+}
+
+.profil-table tr {
+  cursor: pointer;
+}
+
+.profil-table tr.row-grey {
+  background: #f0f0f0;
+}
+
+.profil-book-pic {
+  max-width: 60px;
+  border-radius: 4px;
+}
+
+/* messagerie */
+.messagerie-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.messagerie-block {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Bloc gauche */
+.messagerie-left {
+  width: 30%;
+}
+
+.conversation-card {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.conversation-card:hover {
+  background: #f9f9f9;
+}
+
+.conversation-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.conversation-info {
+  flex: 1;
+}
+
+.conversation-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.conversation-preview {
+  color: #666;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+/* Bloc droit */
+.messagerie-right {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.discussion-thread {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.discussion-message {
+  max-width: 70%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.discussion-message.sent {
+  background: #007bff;
+  color: #fff;
+  margin-left: auto;
+}
+
+.discussion-message.received {
+  background: #f0f0f0;
+  color: #000;
+  margin-right: auto;
+}
+
+.discussion-date {
+  display: block;
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 5px;
+}
+
+.discussion-form {
+  display: flex;
+  gap: 10px;
+}
+
+.discussion-form textarea {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.discussion-form button {
+  padding: 10px 15px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.discussion-form button:hover {
+  background: #0056b3;
+}
+
+.messagerie-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.messagerie-left {
+  width: 30%;
+}
+
+.messagerie-right {
+  width: 70%;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .messagerie-container {
+    flex-direction: column;
+  }
+  .messagerie-left, .messagerie-right {
+    width: 100%;
+  }
+}
+/* Page de connexion */
+.auth-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.auth-left, .auth-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.auth-left {
+  background-color: #f9f9f9;
+}
+
+.auth-left h1 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cta {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.switch-auth {
+  margin-top: 1rem;
+}
+
+.switch-auth a {
+  text-decoration: underline;
+  color: #0077cc;
+}
+
+.account-body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 2rem;
+  background: #f9f9f9;
+}
+
+.account-title {
+  font-size: 28px;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.account-container {
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+  gap: 2rem;
+}
+
+.account-block {
+  flex: 1;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+/* Page d'édition de livre */
+.edit-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.edit-block {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-left {
+  width: 40%;
+  text-align: center;
+}
+
+.edit-book-pic {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+.edit-right {
+  width: 55%;
+}
+
+.edit-form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  background: #f0f0f0; /* gris clair */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-form textarea {
+  min-height: 100px;
+}
+
+.edit-submit {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-submit:hover {
+  background: #0056b3;
+}
+
+/* account */
+.account-profile-pic {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.account-edit-link {
+  color: #888;
+  text-decoration: underline;
+  font-size: 14px;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.account-username {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.account-member-since {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.account-section-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Formulaire */
+.account-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.account-form input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.account-form button {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Tableau bibliothèque */
+.account-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+.account-table th, .account-table td {
+  padding: 0.8rem;
+  text-align: left;
+}
+
+.account-table th {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #555;
+}
+
+.account-table tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+.account-book-pic {
+  width: 50px;
+  height: auto;
+}
+
+.account-status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.account-available {
+  background: #e0f7e9;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+}
+
+.account-unavailable {
+  background: #fde0e0;
+  color: #c62828;
+  border: 1px solid #c62828;
+}
+
+.account-action-links a {
+  margin-right: 1rem;
+  text-decoration: underline;
+  color: #0077cc;
+  font-size: 14px;
+}/*# sourceMappingURL=main.css.map */

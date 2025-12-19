@@ -1,7 +1,6 @@
 /* Boutons */
 .btn, .btn-primary {
   display: inline-block;
-  padding: 0.5rem 1rem;
   background-color: var(--color-primary);
   color: #fff;
   text-decoration: none;
@@ -12,4 +11,5 @@
 
 .btn:hover, .btn-primary:hover {
   background-color: #008c52; /* variante plus sombre du vert */
+  color: #fff;
 }
