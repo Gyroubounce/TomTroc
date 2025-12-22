@@ -5,9 +5,9 @@
         <form class="search-bar" method="get" action="/books">
             <input type="text" name="q" placeholder="Rechercher un livre" value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
             <button type="submit" class="search-btn">
-                🔍
+                <img src="/assets/img/Union.png" alt="Rechercher" class="search-icon">
             </button>
-    </form>
+        </form>
 
         </div>
 

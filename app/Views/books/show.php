@@ -18,13 +18,15 @@
             <p class="status"><strong>Status :</strong> <?= htmlspecialchars($book->status) ?></p>
 
             <div class="owner">
-            <p>Propriétaire :</p>
-            <?php if ($user && $user->profile): ?>
-                <img src="/assets/uploads/profile/<?= htmlspecialchars($user->profile) ?>" 
-                    alt="<?= htmlspecialchars($user->username) ?>" 
-                    class="owner-photo">
-            <?php endif; ?>
-            <a href="/users/profil/<?= $book->user_id ?>"><?= htmlspecialchars($book->user->username ?? 'Inconnu') ?></a>
+            <p>Propriétaire</p>
+            <div class="owner-info">
+                <?php if ($user && $user->profile): ?>
+                    <img src="/assets/uploads/profile/<?= htmlspecialchars($user->profile) ?>" 
+                        alt="<?= htmlspecialchars($user->username) ?>" 
+                        class="owner-photo">
+                <?php endif; ?>
+                <a href="/users/profil/<?= $book->user_id ?>" class="owner-name"><?= htmlspecialchars($book->user->username ?? 'Inconnu') ?></a>
+            </div>
 
 
         </div>

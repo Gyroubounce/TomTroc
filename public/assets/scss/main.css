@@ -7,8 +7,12 @@
   --color-menu: #F5F3EF;
   --color-footer: #FFFFFF;
   --color-background: #FAF9F7;
+  --color-input-background: #EDF2F6;
+  --color-input-border: #F0F0F0;
   --font-title: "Playfair Display", serif;
   --font-body: "Inter", sans-serif;
+  --color-red: #CB2D2D;
+  --color-block-background: #FFFFFF;
 }
 
 /* Reset simple */
@@ -101,8 +105,8 @@ header nav a:hover {
 /* Footer plein écran */
 .site-footer {
   width: 100%;
-  background-color: var(--color-menu);
-  padding: 20px 0;
+  height: 61px;
+  background-color: var(--color-footer);
   display: flex;
   justify-content: center;
 }
@@ -111,21 +115,22 @@ header nav a:hover {
 .footer-container {
   width: 100%;
   display: flex;
-  justify-content: right; /* centre tout */
-  padding: 0 1rem;
+  justify-content: right;
+  padding: 0 3rem;
 }
 
 /* Liens */
 .footer-links {
   display: flex;
   align-items: center;
-  gap: 30px; /* espace entre les 4 éléments */
+  gap: 45px;
 }
 
 .footer-links a {
   color: var(--color-text);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 300;
 }
 
 .footer-links a:hover {
@@ -321,7 +326,8 @@ header nav a:hover {
 /*  SECTION 5 : NOS VALEURS      */
 /* ----------------------------- */
 .home-values {
-  padding: 50px 0;
+  padding-top: 50px;
+  padding-bottom: 90px;
   background-color: var(--color-menu);
 }
 
@@ -356,6 +362,7 @@ header nav a:hover {
 /* L’équipe + cœur */
 .home-equipe-text p {
   margin: 0;
+  margin-top: 40px;
   padding: 0;
   font-size: 12px;
   font-style: italic;
@@ -363,23 +370,24 @@ header nav a:hover {
 }
 
 .home-equipe-icon {
-  display: flex;
-  align-items: center; /* garantit l’alignement vertical */
+  max-width: 392px;
+  margin: auto;
 }
 
 .equipe-heart {
   width: 120px;
   height: auto;
   display: block;
+  margin: -20px auto 0 336px;
 }
 
 /* Livres à  */
 .page-container {
   max-width: 1440px; /* limite la largeur max */
   width: 100%;
-  margin: 80px auto 0 auto;
+  margin: 120px auto 0 auto;
   background-color: var(--color-background);
-  padding-bottom: 2rem;
+  padding-bottom: 5rem;
 }
 
 /* Header de la page */
@@ -387,8 +395,8 @@ header nav a:hover {
   display: flex;
   justify-content: space-between; /* titre à gauche, search à droite */
   align-items: center;
-  width: 860px; /* largeur des 4 cards + 3 gaps */
-  margin: 0 auto 2rem auto; /* centré comme la grille */
+  width: 920px; /* largeur des 4 cards + 3 gaps */
+  margin: 0 auto 4rem auto; /* centré comme la grille */
 }
 
 /* Titre */
@@ -408,10 +416,18 @@ header nav a:hover {
 .search-bar input {
   width: 100%;
   height: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: none;
   font-family: var(--font-body);
-  padding: 0 10px 0 50px; /* espace à droite pour la loupe */
+}
+
+.search-bar input::-moz-placeholder {
+  color: var(--color-min); /* ou une autre couleur */
+  padding-left: 40px;
+}
+
+.search-bar input::placeholder {
+  color: var(--color-min); /* ou une autre couleur */
+  padding-left: 40px;
 }
 
 .search-bar .search-btn {
@@ -426,11 +442,16 @@ header nav a:hover {
   color: var(--color-primary);
 }
 
+.search-icon {
+  width: 16px;
+  height: auto;
+}
+
 /* Grille des livres */
 .books-grid {
   display: grid;
   grid-template-columns: repeat(4, 200px);
-  gap: 40px;
+  gap: 50px 40px;
   width: -moz-fit-content;
   width: fit-content;
   margin: 0 auto;
@@ -485,59 +506,57 @@ header nav a:hover {
   color: var(--color-min);
   margin-left: 15px;
   text-align: left;
+  margin-bottom: 25px;
 }
 
 /* Page Livre détaillé */
 .book-detail {
   display: flex;
   align-items: stretch;
-  gap: 2rem;
+  gap: 5rem;
   max-width: 1440px;
-  margin: 2rem auto;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 6px;
+  background: var(--color-background);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .book-cover-detail {
   width: 720px;
   height: auto;
-  border-radius: 4px;
-  flex-shrink: 0;
 }
 
 .book-info {
-  flex: 1;
   display: flex;
   flex-direction: column; /* contenu vertical */
-  gap: 1rem;
+  max-width: 485px;
 }
 
 .book-info h1 {
-  margin-top: 0;
+  margin-top: 50px;
   font-size: 36px;
   color: var(--color-title);
   font-family: var(--font-title);
+  margin-bottom: 0;
 }
 
 .book-info .author {
   color: #A6A6A6;
   font-size: 16px;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 }
 
 .separator {
   border: none;
   border-top: 1px solid #ddd;
-  margin: 40px 0; /* ligne de séparation de 50px */
+  margin: 10px 0; /* ligne de séparation de 50px */
   width: 50px;
 }
 
 .description-label {
+  text-transform: uppercase;
   font-size: 8px;
   font-weight: bold;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0;
+  margin-top: 20px;
 }
 
 .description-text {
@@ -551,7 +570,8 @@ header nav a:hover {
   margin: 1rem 0;
 }
 
-.owner-label {
+.owner p {
+  text-transform: uppercase;
   font-size: 8px;
   font-weight: bold;
   margin-bottom: 0.3rem;
@@ -560,12 +580,14 @@ header nav a:hover {
 .owner-info {
   display: flex;
   align-items: center;
+  margin-top: 20px;
   gap: 1rem;
+  height: auto;
 }
 
 .owner-photo {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%; /* ✅ photo ronde */
   -o-object-fit: cover;
      object-fit: cover;
@@ -573,13 +595,19 @@ header nav a:hover {
 
 .owner-name {
   font-size: 14px;
+  text-decoration: none;
+  color: var(--color-text);
 }
 
 .book-detail .btn {
   align-self: center;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 485px;
+  height: 63px;
   margin-top: auto;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Page profil */
@@ -872,33 +900,6 @@ header nav a:hover {
   color: #0077cc;
 }
 
-.account-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 2rem;
-  background: #f9f9f9;
-}
-
-.account-title {
-  font-size: 28px;
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.account-container {
-  max-width: 1440px;
-  margin: auto;
-  display: flex;
-  gap: 2rem;
-}
-
-.account-block {
-  flex: 1;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-}
-
 /* Page d'édition de livre */
 .edit-container {
   display: flex;
@@ -964,6 +965,46 @@ header nav a:hover {
 }
 
 /* account */
+.account-body {
+  margin: auto;
+  width: 100%;
+  max-width: 1140px;
+  padding: 2rem;
+  background: var(--color-background);
+}
+
+.account-title {
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.account-container {
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+  gap: 2rem;
+}
+
+.account-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-block-background);
+  padding: 2rem;
+  border-radius: 20px;
+}
+
+.account-left {
+  width: 136px;
+}
+
+/* Bloc 1 : photo + lien */
+.account-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .account-profile-pic {
   width: 135px;
   height: 135px;
@@ -971,65 +1012,112 @@ header nav a:hover {
   -o-object-fit: cover;
      object-fit: cover;
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 
 .account-edit-link {
-  color: #888;
+  color: var(--color-min);
   text-decoration: underline;
   font-size: 14px;
+  margin-top: -10px;
   margin-bottom: 1rem;
   display: inline-block;
 }
 
+/* Bloc 2 : infos */
+.account-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
 .account-username {
   font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-title);
+  color: var(--color-text);
 }
 
 .account-member-since {
   font-size: 14px;
-  color: #666;
+  color: var(--color-min);
   margin-bottom: 1.5rem;
 }
 
 .account-section-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.account-info p {
+  font-size: 14px;
+  margin: 0.3rem 0;
 }
 
 /* Formulaire */
+.account-right {
+  width: 100%;
+}
+
+.account-form-title {
+  font-size: 16px;
+  margin-bottom: 1rem;
+}
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* important pour éviter le centrage */
+  margin: auto;
+}
+
 .account-form label {
   display: block;
+  font-size: 14px;
+  color: var(--color-min);
   margin-top: 1rem;
   font-weight: bold;
 }
 
 .account-form input {
-  width: 100%;
-  padding: 0.6rem;
+  width: 322px;
+  height: 50px;
   margin-top: 0.3rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background-color: var(--color-input-background);
+  border: 1px solid var(--color-input-border);
+  border-radius: 6px;
 }
 
 .account-form button {
+  width: 150px;
+  height: 63px;
   margin-top: 1.5rem;
-  padding: 0.8rem 1.2rem;
-  background: #0077cc;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
+  background: var(--color-menu);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
   cursor: pointer;
 }
 
 /* Tableau bibliothèque */
+.account-block-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--color-block-background);
+  padding: 2rem;
+  border-radius: 20px;
+  margin-top: 35px;
+}
+
 .account-table {
-  width: 100%;
+  width: 1140px;
   border-collapse: collapse;
   margin-top: 2rem;
+  table-layout: fixed;
 }
 
 .account-table th, .account-table td {
@@ -1037,18 +1125,28 @@ header nav a:hover {
   text-align: left;
 }
 
+.account-table td {
+  font-size: 12px;
+  color: var(--color-text);
+}
+
 .account-table th {
   text-transform: uppercase;
-  font-size: 12px;
-  color: #555;
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 .account-table tr:nth-child(even) {
-  background: #f2f2f2;
+  background: var(--color-input-background);
+}
+
+.account-table td:nth-child(4) {
+  font-style: italic;
 }
 
 .account-book-pic {
-  width: 50px;
+  width: 78px;
   height: auto;
 }
 
@@ -1064,17 +1162,26 @@ header nav a:hover {
   background: #e0f7e9;
   color: #2e7d32;
   border: 1px solid #2e7d32;
+  border-radius: 20px;
 }
 
 .account-unavailable {
   background: #fde0e0;
   color: #c62828;
   border: 1px solid #c62828;
+  border-radius: 20px;
 }
 
-.account-action-links a {
+.account-action-links .edit {
   margin-right: 1rem;
   text-decoration: underline;
-  color: #0077cc;
-  font-size: 14px;
+  color: var(--color-text);
+  font-size: 12px;
+}
+
+.account-action-links .supprimer {
+  margin-right: 1rem;
+  text-decoration: underline;
+  color: var(--color-red);
+  font-size: 12px;
 }/*# sourceMappingURL=main.css.map */

@@ -1,8 +1,8 @@
 /* Footer plein écran */
 .site-footer {
   width: 100%;
-  background-color: var(--color-menu);
-  padding: 20px 0;
+  height: 61px;
+  background-color: var(--color-footer);
   display: flex;
   justify-content: center;
 }
@@ -11,21 +11,22 @@
 .footer-container {
   width: 100%;
   display: flex;
-  justify-content: right; /* centre tout */
-  padding: 0 1rem;
+  justify-content: right; 
+  padding: 0 3rem;
 }
 
 /* Liens */
 .footer-links {
   display: flex;
   align-items: center;
-  gap: 30px; /* espace entre les 4 éléments */
+  gap: 45px; 
 }
 
 .footer-links a {
   color: var(--color-text);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 300;
 }
 
 .footer-links a:hover {

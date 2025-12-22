@@ -3,53 +3,50 @@
 .book-detail {
   display: flex;
   align-items: stretch;
-  gap: 2rem;
+  gap: 5rem;
   max-width: 1440px;
-  margin: 2rem auto;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 6px;
+  background: var( --color-background);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .book-cover-detail {
   width: 720px;
   height: auto;
-  border-radius: 4px;
-  flex-shrink: 0;
 }
 
 .book-info {
-  flex: 1;
   display: flex;
   flex-direction: column; /* contenu vertical */
-  gap: 1rem;
+  max-width: 485px;
 }
 
 .book-info h1 {
-  margin-top: 0;
+  margin-top: 50px;
   font-size: 36px;
   color: var(--color-title);
   font-family: var(--font-title);
+  margin-bottom: 0;
 }
 
 .book-info .author {
   color: #A6A6A6;
   font-size: 16px;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 }
 
 .separator {
   border: none;
   border-top: 1px solid #ddd;
-  margin: 40px 0; /* ligne de séparation de 50px */
+  margin: 10px 0; /* ligne de séparation de 50px */
   width: 50px;
 }
 
 .description-label {
+  text-transform: uppercase;
   font-size: 8px;
   font-weight: bold;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0;
+  margin-top: 20px;
 }
 
 .description-text {
@@ -63,7 +60,10 @@
   margin: 1rem 0;
 }
 
-.owner-label {
+
+
+.owner p{
+  text-transform: uppercase;
   font-size: 8px;
   font-weight: bold;
   margin-bottom: 0.3rem;
@@ -72,22 +72,32 @@
 .owner-info {
   display: flex;
   align-items: center;
+  margin-top: 20px;
   gap: 1rem;
+  height: auto
 }
 
 .owner-photo {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%; /* ✅ photo ronde */
   object-fit: cover;
 }
 
 .owner-name {
   font-size: 14px;
+  text-decoration: none;
+  color: var( --color-text);
 }
 
 .book-detail .btn {
-  align-self: center; 
-  width: fit-content;    
-  margin-top: auto; 
+  align-self: center;
+  width: 485px;
+  height: 63px;
+  margin-top: auto;
+  margin-bottom: 50px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
 }
+

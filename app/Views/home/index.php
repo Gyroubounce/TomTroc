@@ -132,9 +132,9 @@
 
             <div class="home-values-content">
                 <p>
-                    Chez Tom Troc, nous mettons l'accent sur le partage, la découverte et la communauté.
-                    Nos valeurs sont ancrées dans notre passion pour les livres et notre désir de créer
-                    des liens entre les lecteurs.
+                   Chez Tom Troc, nous mettons l'accent sur le partage, la découverte et la communauté. 
+                   Nos valeurs sont ancrées dans notre passion pour les livres et notre désir de créer des liens entre les lecteurs. 
+                   Nous croyons en la puissance des histoires pour rassembler les gens et inspirer des conversations enrichissantes.
                 </p>
 
                 <p>
@@ -152,12 +152,9 @@
             <div class="home-equipe-text">
                 <p>L’équipe Tom Troc</p>
             </div>
-
-            <div class="home-equipe-icon">
-                <img src="/assets/img/coeur.svg" alt="Cœur" class="equipe-heart">
-            </div>
-
-
+        </div>
+         <div class="home-equipe-icon">
+            <img src="/assets/img/coeur.svg" alt="Cœur" class="equipe-heart">
         </div>
     </section>
 

@@ -173,7 +173,8 @@
 /* ----------------------------- */
 
 .home-values {
-  padding: 50px 0;
+  padding-top: 50px;
+  padding-bottom: 90px;
   background-color: var(--color-menu);
 }
 
@@ -209,6 +210,7 @@
 
 .home-equipe-text p {
   margin: 0;
+  margin-top: 40px;
   padding: 0;
   font-size: 12px;
   font-style: italic;
@@ -216,13 +218,14 @@
 }
 
 .home-equipe-icon {
-  display: flex;
-  align-items: center;   /* garantit l’alignement vertical */
+  max-width: 392px;
+  margin: auto;
 }
 
 .equipe-heart {
   width: 120px;
   height: auto;
   display: block;
+  margin: -20px auto 0 336px;
 }
 
