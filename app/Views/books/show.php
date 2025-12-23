@@ -1,4 +1,8 @@
-<main>
+<main class="book-show-body">
+    <a href="/books" class="edit-back">
+    Nos livres > <?= htmlspecialchars($book->title) ?>
+    </a>
+
     <div class="book-detail">
         <?php if ($book->image): ?>
             <img src="<?= htmlspecialchars($book->image) ?>" 

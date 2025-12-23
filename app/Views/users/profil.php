@@ -1,22 +1,26 @@
-<main>
-  <h1>Profil de <?= htmlspecialchars($user->username) ?></h1>
-
+<main class="profil-main">
+  
   <div class="profil-container">
     <!-- Bloc gauche : infos utilisateur -->
     <div class="profil-left profil-block">
-      <img src="/assets/uploads/profile/<?= htmlspecialchars($user->profile ?? 'default.png') ?>" 
-           alt="Photo de profil" class="profil-photo">
-      <div class="profil-username"><?= htmlspecialchars($user->username) ?></div>
-      <div class="profil-member-since">Membre depuis <?= date('d/m/Y', strtotime($user->created_at)) ?></div>
-      <div class="profil-library">Bibliothèque : <?= count($books) ?> livres</div>
-
+      
+         <div class="profil-info">
+              <img src="/assets/uploads/profile/<?= htmlspecialchars($user->profile ?? 'default.png') ?>" 
+              alt="Photo de profil" class="profil-photo">
+              <div class="profil-details">
+                <div class="profil-username"><?= htmlspecialchars($user->username) ?></div>
+                <div class="profil-member-since">Membre depuis <?= date('d/m/Y', strtotime($user->created_at)) ?></div>
+                <div class="profil-section-title">Bibliothèque</div>
+                <p><?= count($books) ?> livres</p>
+              </div>
+          </div>
       <!-- CTA pour démarrer une conversation -->
       <a href="/messages/conversation/<?= $user->id ?>" class="profil-cta">Envoyer un message</a>
     </div>
 
     <!-- Bloc droit : bibliothèque de l’utilisateur -->
     <div class="profil-right profil-block">
-      <h2>Ses livres</h2>
+      
       <table class="profil-table">
         <thead>
           <tr>

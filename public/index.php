@@ -37,6 +37,7 @@ $router->add('/logout', 'AuthController', 'logout', 'GET');          // déconne
 // ----------------------
 $router->add('/mon-compte', 'UserController', 'account', 'GET');     // espace perso
 $router->add('/users/profil/:id', 'UserController', 'profil', 'GET');// profil public
+$router->add('/users/update/:id', 'UserController', 'update', 'POST');
 
 // ----------------------
 // Livres

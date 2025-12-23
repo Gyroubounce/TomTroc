@@ -1,65 +1,109 @@
 
 /* Page d'édition de livre */
+.edit-body {
+  width: 1140px;
+  margin: auto;
+}
 
+.edit-back { 
+  display: inline-block; 
+  font-size: 14px; 
+  color: var(--color-min); 
+  text-decoration: none; 
+  margin-bottom: 1rem; 
+  margin-top: 40px;
+} 
+
+.edit-back:hover { 
+  text-decoration: underline; 
+}
+
+.edit-title {
+  font-size: 26px;
+  color: var(--color-title);
+  font-weight: 400;
+  font-family: var(--font-title);
+  margin-bottom: 20px;
+}
 .edit-container {
   display: flex;
   justify-content: space-between;
-  max-width: 1440px;
-  margin: 0 auto;
+  background: var(--color-block-background);
+  border-radius: 20px;
+  padding: 30px;
 }
 
 .edit-block {
-  background: #fff;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.edit-block p {
+  font-size: 14px; 
+  color: var(--color-min); 
 }
 
 .edit-left {
-  width: 40%;
-  text-align: center;
+  width: 488px;
+}
+
+.edit-cover-detail {
+  width: 100%;
+  border-radius: 6px;
 }
 
 .edit-book-pic {
   max-width: 100%;
-  border-radius: 6px;
 }
 
-.edit-right {
-  width: 55%;
+.edit-photo-link {
+  margin-top: 1rem;
+  font-size: 14px;
+  color: var(--color-min);
+  text-decoration: underline;
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
 }
 
 .edit-form label {
   display: block;
   margin-top: 15px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 400;
+  color: var( --color-min);
 }
 
 .edit-form input,
 .edit-form textarea,
 .edit-form select {
-  width: 100%;
+  width: 435px;
+  height: 50px;
   padding: 10px;
   margin-top: 5px;
-  background: #f0f0f0; /* gris clair */
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background-color: var(--color-input-background);
+  border: 1px solid var( --color-input-border);
+  border-radius: 6px;
 }
 
 .edit-form textarea {
   min-height: 100px;
 }
 
-.edit-submit {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+.edit-form { 
+  display: flex; 
+  flex-direction: column; 
+  height: 100%; 
 }
 
-.edit-submit:hover {
-  background: #0056b3;
+.edit-submit {
+  align-self: auto;
+  width: 322px;
+  height: 63px;
+  margin-top: auto;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  border: none;
+  margin-top: auto;
 }
+

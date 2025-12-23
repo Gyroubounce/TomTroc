@@ -79,9 +79,28 @@ class UserManager {
     /**
      * Met à jour la photo de profil d’un utilisateur
      */
-    public function updateProfile(int $id, ?string $profile): void {
-        $stmt = $this->db->prepare("UPDATE users SET profile = ? WHERE id = ?");
-        $stmt->execute([$profile, $id]);
+    public function updateUser(int $id, string $email, ?string $password, string $username): void
+    {
+        // Si le mot de passe est vide → on ne le modifie pas
+        if (empty($password)) {
+            $stmt = $this->db->prepare("
+                UPDATE users 
+                SET email = ?, username = ?
+                WHERE id = ?
+            ");
+            $stmt->execute([$email, $username, $id]);
+            return;
+        }
+
+        // Sinon → on met à jour le mot de passe aussi
+        $hashed = password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = $this->db->prepare("
+            UPDATE users 
+            SET email = ?, username = ?, password = ?
+            WHERE id = ?
+        ");
+        $stmt->execute([$email, $username, $hashed, $id]);
     }
 
     /**

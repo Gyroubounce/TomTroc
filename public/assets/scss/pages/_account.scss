@@ -15,8 +15,6 @@
 }
 
 .account-container {
-  max-width: 1440px;
-  margin: auto;
   display: flex;
   gap: 2rem;
 }
@@ -159,6 +157,11 @@
 .account-table th, .account-table td {
   padding: 0.8rem;
   text-align: left;
+}
+
+.account-table td:first-child,
+.account-table th:first-child {
+  padding-left: 40px;
 }
 
 .account-table td {

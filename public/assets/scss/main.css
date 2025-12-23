@@ -155,7 +155,7 @@ header nav a:hover {
 }
 
 .btn:hover, .btn-primary:hover {
-  background-color: #008c52; /* variante plus sombre du vert */
+  background-color: #008c52;
   color: #fff;
 }
 
@@ -510,13 +510,18 @@ header nav a:hover {
 }
 
 /* Page Livre détaillé */
+.book-show-body {
+  width: 1440px;
+  margin: auto;
+}
+
 .book-detail {
   display: flex;
   align-items: stretch;
   gap: 5rem;
   max-width: 1440px;
   background: var(--color-background);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: auto;
 }
 
 .book-cover-detail {
@@ -611,92 +616,162 @@ header nav a:hover {
 }
 
 /* Page profil */
+.profil-main {
+  margin: auto;
+  width: 100%;
+  max-width: 1140px;
+  padding: 2rem;
+  background: var(--color-background);
+}
+
 /* Conteneur principal */
 .profil-container {
   display: flex;
-  justify-content: space-between;
-  max-width: 1440px;
-  margin: 0 auto;
-  gap: 20px;
+  gap: 2rem;
 }
 
 /* Blocs génériques */
 .profil-block {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-block-background);
+  border-radius: 20px;
 }
 
 /* Bloc gauche (profil) */
 .profil-left {
-  width: 30%;
-  text-align: center;
+  align-items: center;
+  width: 341px;
+  height: 579px;
+}
+
+.profil-info {
+  display: flex;
+  flex-direction: column;
+  width: 135px;
+  height: 367px;
+  margin-top: auto;
 }
 
 .profil-photo {
-  max-width: 150px;
+  width: 135px;
+  height: 135px;
   border-radius: 50%;
-  margin-bottom: 15px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  margin-bottom: 0;
+}
+
+.profil-details {
+  text-align: center;
+  margin-top: auto;
 }
 
 .profil-username {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 1rem;
+  font-family: var(--font-title);
+  color: var(--color-text);
 }
 
-.profil-member-since,
-.profil-library {
-  color: #666;
-  margin-bottom: 10px;
+.profil-member-since {
+  font-size: 14px;
+  color: var(--color-min);
+  margin-bottom: 1.5rem;
+}
+
+.profil-section-title {
+  text-transform: uppercase;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.profil-info p {
+  font-size: 14px;
+  margin: 0.3rem 0;
 }
 
 .profil-cta {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 15px;
-  background: #007bff;
-  color: #fff;
-  border-radius: 6px;
+  width: 215px;
+  height: 63px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
+  margin-top: 1.5rem;
+  background: var(--color-menu);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
+  cursor: pointer;
+  margin: auto;
 }
 
 .profil-cta:hover {
-  background: #0056b3;
+  background-color: #008c52;
+  color: #fff;
 }
 
 /* Bloc droit (tableau des livres) */
 .profil-right {
-  width: 65%;
+  width: 771px;
 }
 
 .profil-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 2rem;
+  table-layout: fixed;
 }
 
 .profil-table th,
 .profil-table td {
   padding: 12px;
   text-align: left;
+  word-wrap: break-word; /* évite les débordements */
+  overflow-wrap: break-word; /* coupe proprement */
+}
+
+.profil-table td:first-child,
+.profil-table th:first-child {
+  padding-left: 40px;
+}
+
+.profil-table td:last-child,
+.profil-table th:last-child {
+  padding-right: 40px;
+}
+
+.profil-table td {
+  font-size: 12px;
+  color: var(--color-text);
 }
 
 .profil-table th {
-  background: #f8f8f8;
+  text-transform: uppercase;
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--color-text);
+  border-bottom: 2px solid var(--color-background);
+}
+
+.profil-table td:nth-child(4) {
+  font-style: italic;
 }
 
 .profil-table tr {
   cursor: pointer;
 }
 
-.profil-table tr.row-grey {
-  background: #f0f0f0;
+.profil-table tr:nth-child(even) {
+  background: var(--color-input-background);
 }
 
 .profil-book-pic {
-  max-width: 60px;
-  border-radius: 4px;
+  width: 78px;
+  height: auto;
 }
 
 /* messagerie */
@@ -901,67 +976,112 @@ header nav a:hover {
 }
 
 /* Page d'édition de livre */
+.edit-body {
+  width: 1140px;
+  margin: auto;
+}
+
+.edit-back {
+  display: inline-block;
+  font-size: 14px;
+  color: var(--color-min);
+  text-decoration: none;
+  margin-bottom: 1rem;
+  margin-top: 40px;
+}
+
+.edit-back:hover {
+  text-decoration: underline;
+}
+
+.edit-title {
+  font-size: 26px;
+  color: var(--color-title);
+  font-weight: 400;
+  font-family: var(--font-title);
+  margin-bottom: 20px;
+}
+
 .edit-container {
   display: flex;
   justify-content: space-between;
-  max-width: 1440px;
-  margin: 0 auto;
+  background: var(--color-block-background);
+  border-radius: 20px;
+  padding: 30px;
 }
 
 .edit-block {
-  background: #fff;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-block p {
+  font-size: 14px;
+  color: var(--color-min);
 }
 
 .edit-left {
-  width: 40%;
-  text-align: center;
+  width: 488px;
+}
+
+.edit-cover-detail {
+  width: 100%;
+  border-radius: 6px;
 }
 
 .edit-book-pic {
   max-width: 100%;
-  border-radius: 6px;
 }
 
-.edit-right {
-  width: 55%;
+.edit-photo-link {
+  margin-top: 1rem;
+  font-size: 14px;
+  color: var(--color-min);
+  text-decoration: underline;
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
 }
 
 .edit-form label {
   display: block;
   margin-top: 15px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-min);
 }
 
 .edit-form input,
 .edit-form textarea,
 .edit-form select {
-  width: 100%;
+  width: 435px;
+  height: 50px;
   padding: 10px;
   margin-top: 5px;
-  background: #f0f0f0; /* gris clair */
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background-color: var(--color-input-background);
+  border: 1px solid var(--color-input-border);
+  border-radius: 6px;
 }
 
 .edit-form textarea {
   min-height: 100px;
 }
 
-.edit-submit {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.edit-submit:hover {
-  background: #0056b3;
+.edit-submit {
+  align-self: auto;
+  width: 322px;
+  height: 63px;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  margin-top: auto;
 }
 
 /* account */
@@ -979,8 +1099,6 @@ header nav a:hover {
 }
 
 .account-container {
-  max-width: 1440px;
-  margin: auto;
   display: flex;
   gap: 2rem;
 }
@@ -1123,6 +1241,11 @@ header nav a:hover {
 .account-table th, .account-table td {
   padding: 0.8rem;
   text-align: left;
+}
+
+.account-table td:first-child,
+.account-table th:first-child {
+  padding-left: 40px;
 }
 
 .account-table td {

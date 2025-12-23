@@ -1,12 +1,17 @@
 
 /* Page Livre détaillé */
+.book-show-body {
+  width: 1440px;
+  margin: auto;
+}
+
 .book-detail {
   display: flex;
   align-items: stretch;
   gap: 5rem;
   max-width: 1440px;
   background: var( --color-background);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: auto;
 }
 
 .book-cover-detail {

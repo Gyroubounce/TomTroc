@@ -1,12 +1,16 @@
-<main class="account-body">
-  <h1 class="account-title">Éditer le livre</h1>
+<main class="edit-body">
+  <a href="/mon-compte" class="edit-back"> ← Retour </a>
+  <h1 class="edit-title">Modifier les informations</h1>
 
   <div class="edit-container">
     <!-- Bloc gauche : image -->
     <div class="edit-left edit-block">
+      <p>photo</p>
       <img src="<?= htmlspecialchars($book->image) ?>" 
                 alt="<?= htmlspecialchars($book->title) ?>" 
-                class="book-cover-detail">
+                class="edit-cover-detail">
+      <a href="/books/edit-image/<?= $book->id ?>" class="edit-photo-link"> Modifier la photo </a>
+                
     </div>
 
     <!-- Bloc droit : formulaire -->
@@ -30,7 +34,7 @@
           <option value="indisponible" <?= $book->status === 'indisponible' ? 'selected' : '' ?>>Indisponible</option>
         </select>
 
-        <button type="submit" class="edit-submit">Valider</button>
+        <button type="submit" class="edit-submit btn">Valider</button>
       </form>
     </div>
   </div>

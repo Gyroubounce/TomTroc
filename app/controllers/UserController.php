@@ -44,26 +44,36 @@ class UserController {
     /**
      * Met à jour un utilisateur (admin)
      */
-    public function update(int $id): void {
+    public function update(int $id): void 
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $profile = null;
-            if (!empty($_FILES['profile']['name'])) {
-                $uploadDir = __DIR__ . '/../../public/assets/uploads/profile/';
-                $fileName = basename($_FILES['profile']['name']);
-                $targetPath = $uploadDir . $fileName;
 
-                if (move_uploaded_file($_FILES['profile']['tmp_name'], $targetPath)) {
-                    $profile = $fileName;
+            // Récupération des champs du formulaire
+            $email    = $_POST['email'] ?? null;
+            $password = $_POST['password'] ?? null;
+            $username = $_POST['username'] ?? null;
+
+            // Mise à jour des infos utilisateur
+            $this->manager->updateUser($id, $email, $password, $username);
+
+            // Gestion de la photo (optionnel)
+            if (!empty($_FILES['profile']['name'])) {
+
+                $uploadDir = __DIR__ . '/../../public/assets/uploads/profile/';
+                $fileName  = basename($_FILES['profile']['name']);
+                $target    = $uploadDir . $fileName;
+
+                if (move_uploaded_file($_FILES['profile']['tmp_name'], $target)) {
+                    $this->manager->updateProfile($id, $fileName);
                 }
             }
 
-            if ($profile) {
-                $this->manager->updateProfile($id, $profile);
-            }
-            header('Location: /users/' . $id);
+            // Retour à la page Mon compte
+            header('Location: /mon-compte');
             exit;
         }
     }
+
 
     /**
      * Supprime un utilisateur (admin)

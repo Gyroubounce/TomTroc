@@ -13,7 +13,7 @@
                 <img src="/assets/uploads/profile/<?= htmlspecialchars($user->profile ?? 'default.png') ?>" 
                      alt="Photo de profil" class="account-profile-pic">
 
-                <a href="/users/edit/<?= $user->id ?>" class="account-edit-link">Modifier</a>
+                <a href="/mon-compte#photo<?= $user->id ?>" class="account-edit-link">Modifier</a>
             </div>
 
             <div class="account-info">
