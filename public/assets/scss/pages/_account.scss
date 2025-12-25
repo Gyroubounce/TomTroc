@@ -2,6 +2,8 @@
 /* account */
 
 .account-body {
+  display: flex;
+  flex-direction: column;
   margin: auto;
   width: 100%;
   max-width: 1140px;
@@ -142,9 +144,9 @@
   flex-direction: column;
   align-items: center;
   background: var(--color-block-background);
-  padding: 2rem;
   border-radius: 20px;
   margin-top: 35px;
+  overflow: hidden;
 }
 
 

@@ -1,30 +1,34 @@
 
+
 /* messagerie */
 .messagerie-container {
   display: flex;
   gap: 20px;
-  max-width: 1440px;
+  width: 1140px;
   margin: 0 auto;
+  background: var(--color-menu);
 }
 
-.messagerie-block {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
 
 /* Bloc gauche */
 .messagerie-left {
   width: 30%;
+  background: var(--color-background);
+}
+
+.messagerie-left h2 {
+  font-size: 26px;
+  font-weight: 400;
+  margin-top: 80px;
+  margin-left: 30px;
 }
 
 .conversation-card {
   display: flex;
   align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
+  background: var(--color-block-background);
   cursor: pointer;
+  padding: 30px 20px;
 }
 
 .conversation-card:hover {
@@ -32,26 +36,27 @@
 }
 
 .conversation-photo {
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  margin-right: 10px;
 }
 
 .conversation-info {
-  flex: 1;
+  margin-left: 15px;
 }
 
 .conversation-header {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
+  color: var(--color-text);
+}
+
+.conversation-date {
+  font-size: 12px;
+  color: var(--color-text);
 }
 
 .conversation-preview {
-  color: #666;
-  font-size: 0.9em;
-  margin-top: 5px;
+  color: var(--color-min);
+  font-size: 12px;
 }
 
 /* Bloc droit */
@@ -59,6 +64,8 @@
   width: 70%;
   display: flex;
   flex-direction: column;
+  background: var( --color-menu);
+  margin-left: 30px;
 }
 
 .discussion-thread {
@@ -68,21 +75,22 @@
 }
 
 .discussion-message {
-  max-width: 70%;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 8px;
+  max-width: 500px;
+  height: 37px;
+  border-radius: 6px;
 }
 
 .discussion-message.sent {
-  background: #007bff;
-  color: #fff;
+  background: var(--color-input-background);
+  color: var(--color-text);
+  font-size: 12px;
   margin-left: auto;
+  padding-left: 20px;
 }
 
 .discussion-message.received {
-  background: #f0f0f0;
-  color: #000;
+  background: var(--color-block-background);
+  color: var(--color-text);
   margin-right: auto;
 }
 
@@ -95,43 +103,28 @@
 
 .discussion-form {
   display: flex;
-  gap: 10px;
+  gap: 20px;
+  margin-bottom: 100px;
 }
 
 .discussion-form textarea {
   flex: 1;
-  padding: 10px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: none;
 }
 
 .discussion-form button {
-  padding: 10px 15px;
-  background: #007bff;
-  color: #fff;
+  width: 132px;
+  height: 49px;
+  border-radius: 10px;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
 }
 
 .discussion-form button:hover {
-  background: #0056b3;
+  background: var(--color-primary);
 }
 
-.messagerie-container {
-  display: flex;
-  gap: 20px;
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
-.messagerie-left {
-  width: 30%;
-}
-
-.messagerie-right {
-  width: 70%;
-}
 
 /* Mobile */
 @media (max-width: 768px) {

@@ -1,5 +1,5 @@
 <main class="book-show-body">
-    <a href="/books" class="edit-back">
+    <a href="/books" class="book-back">
     Nos livres > <?= htmlspecialchars($book->title) ?>
     </a>
 
@@ -35,7 +35,8 @@
 
         </div>
 
-            <a href="/messages/conversation/<?= $user->id ?>" class="btn">Envoyer un message</a>
+            <a href="/messages?conversation=<?= $user->id ?>" class="btn">Envoyer un message</a>
+
         </div>
     </div>
 </main>

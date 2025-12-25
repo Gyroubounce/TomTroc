@@ -48,16 +48,16 @@ $router->add('/books/edit/:id', 'BookController', 'edit', 'GET');    // formulai
 $router->add('/books/update/:id', 'BookController', 'update', 'POST');// traitement édition
 
 // ----------------------
+// ----------------------
 // Messagerie
 // ----------------------
-// 1. Page d’accueil messagerie (liste des conversations)
+
+// 1. Page d’accueil messagerie (liste + conversation)
 $router->add('/messages', 'MessageController', 'index', 'GET');
 
-// 2. Fil de discussion (mobile ou URL directe)
-$router->add('/messages/conversation/:id', 'MessageController', 'conversation', 'GET');
+// 2. Envoi d’un message à un utilisateur
+$router->add('/messages/send-to/:id', 'MessageController', 'sendToUser', 'POST');
 
-// 3. Envoi d’un message
-$router->add('/messages/send/:id', 'MessageController', 'send', 'POST');
 
 // ----------------------
 // Dispatch

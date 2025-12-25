@@ -1,8 +1,23 @@
 
 /* Page Livre détaillé */
 .book-show-body {
-  width: 1440px;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-back { 
+  width: 1140px;
   margin: auto;
+  display: inline-block; 
+  font-size: 14px; 
+  color: var(--color-min); 
+  text-decoration: none; 
+  margin-bottom: 1rem; 
+  margin-top: 40px;
+} 
+
+.book-back:hover { 
+  text-decoration: underline; 
 }
 
 .book-detail {

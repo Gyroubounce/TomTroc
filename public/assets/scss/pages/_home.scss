@@ -1,6 +1,11 @@
 /* ----------------------------- */
 /*  GLOBAL CONTAINER 1140px     */
 /* ----------------------------- */
+.home {
+  display: flex;
+  flex-direction: column;
+}
+
 
 .container {
   width: 100%;

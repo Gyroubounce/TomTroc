@@ -15,7 +15,7 @@
               </div>
           </div>
       <!-- CTA pour démarrer une conversation -->
-      <a href="/messages/conversation/<?= $user->id ?>" class="profil-cta">Envoyer un message</a>
+      <a href="/messages?conversation=<?= $user->id ?>" class="profil-cta">Envoyer un message</a>
     </div>
 
     <!-- Bloc droit : bibliothèque de l’utilisateur -->

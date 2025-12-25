@@ -13,6 +13,7 @@
 .profil-container {
   display: flex;
   gap: 2rem;
+  align-items: flex-start;
 }
 
 /* Blocs génériques */
@@ -21,6 +22,7 @@
   flex-direction: column;
   background: var(--color-block-background);
   border-radius: 20px;
+  overflow: hidden;
 }
 
 /* Bloc gauche (profil) */
