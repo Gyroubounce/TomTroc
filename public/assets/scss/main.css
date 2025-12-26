@@ -809,7 +809,7 @@ header nav a:hover {
 
 /* Bloc gauche */
 .messagerie-left {
-  width: 30%;
+  width: 308px;
   background: var(--color-background);
 }
 
@@ -823,9 +823,10 @@ header nav a:hover {
 .conversation-card {
   display: flex;
   align-items: center;
+  justify-content: center;
   background: var(--color-block-background);
   cursor: pointer;
-  padding: 30px 20px;
+  height: 84px;
 }
 
 .conversation-card:hover {
@@ -836,6 +837,8 @@ header nav a:hover {
   width: 48px;
   height: 48px;
   border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .conversation-info {
@@ -854,6 +857,8 @@ header nav a:hover {
 .conversation-preview {
   color: var(--color-min);
   font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 
 /* Bloc droit */
@@ -865,37 +870,105 @@ header nav a:hover {
   margin-left: 30px;
 }
 
+/* Header en haut de la colonne droite */
+.discussion-top-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.discussion-top-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.discussion-top-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
 .discussion-thread {
   flex: 1;
   overflow-y: auto;
   margin-bottom: 15px;
 }
 
+/* Conteneur du message */
 .discussion-message {
-  max-width: 500px;
-  height: 37px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 15px;
+  background: transparent; /* important : pas de fond ici */
+}
+
+/* HEADER : photo + date + heure sur la même ligne */
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Photo */
+.discussion-profile {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+/* Date + heure sur une colonne */
+.discussion-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: first baseline;
+  font-size: 12px;
+  color: var(--color-min);
+  gap: 5px;
+}
+
+/* MESSAGE : bande blanche uniquement ici */
+.discussion-content {
+  padding: 10px 15px;
   border-radius: 6px;
+  color: var(--color-text);
+  font-size: 12px;
+  line-height: 1.4;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0;
 }
 
 .discussion-message.sent {
-  background: var(--color-input-background);
   color: var(--color-text);
   font-size: 12px;
-  margin-left: auto;
+  align-items: flex-end;
   padding-left: 20px;
 }
 
+.discussion-message.sent .discussion-content {
+  background: var(--color-input-background);
+  width: 500px;
+}
+
 .discussion-message.received {
-  background: var(--color-block-background);
   color: var(--color-text);
   margin-right: auto;
 }
 
+.discussion-message.received .discussion-content {
+  background: white;
+}
+
 .discussion-date {
   display: block;
-  font-size: 0.8em;
-  color: #666;
-  margin-top: 5px;
+  font-size: 12px;
 }
 
 .discussion-form {
@@ -910,6 +983,22 @@ header nav a:hover {
   border: none;
 }
 
+.discussion-form textarea::-moz-placeholder {
+  padding-left: 40px;
+  padding-top: 15px;
+  color: var(--color-min);
+  font-size: 14px;
+  font-family: var(--font-body);
+}
+
+.discussion-form textarea::placeholder {
+  padding-left: 40px;
+  padding-top: 15px;
+  color: var(--color-min);
+  font-size: 14px;
+  font-family: var(--font-body);
+}
+
 .discussion-form button {
   width: 132px;
   height: 49px;
@@ -920,6 +1009,10 @@ header nav a:hover {
 
 .discussion-form button:hover {
   background: var(--color-primary);
+}
+
+.visually-hidden {
+  display: none;
 }
 
 /* Mobile */
@@ -1153,7 +1246,6 @@ header nav a:hover {
   color: var(--color-min);
   text-decoration: underline;
   font-size: 14px;
-  margin-top: -10px;
   margin-bottom: 1rem;
   display: inline-block;
 }

@@ -27,37 +27,46 @@ $router->add('/', 'HomeController', 'index');
 // ----------------------
 // Authentification
 // ----------------------
-$router->add('/inscription', 'AuthController', 'register', 'GET');   // formulaire inscription
-$router->add('/connexion', 'AuthController', 'login', 'GET');        // formulaire connexion
-$router->add('/auth', 'AuthController', 'authenticate', 'POST');     // traitement connexion
-$router->add('/logout', 'AuthController', 'logout', 'GET');          // déconnexion
+
+// Formulaire inscription
+$router->add('/inscription', 'AuthController', 'register', 'GET');
+
+// Traitement inscription (ROUTE MANQUANTE → AJOUTÉE)
+$router->add('/users/storeRegister', 'AuthController', 'storeRegister', 'POST');
+
+// Formulaire connexion
+$router->add('/connexion', 'AuthController', 'login', 'GET');
+
+// Traitement connexion
+$router->add('/auth', 'AuthController', 'authenticate', 'POST');
+
+// Déconnexion
+$router->add('/logout', 'AuthController', 'logout', 'GET');
 
 // ----------------------
 // Utilisateurs
 // ----------------------
-$router->add('/mon-compte', 'UserController', 'account', 'GET');     // espace perso
-$router->add('/users/profil/:id', 'UserController', 'profil', 'GET');// profil public
+$router->add('/mon-compte', 'UserController', 'account', 'GET');
+$router->add('/users/profil/:id', 'UserController', 'profil', 'GET');
 $router->add('/users/update/:id', 'UserController', 'update', 'POST');
 
 // ----------------------
 // Livres
 // ----------------------
-$router->add('/books', 'BookController', 'index', 'GET');            // liste des livres
-$router->add('/books/:id', 'BookController', 'show', 'GET');         // détail d’un livre
-$router->add('/books/edit/:id', 'BookController', 'edit', 'GET');    // formulaire édition
-$router->add('/books/update/:id', 'BookController', 'update', 'POST');// traitement édition
+$router->add('/books', 'BookController', 'index', 'GET');
+$router->add('/books/:id', 'BookController', 'show', 'GET');
+$router->add('/books/edit/:id', 'BookController', 'edit', 'GET');
+$router->add('/books/update/:id', 'BookController', 'update', 'POST');
 
-// ----------------------
 // ----------------------
 // Messagerie
 // ----------------------
 
-// 1. Page d’accueil messagerie (liste + conversation)
+// Liste + conversation
 $router->add('/messages', 'MessageController', 'index', 'GET');
 
-// 2. Envoi d’un message à un utilisateur
+// Envoi d’un message
 $router->add('/messages/send-to/:id', 'MessageController', 'sendToUser', 'POST');
-
 
 // ----------------------
 // Dispatch

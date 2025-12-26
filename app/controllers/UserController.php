@@ -44,8 +44,7 @@ class UserController {
     /**
      * Met à jour un utilisateur (admin)
      */
-    public function update(int $id): void 
-    {
+    public function update(int $id): void     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Récupération des champs du formulaire

@@ -3,10 +3,7 @@
     <div class="auth-left">
         <h1>Connexion</h1>
         <form action="/auth" method="post">
-            <div class="form-group">
-                <label for="username">Pseudo</label>
-                <input type="text" id="username" name="username" required>
-            </div>
+            
 
             <div class="form-group">
                 <label for="email">Email</label>

@@ -40,12 +40,14 @@ class UserManager {
     /**
      * Récupère un utilisateur par son email
      */
-    public function findByEmail(string $email): ?User {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetchObject(User::class);
-        return $user ?: null;
+    public function findByEmail(string $email): ?User
+    {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+        $stmt->execute(['email' => $email]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, User::class);
+        return $stmt->fetch() ?: null;
     }
+
 
     public function findByUsernameAndEmail(string $username, string $email): ?object {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE username = :username AND email = :email");
@@ -63,7 +65,7 @@ class UserManager {
 
     /**
      * Crée un nouvel utilisateur
-     */
+        */
     public function create(string $username, string $email, string $password, ?string $profile = null): void {
         $stmt = $this->db->prepare(
             "INSERT INTO users (username, email, password, profile) VALUES (?, ?, ?, ?)"
@@ -71,10 +73,11 @@ class UserManager {
         $stmt->execute([
             $username,
             $email,
-            password_hash($password, PASSWORD_DEFAULT),
+            $password,   // <-- le mot de passe est déjà hashé
             $profile
         ]);
     }
+
 
     /**
      * Met à jour la photo de profil d’un utilisateur
@@ -101,6 +104,18 @@ class UserManager {
             WHERE id = ?
         ");
         $stmt->execute([$email, $username, $hashed, $id]);
+    }
+
+    /**
+     * Met à jour le mot de passe d’un utilisateur  
+     * */
+        public function updatePassword(int $id, string $hash): void
+    {
+        $stmt = $this->db->prepare("UPDATE users SET password = :password WHERE id = :id");
+        $stmt->execute([
+            'password' => $hash,
+            'id' => $id
+        ]);
     }
 
     /**

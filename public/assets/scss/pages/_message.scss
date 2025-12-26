@@ -12,7 +12,7 @@
 
 /* Bloc gauche */
 .messagerie-left {
-  width: 30%;
+  width: 308px;
   background: var(--color-background);
 }
 
@@ -26,9 +26,10 @@
 .conversation-card {
   display: flex;
   align-items: center;
+  justify-content: center;
   background: var(--color-block-background);
   cursor: pointer;
-  padding: 30px 20px;
+  height: 84px;
 }
 
 .conversation-card:hover {
@@ -39,6 +40,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .conversation-info {
@@ -57,6 +59,8 @@
 .conversation-preview {
   color: var(--color-min);
   font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 
 /* Bloc droit */
@@ -68,37 +72,105 @@
   margin-left: 30px;
 }
 
+/* Header en haut de la colonne droite */
+.discussion-top-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.discussion-top-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.discussion-top-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+
 .discussion-thread {
   flex: 1;
   overflow-y: auto;
   margin-bottom: 15px;
 }
-
+/* Conteneur du message */
 .discussion-message {
-  max-width: 500px;
-  height: 37px;
-  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 15px;
+  background: transparent; /* important : pas de fond ici */
 }
 
-.discussion-message.sent {
-  background: var(--color-input-background);
+/* HEADER : photo + date + heure sur la même ligne */
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Photo */
+.discussion-profile {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Date + heure sur une colonne */
+.discussion-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: first baseline;
+  font-size: 12px;
+  color: var(--color-min);
+  gap: 5px;
+}
+
+/* MESSAGE : bande blanche uniquement ici */
+.discussion-content {
+  padding: 10px 15px;
+  border-radius: 6px;
   color: var(--color-text);
   font-size: 12px;
-  margin-left: auto;
+  line-height: 1.4;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: 0;
+}
+
+
+
+.discussion-message.sent {
+  color: var(--color-text);
+  font-size: 12px;
+  align-items: flex-end;
   padding-left: 20px;
 }
 
+.discussion-message.sent .discussion-content {
+ background: var(--color-input-background);
+ width: 500px;
+}
+
 .discussion-message.received {
-  background: var(--color-block-background);
   color: var(--color-text);
   margin-right: auto;
 }
 
+.discussion-message.received .discussion-content {
+  background: white;
+}
+
 .discussion-date {
   display: block;
-  font-size: 0.8em;
-  color: #666;
-  margin-top: 5px;
+  font-size: 12px;
 }
 
 .discussion-form {
@@ -111,6 +183,15 @@
   flex: 1;
   border-radius: 6px;
   border: none;
+
+}
+
+.discussion-form textarea::placeholder { 
+  padding-left: 40px;
+  padding-top: 15px;
+  color: var(--color-min);
+  font-size: 14px;
+  font-family: var(--font-body);
 }
 
 .discussion-form button {
@@ -125,6 +206,9 @@
   background: var(--color-primary);
 }
 
+.visually-hidden {
+  display: none;
+}
 
 /* Mobile */
 @media (max-width: 768px) {

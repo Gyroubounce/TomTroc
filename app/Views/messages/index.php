@@ -44,26 +44,67 @@
 
 
     <!-- Colonne droite : discussion -->
+
     <section class="messagerie-right" aria-label="Discussion en cours">
+
+      <?php if (isset($otherUser)): ?>
+        <header class="discussion-top-header">
+
+            <?php 
+                $profile = $otherUser->profile ?: 'default.png';
+            ?>
+
+            <img 
+                src="/assets/uploads/profile/<?= htmlspecialchars($profile) ?>" 
+                alt="Photo de profil"
+                class="discussion-top-photo"
+            >
+
+            <span class="discussion-top-name">
+                <?= htmlspecialchars($otherUser->username) ?>
+            </span>
+
+        </header>
+      <?php endif; ?>
+
 
       <?php if (isset($messages)): ?>
 
         <section class="discussion-thread" aria-live="polite">
           <?php foreach ($messages as $message): ?>
 
-            <article class="discussion-message <?= $message->sender_id === $user->id ? 'sent' : 'received' ?>"
-                     aria-label="<?= $message->sender_id === $user->id ? 'Message envoyé' : 'Message reçu' ?>">
+            <article class="discussion-message <?= $message->sender_id === $user->id ? 'sent' : 'received' ?>">
 
-              <p><?= htmlspecialchars($message->content) ?></p>
+              <!-- HEADER : photo de l'autre + date + heure -->
+              <div class="message-header">
 
-              <time class="discussion-date" datetime="<?= date('c', strtotime($message->created_at)) ?>">
-                <?= date('d/m/Y H:i', strtotime($message->created_at)) ?>
-              </time>
+                  <?php if ($message->sender_id !== $user->id): ?>
+                      <!-- Photo seulement pour les messages reçus -->
+                      <img 
+                        src="/assets/uploads/profile/<?= htmlspecialchars($profile) ?>" 
+                        alt="Photo de profil"
+                        class="discussion-profile"
+                      >
+                  <?php endif; ?>
+
+                  <div class="discussion-meta">
+                    <span class="discussion-date"><?= date('d.m', strtotime($message->created_at)) ?></span>
+                    <span class="discussion-time"><?= date('H:i', strtotime($message->created_at)) ?></span>
+                  </div>
+
+              </div>
+
+
+              <!-- CONTENU DU MESSAGE -->
+              <p class="discussion-content"><?= htmlspecialchars($message->content) ?></p>
 
             </article>
 
           <?php endforeach; ?>
         </section>
+
+
+
 
         <form action="/messages/send-to/<?= $otherUser->id ?>"
               method="post"
