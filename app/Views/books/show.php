@@ -1,42 +1,82 @@
-<main class="book-show-body">
-    <a href="/books" class="book-back">
-    Nos livres > <?= htmlspecialchars($book->title) ?>
+<main class="book-show-body" role="main">
+
+    <!-- Lien retour -->
+    <a href="/books"
+       class="book-back"
+       aria-label="Retour à la liste des livres">
+        Nos livres > <?= htmlspecialchars($book->getTitle()) ?>
     </a>
 
     <div class="book-detail">
-        <?php if ($book->image): ?>
-            <img src="<?= htmlspecialchars($book->image) ?>" 
-                alt="<?= htmlspecialchars($book->title) ?>" 
-                class="book-cover-detail">
+
+        <!-- Image du livre -->
+        <?php if ($book->getImage()): ?>
+            <img src="<?= htmlspecialchars($book->getImage()) ?>" 
+                 alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>" 
+                 class="book-cover-detail">
+        <?php else: ?>
+            <img src="/assets/img/default-book.png"
+                 alt="Aucune couverture disponible pour <?= htmlspecialchars($book->getTitle()) ?>"
+                 class="book-cover-detail">
         <?php endif; ?>
 
         <div class="book-info">
-            <h1><?= htmlspecialchars($book->title) ?></h1>
-            <p class="author">par <?= htmlspecialchars($book->author) ?></p>
 
-            <hr class="separator">
+            <!-- Titre -->
+            <h1><?= htmlspecialchars($book->getTitle()) ?></h1>
 
+            <!-- Auteur -->
+            <p class="author">
+                par <?= htmlspecialchars($book->getAuthor() ?? 'Auteur inconnu') ?>
+            </p>
+
+            <hr class="separator" aria-hidden="true">
+
+            <!-- Description -->
             <p class="description-label">Description</p>
-            <p class="description-text"><?= nl2br(htmlspecialchars($book->description)) ?></p>
+            <p class="description-text">
+                <?= nl2br(htmlspecialchars($book->getDescription() ?? 'Aucune description disponible.')) ?>
+            </p>
 
-            <p class="status"><strong>Status :</strong> <?= htmlspecialchars($book->status) ?></p>
+            <!-- Statut -->
+            <p class="status">
+                <strong>Status :</strong>
+                <?= htmlspecialchars($book->getStatus()) ?>
+            </p>
 
-            <div class="owner">
+        <div class="owner">
             <p>Propriétaire</p>
+
             <div class="owner-info">
-                <?php if ($user && $user->profile): ?>
-                    <img src="/assets/uploads/profile/<?= htmlspecialchars($user->profile) ?>" 
-                        alt="<?= htmlspecialchars($user->username) ?>" 
+
+                <?php if ($book->getUser() && $book->getUser()->getProfile()): ?>
+                    <img src="/assets/uploads/profile/<?= htmlspecialchars($book->getUser()->getProfile()) ?>" 
+                        alt="Photo de profil de <?= htmlspecialchars($book->getUser()->getUsername()) ?>" 
                         class="owner-photo">
                 <?php endif; ?>
-                <a href="/users/profil/<?= $book->user_id ?>" class="owner-name"><?= htmlspecialchars($book->user->username ?? 'Inconnu') ?></a>
+
+                <?php if ($book->getUser()): ?>
+                    <a href="/users/profil/<?= $book->getUser()->getId() ?>"
+                    class="owner-name"
+                    aria-label="Voir le profil de <?= htmlspecialchars($book->getUser()->getUsername()) ?>">
+                        <?= htmlspecialchars($book->getUser()->getUsername()) ?>
+                    </a>
+                <?php else: ?>
+                    <span class="owner-name">Utilisateur inconnu</span>
+                <?php endif; ?>
+
             </div>
-
-
         </div>
 
-            <a href="/messages?conversation=<?= $user->id ?>" class="btn">Envoyer un message</a>
+
+            <!-- Bouton message -->
+            <a href="/messages?conversation=<?= $book->getUserId() ?>"
+               class="btn"
+               aria-label="Envoyer un message au propriétaire du livre">
+                Envoyer un message
+            </a>
 
         </div>
+    
     </div>
 </main>

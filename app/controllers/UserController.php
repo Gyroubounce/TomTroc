@@ -44,10 +44,9 @@ class UserController {
     /**
      * Met à jour un utilisateur (admin)
      */
-    public function update(int $id): void     {
+    public function update(int $id): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            // Récupération des champs du formulaire
             $email    = $_POST['email'] ?? null;
             $password = $_POST['password'] ?? null;
             $username = $_POST['username'] ?? null;
@@ -55,7 +54,7 @@ class UserController {
             // Mise à jour des infos utilisateur
             $this->manager->updateUser($id, $email, $password, $username);
 
-            // Gestion de la photo (optionnel)
+            // Gestion de la photo
             if (!empty($_FILES['profile']['name'])) {
 
                 $uploadDir = __DIR__ . '/../../public/assets/uploads/profile/';
@@ -63,16 +62,15 @@ class UserController {
                 $target    = $uploadDir . $fileName;
 
                 if (move_uploaded_file($_FILES['profile']['tmp_name'], $target)) {
+                    // ⚠️ Méthode à ajouter dans UserManager
                     $this->manager->updateProfile($id, $fileName);
                 }
             }
 
-            // Retour à la page Mon compte
             header('Location: /mon-compte');
             exit;
         }
     }
-
 
     /**
      * Supprime un utilisateur (admin)
@@ -101,19 +99,20 @@ class UserController {
             return;
         }
 
-        // ⚡ Récupérer les livres du user connecté
+        // ✔️ Correction ici
         $bookManager = new BookManager();
-        $books = $bookManager->findByUserId($userId);
+        $books = $bookManager->findByUser($userId);
 
-        // Rendre la vue avec user + livres
         View::render('users/account', [
             'user'  => $user,
             'books' => $books
         ]);
     }
-    /**    * Affiche le profil public d’un utilisateur
+
+    /**
+     * Affiche le profil public d’un utilisateur
      */
-        public function profil(int $userId): void {
+    public function profil(int $userId): void {
         $user  = (new UserManager())->findById($userId);
         $books = (new BookManager())->findByUser($userId);
 
@@ -122,7 +121,5 @@ class UserController {
             'books' => $books
         ]);
     }
-
-
+    
 }
-

@@ -1,4 +1,4 @@
-<main role="main">
+<main role="main" class="messagerie-main">
 
   <div class="messagerie-container">
 
@@ -6,7 +6,7 @@
     <aside class="messagerie-left" aria-label="Liste des conversations">
 
       <header>
-        <h2>Messagerie</h2>
+        <h1>Messagerie</h1>
       </header>
 
       <nav class="conversation-list" aria-label="Conversations">
@@ -51,17 +51,17 @@
         <header class="discussion-top-header">
 
             <?php 
-                $profile = $otherUser->profile ?: 'default.png';
+                $profile = $otherUser->getProfile() ?: 'default.png';
             ?>
 
             <img 
                 src="/assets/uploads/profile/<?= htmlspecialchars($profile) ?>" 
-                alt="Photo de profil"
+                alt="Photo de profil de <?= htmlspecialchars($otherUser->getUsername()) ?>"
                 class="discussion-top-photo"
             >
 
             <span class="discussion-top-name">
-                <?= htmlspecialchars($otherUser->username) ?>
+                <?= htmlspecialchars($otherUser->getUsername()) ?>
             </span>
 
         </header>
@@ -73,16 +73,16 @@
         <section class="discussion-thread" aria-live="polite">
           <?php foreach ($messages as $message): ?>
 
-            <article class="discussion-message <?= $message->sender_id === $user->id ? 'sent' : 'received' ?>">
+            <article class="discussion-message <?= $message->sender_id === $user->getId() ? 'sent' : 'received' ?>">
 
               <!-- HEADER : photo de l'autre + date + heure -->
               <div class="message-header">
 
-                  <?php if ($message->sender_id !== $user->id): ?>
+                  <?php if ($message->sender_id !== $user->getId()): ?>
                       <!-- Photo seulement pour les messages reçus -->
                       <img 
                         src="/assets/uploads/profile/<?= htmlspecialchars($profile) ?>" 
-                        alt="Photo de profil"
+                        alt="Photo de profil de <?= htmlspecialchars($otherUser->getUsername()) ?>"
                         class="discussion-profile"
                       >
                   <?php endif; ?>
@@ -104,18 +104,16 @@
         </section>
 
 
-
-
-        <form action="/messages/send-to/<?= $otherUser->id ?>"
+        <form action="/messages/send-to/<?= $otherUser->getId() ?>"
               method="post"
               class="discussion-form"
               aria-label="Formulaire d’envoi de message">
 
           <label for="message-content" class="visually-hidden">Votre message</label>
-          <textarea id="message-content"
-                    name="content"
-                    placeholder="Tapez votre message ici"
-                    required></textarea>
+          <input id="message-content"
+                 name="content"
+                 placeholder="Tapez votre message ici"
+                 required>
 
           <button type="submit" class="btn">Envoyer</button>
         </form>

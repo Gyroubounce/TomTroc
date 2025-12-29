@@ -87,7 +87,7 @@ h1, h2, h3 {
 .user-nav ul {
   list-style: none;
   display: flex;
-  gap: 70px;
+  gap: 50px;
   margin: 0;
   padding: 0;
 }
@@ -159,6 +159,33 @@ header nav a:hover {
 .btn:hover, .btn-primary:hover {
   background-color: #008c52;
   color: #fff;
+}
+
+.messages-menu__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.messages-menu__icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.messages-menu__badge {
+  background-color: #000000;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0 6px;
+  border-radius: 12px;
+  line-height: 1.2;
+  margin-left: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
 }
 
 /* ----------------------------- */
@@ -543,7 +570,7 @@ header nav a:hover {
   gap: 5rem;
   max-width: 1440px;
   background: var(--color-background);
-  margin: auto;
+  margin: 0 auto;
 }
 
 .book-cover-detail {
@@ -608,6 +635,7 @@ header nav a:hover {
   display: flex;
   align-items: center;
   margin-top: 20px;
+  margin-bottom: 20px;
   gap: 1rem;
   height: auto;
 }
@@ -795,7 +823,11 @@ header nav a:hover {
 
 .profil-book-pic {
   width: 78px;
-  height: auto;
+  height: 100px;
+}
+
+.messagerie-main {
+  background: var(--color-menu);
 }
 
 /* messagerie */
@@ -954,7 +986,6 @@ header nav a:hover {
 
 .discussion-message.sent .discussion-content {
   background: var(--color-input-background);
-  width: 500px;
 }
 
 .discussion-message.received {
@@ -977,22 +1008,23 @@ header nav a:hover {
   margin-bottom: 100px;
 }
 
-.discussion-form textarea {
+.discussion-form input {
   flex: 1;
   border-radius: 6px;
   border: none;
+  padding-left: 20px;
 }
 
-.discussion-form textarea::-moz-placeholder {
-  padding-left: 40px;
+.discussion-form input::-moz-placeholder {
+  padding-left: 20px;
   padding-top: 15px;
   color: var(--color-min);
   font-size: 14px;
   font-family: var(--font-body);
 }
 
-.discussion-form textarea::placeholder {
-  padding-left: 40px;
+.discussion-form input::placeholder {
+  padding-left: 20px;
   padding-top: 15px;
   color: var(--color-min);
   font-size: 14px;
@@ -1024,18 +1056,16 @@ header nav a:hover {
     width: 100%;
   }
 }
-/* Page de connexion */
+/* Page de connexion / inscription */
 .auth-container {
   display: flex;
-  min-height: 100vh;
+  margin: 0 auto;
 }
 
-.auth-left, .auth-right {
+.auth-left,
+.auth-right {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 3rem;
+  padding: 0 3rem;
 }
 
 .auth-left {
@@ -1043,49 +1073,65 @@ header nav a:hover {
 }
 
 .auth-left h1 {
-  margin-bottom: 2rem;
-  font-size: 2rem;
+  margin-top: 210px;
+  margin-bottom: 4rem;
+  font-weight: 400;
+  font-size: 36px;
+  color: var(--color-title);
 }
 
+/* Formulaire */
 .form-group {
   margin-bottom: 1.5rem;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-min);
+  font-size: 14px;
 }
 
 .form-group input {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  width: 322px;
+  height: 50px;
+  border: none;
 }
 
+/* Bouton CTA */
 .cta {
-  display: inline-block;
-  padding: 0.8rem 1.5rem;
-  background-color: #0077cc;
-  color: #fff;
+  width: 322px;
+  height: 63px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
 }
 
+/* Liens sous le formulaire */
+.auth-register,
 .switch-auth {
-  margin-top: 1rem;
+  margin-top: 2rem;
+  font-size: 14px;
+  color: var(--color-text);
 }
 
-.switch-auth a {
-  text-decoration: underline;
-  color: #0077cc;
+/* Liens cliquables */
+.auth-register a,
+.switch-auth-link {
+  color: var(--color-text);
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 /* Page d'édition de livre */
 .edit-body {
   width: 1140px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .edit-back {
@@ -1188,7 +1234,7 @@ header nav a:hover {
   justify-content: center;
   align-items: center;
   border: none;
-  margin-top: auto;
+  margin-top: 40px;
 }
 
 /* account */
@@ -1378,7 +1424,7 @@ header nav a:hover {
 
 .account-book-pic {
   width: 78px;
-  height: auto;
+  height: 100px;
 }
 
 .account-status {

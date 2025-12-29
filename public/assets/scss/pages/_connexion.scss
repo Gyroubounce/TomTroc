@@ -1,16 +1,13 @@
-
-/* Page de connexion */
+/* Page de connexion / inscription */
 .auth-container {
     display: flex;
-    min-height: 100vh;
+    margin: 0 auto;
 }
 
-.auth-left, .auth-right {
+.auth-left, 
+.auth-right {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 3rem;
+    padding: 0 3rem;
 }
 
 .auth-left {
@@ -18,42 +15,56 @@
 }
 
 .auth-left h1 {
-    margin-bottom: 2rem;
-    font-size: 2rem;
+    margin-top: 210px;
+    margin-bottom: 4rem;
+    font-weight: 400;
+    font-size: 36px;
+    color: var(--color-title);
 }
 
+/* Formulaire */
 .form-group {
     margin-bottom: 1.5rem;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-min);
+    font-size: 14px;
 }
 
 .form-group input {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 322px;
+    height: 50px;
+    border: none;
 }
 
+/* Bouton CTA */
 .cta {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background-color: #0077cc;
-    color: #fff;
+    width: 322px;
+    height: 63px;
+    margin-top: 40px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
 }
 
+/* Liens sous le formulaire */
+.auth-register,
 .switch-auth {
-    margin-top: 1rem;
+    margin-top: 2rem;
+    font-size: 14px;
+    color: var(--color-text);
 }
 
-.switch-auth a {
-    text-decoration: underline;
-    color: #0077cc;
+/* Liens cliquables */
+.auth-register a,
+.switch-auth-link {
+    color: var(--color-text);
+    font-weight: 500;
+    transition: color .2s ease;
 }
 

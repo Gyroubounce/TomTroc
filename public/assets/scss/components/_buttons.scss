@@ -13,3 +13,31 @@
   background-color: #008c52; 
   color: #fff;
 }
+
+.messages-menu__btn { 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 0.4rem; 
+}
+
+.messages-menu__icon { 
+  font-size: 1rem; 
+  line-height: 1; 
+}
+
+
+.messages-menu__badge {
+    background-color: #000000; 
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0 6px;
+    border-radius: 12px;
+    line-height: 1.2;
+    margin-left: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+}

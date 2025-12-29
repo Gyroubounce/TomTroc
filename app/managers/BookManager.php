@@ -8,27 +8,35 @@ class BookManager {
     }
 
     /**
-     * Hydrate un objet Book avec son User (vendeur)
+     * Hydrate un Book + son User complet
      */
     private function hydrateBook(array $row): Book {
         $book = new Book();
-        $book->id = (int)$row['id'];
-        $book->title = $row['title'];
-        $book->author = $row['author'];
-        $book->description = $row['description'];
-        $book->status = $row['status'];
-        $book->user_id = (int)$row['user_id'];
-        $book->image = $row['image'];
 
-        // Hydrate l'objet User (vendeur)
-        $user = new User();
-        $user->id = (int)$row['user_id'];
-        $user->username = $row['username'];
-        $user->email = $row['email'];
-        $user->profile = $row['profile'];
+        // Hydratation du Book
+        $book->setTitle($row['title']);
+        $book->setAuthor($row['author']);
+        $book->setDescription($row['description']);
+        $book->setStatus($row['status']);
+        $book->setImage($row['image']);
 
-        // ⚠️ Correction : on rattache l’objet User au Book
-        $book->user = $user;
+        // Hydratation des propriétés privées id et user_id
+        $ref = new ReflectionClass($book);
+
+        $idProp = $ref->getProperty('id');
+        $idProp->setAccessible(true);
+        $idProp->setValue($book, (int)$row['id']);
+
+        $userIdProp = $ref->getProperty('user_id');
+        $userIdProp->setAccessible(true);
+        $userIdProp->setValue($book, (int)$row['user_id']);
+
+        // Hydratation complète du User via UserManager
+        $userManager = new UserManager();
+        $user = $userManager->findById((int)$row['user_id']);
+
+        // On rattache le User complet au Book
+        $book->setUser($user);
 
         return $book;
     }
@@ -37,37 +45,29 @@ class BookManager {
      * Récupère tous les livres avec leur vendeur
      */
     public function findAll(): array {
-        $sql = "SELECT b.*, u.id AS user_id, u.username, u.email, u.profile
-                FROM books b
-                JOIN users u ON b.user_id = u.id";
+        $sql = "SELECT * FROM books ORDER BY id DESC";
         $stmt = $this->db->query($sql);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return array_map(fn($row) => $this->hydrateBook($row), $rows);
+        return array_map([$this, 'hydrateBook'], $rows);
     }
 
     /**
-     * Récupère les livres disponibles avec leur vendeur
+     * Récupère les livres disponibles
      */
     public function findAvailable(): array {
-        $sql = "SELECT b.*, u.id AS user_id, u.username, u.email, u.profile
-                FROM books b
-                JOIN users u ON b.user_id = u.id
-                WHERE b.status = 'disponible'";
+        $sql = "SELECT * FROM books WHERE status = 'disponible' ORDER BY id DESC";
         $stmt = $this->db->query($sql);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return array_map(fn($row) => $this->hydrateBook($row), $rows);
+        return array_map([$this, 'hydrateBook'], $rows);
     }
 
     /**
-     * Récupère un livre par son ID avec son vendeur
+     * Récupère un livre par ID
      */
     public function findById(int $id): ?Book {
-        $sql = "SELECT b.*, u.id AS user_id, u.username, u.email, u.profile
-                FROM books b
-                JOIN users u ON b.user_id = u.id
-                WHERE b.id = ?";
+        $sql = "SELECT * FROM books WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -76,40 +76,58 @@ class BookManager {
     }
 
     /**
-     * Recherche des livres par titre (uniquement disponibles)
+     * Recherche par titre
      */
     public function findByTitle(string $title): array {
-        $sql = "SELECT b.*, u.id AS user_id, u.username, u.email, u.profile
-                FROM books b
-                JOIN users u ON b.user_id = u.id
-                WHERE b.status = 'disponible' AND b.title LIKE ?";
+        $sql = "SELECT * FROM books 
+                WHERE status = 'disponible' 
+                AND title LIKE ?
+                ORDER BY id DESC";
+
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['%' . $title . '%']);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return array_map(fn($row) => $this->hydrateBook($row), $rows);
+        return array_map([$this, 'hydrateBook'], $rows);
     }
 
     /**
-     * Crée un nouveau livre
+     * Création
      */
-    public function create(string $title, string $author, string $description, string $status, int $userId, ?string $image = null): void {
+    public function create(string $title, ?string $author, ?string $description, string $status, int $userId, ?string $image): void {
         $sql = "INSERT INTO books (title, author, description, status, user_id, image)
                 VALUES (?, ?, ?, ?, ?, ?)";
+
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$title, $author, $description, $status, $userId, $image]);
     }
 
     /**
-     * Met à jour le statut d’un livre
+     * Mise à jour
      */
-    public function updateStatus(int $id, string $status): void {
-        $stmt = $this->db->prepare("UPDATE books SET status = ? WHERE id = ?");
-        $stmt->execute([$status, $id]);
+    public function update(Book $book): bool {
+        $sql = "UPDATE books 
+                SET title = :title,
+                    author = :author,
+                    description = :description,
+                    status = :status,
+                    image = :image
+                WHERE id = :id";
+
+        $stmt = $this->db->prepare($sql);
+
+        return $stmt->execute([
+            ':title' => $book->getTitle(),
+            ':author' => $book->getAuthor(),
+            ':description' => $book->getDescription(),
+            ':status' => $book->getStatus(),
+            ':image' => $book->getImage(),
+            ':id' => $book->getId()
+        ]);
     }
 
     /**
-     * Supprime un livre
+     * Suppression
      */
     public function delete(int $id): void {
         $stmt = $this->db->prepare("DELETE FROM books WHERE id = ?");
@@ -117,42 +135,35 @@ class BookManager {
     }
 
     /**
-     * Récupère les derniers livres ajoutés (disponibles)
+     * Livres d’un utilisateur
+     */
+    public function findByUser(int $userId): array {
+        $sql = "SELECT * FROM books 
+                WHERE user_id = ?
+                ORDER BY id DESC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$userId]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return array_map([$this, 'hydrateBook'], $rows);
+    }
+
+    /**
+     * Récupère les derniers livres disponibles
      */
     public function findLatest(int $limit = 4): array {
-        $sql = "SELECT b.*, u.id AS user_id, u.username, u.email, u.profile
-                FROM books b
-                JOIN users u ON b.user_id = u.id
-                WHERE b.status = 'disponible'
-                ORDER BY b.id DESC
+        $sql = "SELECT * FROM books
+                WHERE status = 'disponible'
+                ORDER BY id DESC
                 LIMIT ?";
+
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(1, $limit, PDO::PARAM_INT);
         $stmt->execute();
+
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return array_map(fn($row) => $this->hydrateBook($row), $rows);
+        return array_map([$this, 'hydrateBook'], $rows);
     }
-
-    public function findByUserId(int $userId): array {
-        $stmt = $this->db->prepare("SELECT * FROM books WHERE user_id = :user_id");
-        $stmt->execute(['user_id' => $userId]);
-        
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
-    }
-
-        // Récupérer tous les livres d’un utilisateur
-    public function findByUser(int $userId): array {
-        $stmt = $this->db->prepare("
-            SELECT b.*, u.username
-            FROM books b
-            JOIN users u ON b.user_id = u.id
-            WHERE b.user_id = :userId
-            ORDER BY b.id DESC
-        ");
-        $stmt->execute(['userId' => $userId]);
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
-    }
-
-
 }

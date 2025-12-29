@@ -39,9 +39,6 @@ class AuthController {
     }
 
     /**
-     * Authentifie un utilisateur
-     */
-    /**
      * Authentifie un utilisateur via son email
      */
     public function authenticate(): void {
@@ -50,47 +47,39 @@ class AuthController {
             $email = trim($_POST['email'] ?? '');
             $password = trim($_POST['password'] ?? '');
 
-            // Recherche par email
-          // 1. L'utilisateur existe
-        $user = $this->userManager->findByEmail($email);
+            // 1. Recherche par email
+            $user = $this->userManager->findByEmail($email);
 
-        if (!$user) {
-            $error = "Adresse email introuvable";
+            if (!$user) {
+                $error = "Adresse email introuvable";
+                View::render('auth/login', ['error' => $error]);
+                return;
+            }
+
+            // 2. Vérification du mot de passe hashé
+            if (password_verify($password, $user->getPassword())) {
+                Session::set('user_id', $user->getId());
+                header('Location: /mon-compte');
+                exit;
+            }
+
+            // 3. Migration automatique si ancien mot de passe en clair
+            if ($password === $user->getPassword()) {
+
+                $newHash = password_hash($password, PASSWORD_DEFAULT);
+
+                $this->userManager->updatePassword($user->getId(), $newHash);
+
+                Session::set('user_id', $user->getId());
+                header('Location: /mon-compte');
+                exit;
+            }
+
+            // 4. Mauvais mot de passe
+            $error = "Mot de passe incorrect";
             View::render('auth/login', ['error' => $error]);
-            return;
-        }
-
-        // 2. Si le mot de passe est déjà hashé → vérification normale
-        if (password_verify($password, $user->password)) {
-            Session::set('user_id', $user->id);
-            header('Location: /mon-compte');
-            exit;
-        }
-
-        // 3. Si l'ancien mot de passe était en clair → migration automatique
-        if ($password === $user->password) {
-
-            // On re-hash le mot de passe
-            $newHash = password_hash($password, PASSWORD_DEFAULT);
-
-            // Mise à jour en base
-            $this->userManager->updatePassword($user->id, $newHash);
-
-            // Connexion
-            Session::set('user_id', $user->id);
-            header('Location: /mon-compte');
-            exit;
-        }
-
-        // 4. Sinon → mauvais mot de passe
-        $error = "Mot de passe incorrect";
-        View::render('auth/login', ['error' => $error]);
-
         }
     }
-
-
-
 
     /**
      * Déconnexion

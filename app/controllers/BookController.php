@@ -15,11 +15,9 @@ class BookController {
     public function index(): void {
         $search = $_GET['q'] ?? '';
 
-        if (!empty($search)) {
-            $books = $this->bookManager->findByTitle($search);
-        } else {
-            $books = $this->bookManager->findAvailable();
-        }
+        $books = !empty($search)
+            ? $this->bookManager->findByTitle($search)
+            : $this->bookManager->findAvailable();
 
         View::render('books/index', ['books' => $books]);
     }
@@ -41,7 +39,8 @@ class BookController {
             return;
         }
 
-        $user = $this->userManager->findById($book->user_id);
+        // ✔️ Utilisation du getter
+        $user = $this->userManager->findById($book->getUserId());
 
         View::render('books/show', [
             'book' => $book,
@@ -49,9 +48,8 @@ class BookController {
         ]);
     }
 
-
     /**
-     * Formulaire de création d’un livre (protégé par session)
+     * Formulaire de création d’un livre
      */
     public function create(): void {
         if (!Session::has('user_id')) {
@@ -67,6 +65,7 @@ class BookController {
      */
     public function store(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
             if (!Session::has('user_id')) {
                 header('Location: /connexion');
                 exit;
@@ -78,7 +77,7 @@ class BookController {
             $status      = 'disponible';
             $userId      = Session::get('user_id');
 
-            // Gestion de l’upload d’image
+            // Upload image
             $image = null;
             if (!empty($_FILES['image']['name'])) {
                 $uploadDir  = __DIR__ . '/../../public/assets/uploads/books/';
@@ -91,6 +90,7 @@ class BookController {
             }
 
             $this->bookManager->create($title, $author, $description, $status, $userId, $image);
+
             header('Location: /books');
             exit;
         }
@@ -106,6 +106,7 @@ class BookController {
         }
 
         $book = $this->bookManager->findById($id);
+
         if (!$book) {
             http_response_code(404);
             echo "Livre introuvable";
@@ -120,25 +121,46 @@ class BookController {
      */
     public function update(int $id): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
             if (!Session::has('user_id')) {
                 header('Location: /connexion');
                 exit;
             }
 
-            $title       = trim($_POST['title'] ?? '');
-            $author      = trim($_POST['author'] ?? '');
-            $description = trim($_POST['description'] ?? '');
-            $status      = $_POST['status'] ?? 'disponible';
+            // 1️⃣ Récupération du livre
+            $book = $this->bookManager->findById($id);
 
-            // ⚡ Appel à BookManager pour mettre à jour toutes les infos
-            $this->bookManager->update($id, $title, $author, $description, $status);
+            if (!$book) {
+                http_response_code(404);
+                echo "Livre introuvable";
+                return;
+            }
 
-            // Redirection vers la page du livre
+            // 2️⃣ Mise à jour via SETTERS
+            $book->setTitle(trim($_POST['title'] ?? ''));
+            $book->setAuthor(trim($_POST['author'] ?? ''));
+            $book->setDescription(trim($_POST['description'] ?? ''));
+            $book->setStatus($_POST['status'] ?? 'disponible');
+
+            // 3️⃣ Upload image
+            if (!empty($_FILES['image']['name'])) {
+                $uploadDir  = __DIR__ . '/../../public/assets/uploads/books/';
+                $fileName   = basename($_FILES['image']['name']);
+                $targetPath = $uploadDir . $fileName;
+
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                    $book->setImage($fileName);
+                }
+            }
+
+            // 4️⃣ Mise à jour en base
+            $this->bookManager->update($book);
+
+            // 5️⃣ Redirection
             header('Location: /books/' . $id);
             exit;
         }
     }
-
 
     /**
      * Supprime un livre

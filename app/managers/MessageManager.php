@@ -63,4 +63,20 @@ class MessageManager {
         ");
         $stmt->execute([$senderId, $receiverId, $content]);
     }
+
+
+    /**
+     * Compte le nombre de messages non lus pour un utilisateur
+     */
+    public function countUnreadMessages(int $userId): int {
+    $stmt = $this->db->prepare("
+        SELECT COUNT(*) 
+        FROM messages 
+        WHERE receiver_id = ? 
+        AND is_read = 0
+    ");
+    $stmt->execute([$userId]);
+    return (int) $stmt->fetchColumn();
+    }
+
 }

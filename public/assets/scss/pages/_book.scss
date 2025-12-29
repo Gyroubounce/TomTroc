@@ -26,7 +26,7 @@
   gap: 5rem;
   max-width: 1440px;
   background: var( --color-background);
-  margin: auto;
+  margin: 0 auto;
 }
 
 .book-cover-detail {
@@ -93,6 +93,7 @@
   display: flex;
   align-items: center;
   margin-top: 20px;
+  margin-bottom: 20px;
   gap: 1rem;
   height: auto
 }

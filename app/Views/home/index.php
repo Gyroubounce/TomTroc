@@ -1,21 +1,21 @@
-<main class="home">
+<main class="home" role="main">
 
     <!-- SECTION 1 : HERO -->
-    <section class="home-hero">
+    <section class="home-hero" aria-labelledby="hero-title">
         <div class="container">
 
             <div class="home-hero-content">
 
                 <div class="home-hero-text">
-                    <h1>Rejoignez nos lecteurs passionnés</h1>
+                    <h1 id="hero-title">Rejoignez nos lecteurs passionnés</h1>
 
-                    <p>
-                        Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux
+                    <p> Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux
                         de la lecture. Nous croyons en la magie du partage de connaissances et
-                        d'histoires à travers les livres.
-                    </p>
+                        d'histoires à travers les livres.</p>
 
-                    <a href="/books" class="btn btn-primary btn-hero">
+                    <a href="/books"
+                       class="btn btn-primary btn-hero"
+                       aria-label="Découvrir les livres disponibles à l'échange">
                         Découvrir
                     </a>
                 </div>
@@ -23,11 +23,8 @@
                 <div class="home-hero-image">
                     <img
                         src="/assets/img/connexion_01.png"
-                        alt="Livres et lecture"
-                        width="404"
-                        height="539"
-                    >
-                    <p class="hero-credit">Hamza</p>
+                        alt="Illustration de lecteurs et de livres">
+                    <p class="hero-credit" aria-hidden="true">Hamza</p>
                 </div>
 
             </div>
@@ -37,27 +34,45 @@
 
 
     <!-- SECTION 2 : DERNIERS LIVRES AJOUTÉS -->
-    <section class="home-latest-books">
+    <section class="home-latest-books" aria-labelledby="latest-books-title">
         <div class="container">
 
-            <h2>Les derniers livres ajoutés</h2>
+            <h2 id="latest-books-title">Les derniers livres ajoutés</h2>
 
-            <div class="books-grid">
+            <div class="books-grid" role="list">
                 <?php foreach ($books as $book): ?>
-                    <a href="/books/<?= $book->id ?>" class="book-card">
+                    <a href="/books/<?= $book->getId() ?>"
+                       class="book-card"
+                       role="listitem"
+                       tabindex="0"
+                       aria-label="Voir le livre <?= htmlspecialchars($book->getTitle()) ?>, écrit par <?= htmlspecialchars($book->getAuthor() ?? 'Auteur inconnu') ?>, proposé par <?= htmlspecialchars($book->getUser()?->getUsername() ?? 'Utilisateur inconnu') ?>"
+                    >
 
-                        <?php if (!empty($book->image)): ?>
+                        <?php if (!empty($book->getImage())): ?>
                             <img
-                                src="<?= htmlspecialchars($book->image) ?>"
-                                alt="<?= htmlspecialchars($book->title) ?>"
+                                src="<?= htmlspecialchars($book->getImage()) ?>"
+                                alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>"
+                                class="book-cover"
+                            >
+                        <?php else: ?>
+                            <img
+                                src="/assets/img/default-book.png"
+                                alt="Aucune couverture disponible pour <?= htmlspecialchars($book->getTitle()) ?>"
                                 class="book-cover"
                             >
                         <?php endif; ?>
 
-                        <h3 class="book-title"><?= htmlspecialchars($book->title) ?></h3>
-                        <p class="book-author"><?= htmlspecialchars($book->author) ?></p>
+                        <h3 class="book-title"><?= htmlspecialchars($book->getTitle()) ?></h3>
+
+                        <p class="book-author">
+                            <?= htmlspecialchars($book->getAuthor() ?? 'Auteur inconnu') ?>
+                        </p>
+
                         <p class="book-seller">
-                            Vendu par : <?= htmlspecialchars($book->user->username ?? 'Inconnu') ?>
+                            Vendu par :
+                            <span>
+                                <?= htmlspecialchars($book->getUser()?->getUsername() ?? 'Inconnu') ?>
+                            </span>
                         </p>
 
                     </a>
@@ -65,7 +80,9 @@
             </div>
 
             <div class="home-books-cta">
-                <a href="/books" class="btn btn-secondary btn-large">
+                <a href="/books"
+                   class="btn btn-secondary btn-large"
+                   aria-label="Voir tous les livres disponibles">
                     Voir tous les livres
                 </a>
             </div>
@@ -75,38 +92,39 @@
 
 
     <!-- SECTION 3 : COMMENT ÇA MARCHE -->
-    <section class="home-how-it-works">
+    <section class="home-how-it-works" aria-labelledby="how-title">
         <div class="container">
 
-            <h2>Comment ça marche ?</h2>
+            <h2 id="how-title">Comment ça marche ?</h2>
 
             <p class="home-how-description">
                 Échanger des livres avec TomTroc c’est simple et amusant !
-                Suivez ces étapes pour commencer :
-            </p>
+                Suivez ces étapes pour commencer : </p>
 
-            <div class="home-how-steps">
+            <div class="home-how-steps" role="list">
 
-                <div class="home-how-step">
+                <div class="home-how-step" role="listitem">
                     <p>Inscrivez-vous gratuitement sur notre plateforme.</p>
                 </div>
 
-                <div class="home-how-step">
+                <div class="home-how-step" role="listitem">
                     <p>Ajoutez les livres que vous souhaitez échanger à votre profil.</p>
                 </div>
 
-                <div class="home-how-step">
+                <div class="home-how-step" role="listitem">
                     <p>Parcourez les livres disponibles chez d'autres membres.</p>
                 </div>
 
-                <div class="home-how-step">
+                <div class="home-how-step" role="listitem">
                     <p>Proposez un échange et discutez avec d'autres passionnés de lecture.</p>
                 </div>
 
             </div>
 
             <div class="home-books-cta">
-                <a href="/books" class="btn btn-outline btn-large">
+                <a href="/books"
+                   class="btn btn-outline btn-large"
+                   aria-label="Voir tous les livres disponibles">
                     Voir tous les livres
                 </a>
             </div>
@@ -116,19 +134,20 @@
 
 
     <!-- SECTION 4 : BANDEAU IMAGE -->
-    <section class="home-banner">
+    <section class="home-banner" aria-labelledby="banner-title">
+        <h2 id="banner-title" class="visually-hidden">Illustration de l'échange de livres</h2>
         <img
             src="/assets/img/bandeau.png"
-            alt="Bandeau illustrant l'échange de livres"
+            alt="Illustration représentant l'échange de livres entre lecteurs"
         >
     </section>
 
 
     <!-- SECTION 5 : NOS VALEURS -->
-    <section class="home-values">
+    <section class="home-values" aria-labelledby="values-title">
         <div class="container">
 
-            <h2>Nos valeurs</h2>
+            <h2 id="values-title">Nos valeurs</h2>
 
             <div class="home-values-content">
                 <p>
@@ -153,8 +172,9 @@
                 <p>L’équipe Tom Troc</p>
             </div>
         </div>
-         <div class="home-equipe-icon">
-            <img src="/assets/img/coeur.svg" alt="Cœur" class="equipe-heart">
+
+        <div class="home-equipe-icon">
+            <img src="/assets/img/coeur.svg" alt="Icône de cœur symbolisant la passion et la communauté" class="equipe-heart">
         </div>
     </section>
 
