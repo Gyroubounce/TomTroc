@@ -1,18 +1,21 @@
 <?php
 
 class MessageController {
-    private MessageManager $messageManager;
 
-    public function __construct() {
-        $this->messageManager = new MessageManager();
+    public function start(int $receiverId): void
+    {
+        if (!Session::has('user_id')) {
+            header('Location: /connexion');
+            exit;
+        }
+
+        // Redirige vers la messagerie avec l'utilisateur ciblé
+        header("Location: /messages?user=$receiverId");
+        exit;
     }
 
-    /**
-     * Page principale de la messagerie :
-     * - colonne gauche : liste des conversations
-     * - colonne droite : messages de la conversation sélectionnée (si ?conversation=ID)
-     */
-    public function index(): void {
+    public function index(): void
+    {
         if (!Session::has('user_id')) {
             header('Location: /connexion');
             exit;
@@ -20,47 +23,57 @@ class MessageController {
 
         $userId = Session::get('user_id');
 
-        // Liste des conversations de l'utilisateur connecté
-        $conversations = $this->messageManager->findConversationsByUser($userId);
+        // Si on vient de la page show → ?user=ID
+        $otherUserId = $_GET['other'] ?? null;
 
-        $messages  = null;
+
         $otherUser = null;
+        $messages = [];
+        $conversations = [];
 
-        // Si une conversation est sélectionnée via ?conversation=ID
-        if (isset($_GET['conversation'])) {
-            $otherUserId = (int)$_GET['conversation'];
+        // 🔥 On instancie TON MessageManager
+        $messageManager = new MessageManager();
 
+        // 🔥 On récupère la liste des conversations (colonne gauche)
+        $conversations = $messageManager->getConversations($userId);
+
+        if ($otherUserId) {
+
+            // 🔥 On récupère l'utilisateur avec qui on parle
             $otherUser = (new UserManager())->findById($otherUserId);
-            $messages  = $this->messageManager->findMessagesBetween($userId, $otherUserId);
+
+            // 🔥 On récupère les messages entre les deux utilisateurs
+            $messages = $messageManager->getMessages($userId, $otherUserId);
+            // 🔥 Marque les messages reçus comme lus 
+            $messageManager->markConversationAsRead($userId, $otherUserId);
         }
 
         View::render('messages/index', [
-            'conversations' => $conversations,
-            'messages'      => $messages,
+            'currentUser' => (new UserManager())->findById($userId),
             'otherUser'     => $otherUser,
-            'user'          => (new UserManager())->findById($userId),
+            'messages'      => $messages,
+            'conversations' => $conversations
         ]);
     }
 
-    /**
-     * Envoi d’un message à un autre utilisateur
-     * => retour sur /messages avec la même conversation ouverte
-     */
-    public function sendToUser(int $otherUserId): void {
+    public function sendTo(int $receiverId): void
+    {
         if (!Session::has('user_id')) {
             header('Location: /connexion');
             exit;
         }
 
         $senderId = Session::get('user_id');
-        $content  = trim($_POST['content'] ?? '');
+        $content = trim($_POST['content']);
 
-        if (!empty($content)) {
-            $this->messageManager->sendBetweenUsers($senderId, $otherUserId, $content);
+        if ($content !== '') {
+            $messageManager = new MessageManager();
+            $messageManager->createMessage($senderId, $receiverId, $content);
         }
 
-        // On revient sur la page messages/index.php avec la conversation ouverte
-        header('Location: /messages?conversation=' . $otherUserId);
+        // Retour à la conversation
+        header("Location: /messages?other=$receiverId");
         exit;
     }
+
 }

@@ -188,6 +188,26 @@ header nav a:hover {
   height: 18px;
 }
 
+.account-add-book {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.btn-add-book {
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.btn-add-book:hover {
+  background-color: #45a049;
+}
+
 /* ----------------------------- */
 /*  GLOBAL CONTAINER 1140px     */
 /* ----------------------------- */
@@ -1296,6 +1316,10 @@ header nav a:hover {
   display: inline-block;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Bloc 2 : infos */
 .account-info {
   display: flex;
@@ -1420,6 +1444,7 @@ header nav a:hover {
 
 .account-table td:nth-child(4) {
   font-style: italic;
+  padding-right: 30px;
 }
 
 .account-book-pic {

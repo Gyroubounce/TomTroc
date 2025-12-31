@@ -70,11 +70,13 @@
 
 
             <!-- Bouton message -->
-            <a href="/messages?conversation=<?= $book->getUserId() ?>"
-               class="btn"
-               aria-label="Envoyer un message au propriétaire du livre">
+           <a href="/messages?other=<?= $user->getId() ?>" class="btn"
+
+
+            aria-label="Envoyer un message au propriétaire du livre">
                 Envoyer un message
             </a>
+
 
         </div>
     

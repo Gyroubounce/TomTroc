@@ -1,34 +1,58 @@
 <?php
-class Router {
-    private $routes = [];
 
-    public function add($path, $controller, $method, $httpMethod = 'GET') {
+class Router {
+    private array $routes = [];
+
+    /**
+     * Ajoute une route au routeur
+     */
+    public function add(string $path, string $controller, string $method, string $httpMethod = 'GET'): void
+    {
         $this->routes[] = [
-            'path'       => $path,
+            'path'       => rtrim($path, '/'),
             'controller' => $controller,
             'method'     => $method,
             'httpMethod' => strtoupper($httpMethod)
         ];
     }
 
-    public function dispatch($uri) {
-        $path = parse_url($uri, PHP_URL_PATH);
+    /**
+     * Analyse l'URL et appelle le bon contrôleur
+     */
+    public function dispatch(string $uri): mixed
+    {
+        $path = rtrim(parse_url($uri, PHP_URL_PATH), '/');
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
         foreach ($this->routes as $route) {
-            $pattern = preg_replace('#:id#', '([0-9]+)', $route['path']);
 
-            if (preg_match('#^' . $pattern . '$#', $path, $matches) && $route['httpMethod'] === $requestMethod) {
-                $instance = new $route['controller']();
-                if (isset($matches[1])) {
-                    return $instance->{$route['method']}($matches[1]);
+            // Support des paramètres dynamiques :id
+            $pattern = preg_replace('#:([a-zA-Z_]+)#', '([0-9]+)', $route['path']);
+
+            if (preg_match('#^' . $pattern . '$#', $path, $matches)
+                && $route['httpMethod'] === $requestMethod) {
+
+                $controllerName = $route['controller'];
+
+                if (!class_exists($controllerName)) {
+                    throw new Exception("Contrôleur introuvable : $controllerName");
                 }
-                return $instance->{$route['method']}();
+
+                $controller = new $controllerName();
+
+                if (!method_exists($controller, $route['method'])) {
+                    throw new Exception("Méthode introuvable : {$route['method']} dans $controllerName");
+                }
+
+                // Retire le premier élément (la route complète)
+                array_shift($matches);
+
+                return call_user_func_array([$controller, $route['method']], $matches);
             }
         }
 
+        // 404
         $error = new ErrorController();
-        $error->notFound();
-        exit;
+        return $error->notFound();
     }
 }

@@ -13,17 +13,34 @@
         <!-- Bloc gauche -->
         <div class="account-left account-block">
 
-            <div class="account-top">
-                <img src="/assets/uploads/profile/<?= htmlspecialchars($user->getProfile() ?? 'default.png') ?>" 
-                     alt="Photo de profil de <?= htmlspecialchars($user->getUsername()) ?>"
-                     class="account-profile-pic">
+           <div class="account-top">
 
-                <a href="/mon-compte#photo<?= $user->getId() ?>"
-                   class="account-edit-link"
-                   aria-label="Modifier la photo de profil">
+                <img src="/assets/uploads/profile/<?= htmlspecialchars($user->getProfile() ?? 'default.png') ?>" 
+                    alt="Photo de profil de <?= htmlspecialchars($user->getUsername()) ?>"
+                    class="account-profile-pic">
+
+                <a href="#" 
+                class="account-edit-link"
+                id="trigger-file"
+                aria-label="Modifier la photo de profil">
                     Modifier
                 </a>
+
+                <!-- Formulaire invisible -->
+                <form id="photo-form"
+                    action="/users/update/<?= $user->getId() ?>"
+                    method="post"
+                    enctype="multipart/form-data"
+                    class="hidden">
+
+                    <input type="file"
+                        id="profile-input"
+                        name="profile"
+                        accept="image/jpeg,image/png">
+                </form>
+
             </div>
+
 
             <div class="account-info">
                 <div class="account-username">
@@ -38,6 +55,13 @@
                 <div class="account-section-title">Bibliothèque</div>
                 <p><?= count($books) ?> livres</p>
             </div>
+
+            <div class="account-add-book">
+                <a href="/books/create" class="btn-add-book">
+                    + Ajouter un livre
+                </a>
+            </div>
+
 
         </div>
 
@@ -109,9 +133,22 @@
 
                     <!-- Photo -->
                     <td>
-                        <img src="<?= htmlspecialchars($book->getImage()) ?>"
-                             alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>"
-                             class="account-book-pic">
+                        <?php
+                            $image = $book->getImage();
+
+                            // Si l'image contient déjà un chemin complet, on le garde tel quel
+                            if (str_starts_with($image, '/assets/uploads/books/')) {
+                                $src = $image;
+                            } else {
+                                $src = '/assets/uploads/books/' . $image;
+                            }
+                            ?>
+
+                            <img src="<?= htmlspecialchars($src) ?>"
+                                alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>"
+                                class="account-book-pic">
+
+
                     </td>
 
                     <!-- Titre -->
@@ -121,7 +158,10 @@
                     <td><?= htmlspecialchars($book->getAuthor() ?? 'Auteur inconnu') ?></td>
 
                     <!-- Description -->
-                    <td><?= htmlspecialchars($book->getDescription() ?? 'Aucune description') ?></td>
+                    <td>
+                        <?= htmlspecialchars(mb_strimwidth($book->getDescription() ?? 'Aucune description', 0, 80, '…')) ?>
+                    </td>
+
 
                     <!-- Disponibilité -->
                     <td>
@@ -154,5 +194,6 @@
         </table>
 
     </section>
+<script src="/assets/js/app.js"></script>
 
 </main>

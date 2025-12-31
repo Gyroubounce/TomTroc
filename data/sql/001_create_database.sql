@@ -4,15 +4,17 @@ CREATE DATABASE IF NOT EXISTS tomtroc
 
 USE tomtroc;
 
+-- TABLE USERS
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(50) UNIQUE NOT NULL,
   email VARCHAR(100) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
-  profile VARCHAR(255) DEFAULT NULL;
+  profile VARCHAR(255) DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- TABLE BOOKS
 CREATE TABLE IF NOT EXISTS books (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
@@ -21,18 +23,27 @@ CREATE TABLE IF NOT EXISTS books (
   status ENUM('disponible','non dispo') DEFAULT 'disponible',
   image VARCHAR(255),
   user_id INT NOT NULL,
-  CONSTRAINT fk_books_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  CONSTRAINT fk_books_user 
+    FOREIGN KEY (user_id) REFERENCES users(id) 
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE
 );
 
+-- TABLE MESSAGES
 CREATE TABLE IF NOT EXISTS messages (
   id INT AUTO_INCREMENT PRIMARY KEY,
   sender_id INT NOT NULL,
   receiver_id INT NOT NULL,
-  book_id INT NULL,
   content TEXT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_messages_sender FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
-  CONSTRAINT fk_messages_receiver FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE,
-  CONSTRAINT fk_messages_book FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
+  is_read TINYINT(1) NOT NULL DEFAULT 0,
+  CONSTRAINT fk_messages_sender 
+    FOREIGN KEY (sender_id) REFERENCES users(id) 
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE,
+  CONSTRAINT fk_messages_receiver 
+    FOREIGN KEY (receiver_id) REFERENCES users(id) 
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE
 );
 

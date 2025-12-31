@@ -7,6 +7,7 @@ class Message
     private int $sender_id;
     private int $receiver_id;
     private string $content;
+    private int $is_read;
 
 
     // --- GETTERS ---
@@ -27,10 +28,17 @@ class Message
         return $this->content;
     }
 
+    public function getIsRead(): int { 
+        return $this->is_read; 
+    }
 
     // --- SETTERS (UNIQUEMENT POUR LE CONTENU) ---
 
     public function setContent(string $content): void {
         $this->content = $content;
+    }
+
+    public function setIsRead(int $is_read): void { 
+        $this->is_read = $is_read; 
     }
 }

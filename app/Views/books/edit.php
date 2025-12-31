@@ -6,17 +6,45 @@
 
     <!-- Bloc gauche : image -->
     <div class="edit-left edit-block">
-      <p>Photo</p>
+        <p>Photo</p>
 
-      <img src="<?= htmlspecialchars($book->getImage()) ?>" 
-           alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>" 
-           class="edit-cover-detail">
+       <?php
+          $image = $book->getImage();
 
-      <a href="/books/edit-image/<?= $book->getId() ?>" 
-         class="edit-photo-link">
-         Modifier la photo
-      </a>
+          // Si l'image contient déjà un chemin complet, on le garde tel quel
+          if (str_starts_with($image, '/assets/uploads/books/')) {
+              $src = $image;
+          } else {
+              $src = '/assets/uploads/books/' . $image;
+          }
+          ?>
+
+          <img src="<?= htmlspecialchars($src) ?>"
+              alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>"
+              class="edit-cover-detail">
+
+
+        <a href="#" 
+          class="edit-photo-link"
+          id="trigger-book-file"
+          aria-label="Modifier la photo du livre">
+          Modifier la photo
+        </a>
+
+        <!-- Formulaire invisible -->
+        <form id="book-photo-form"
+              action="/books/update-image/<?= $book->getId() ?>"
+              method="post"
+              enctype="multipart/form-data"
+              class="hidden">
+
+            <input type="file"
+                  id="book-image-input"
+                  name="image"
+                  accept="image/jpeg,image/png">
+        </form>
     </div>
+
 
     <!-- Bloc droit : formulaire -->
     <div class="edit-right edit-block">
@@ -52,4 +80,5 @@
     </div>
 
   </div>
+  <script src="/assets/js/app.js"></script>
 </main>

@@ -33,7 +33,7 @@
 
       <!-- CTA : envoyer un message au propriétaire -->
       <?php if ($user->getId() !== Session::get('user_id')): ?>
-        <a href="/messages?conversation=<?= $user->getId() ?>"
+        <a href="/messages?other=<?= $user->getId() ?>"
            class="profil-cta"
            aria-label="Envoyer un message à <?= htmlspecialchars($user->getUsername()) ?>">
           Envoyer un message
@@ -65,9 +65,20 @@
 
               <!-- Photo du livre -->
               <td>
-                <img src="<?= htmlspecialchars($book->getImage()) ?>"
-                     alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>"
-                     class="profil-book-pic">
+                     <?php
+                            $image = $book->getImage();
+
+                            // Si l'image contient déjà un chemin complet, on le garde tel quel
+                            if (str_starts_with($image, '/assets/uploads/books/')) {
+                                $src = $image;
+                            } else {
+                                $src = '/assets/uploads/books/' . $image;
+                            }
+                            ?>
+
+                            <img src="<?= htmlspecialchars($src) ?>"
+                                alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>"
+                                class="account-book-pic">
               </td>
 
               <!-- Titre -->
@@ -77,7 +88,10 @@
               <td><?= htmlspecialchars($book->getAuthor() ?? 'Auteur inconnu') ?></td>
 
               <!-- Description -->
-              <td><?= htmlspecialchars($book->getDescription() ?? 'Aucune description') ?></td>
+              <td>
+                <?= htmlspecialchars(mb_strimwidth($book->getDescription() ?? 'Aucune description', 0, 80, '…')) ?>
+              </td>
+
 
             </tr>
           <?php endforeach; ?>

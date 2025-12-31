@@ -126,6 +126,16 @@ class BookManager {
         ]);
     }
 
+
+    /**
+     * Met à jour l’image d’un livre
+     */
+    public function updateImage(int $id, string $fileName): void {
+        $stmt = $this->db->prepare("UPDATE books SET image = ? WHERE id = ?");
+        $stmt->execute([$fileName, $id]);
+    }
+
+
     /**
      * Suppression
      */

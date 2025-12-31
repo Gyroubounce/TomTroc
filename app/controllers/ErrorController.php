@@ -1,9 +1,12 @@
 <?php
+/**
+ * Contrôleur des erreurs.
+ * Affiche la page 404 via View::render().
+ */
 class ErrorController {
-    public function notFound() {
+    public function notFound(): void
+    {
         http_response_code(404);
-        include __DIR__ . '/../views/partials/header.php';
-        include __DIR__ . '/../views/errors/404.php';
-        include __DIR__ . '/../views/partials/footer.php';
+        View::render('errors/404');
     }
 }

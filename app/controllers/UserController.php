@@ -2,9 +2,11 @@
 
 class UserController {
     private UserManager $manager;
+    private ImageManager $imageManager;
 
     public function __construct() {
         $this->manager = new UserManager();
+        $this->imageManager = new ImageManager();
     }
 
     /**
@@ -44,7 +46,8 @@ class UserController {
     /**
      * Met à jour un utilisateur (admin)
      */
-    public function update(int $id): void {
+    public function update(int $id): void
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $email    = $_POST['email'] ?? null;
@@ -54,16 +57,14 @@ class UserController {
             // Mise à jour des infos utilisateur
             $this->manager->updateUser($id, $email, $password, $username);
 
-            // Gestion de la photo
-            if (!empty($_FILES['profile']['name'])) {
+            // Gestion de la photo de profil
+            if (!empty($_FILES['profile']['name']) && $_FILES['profile']['error'] === UPLOAD_ERR_OK) {
 
-                $uploadDir = __DIR__ . '/../../public/assets/uploads/profile/';
-                $fileName  = basename($_FILES['profile']['name']);
-                $target    = $uploadDir . $fileName;
+                $imagePath = $this->imageManager->processUpload($_FILES['profile'], 'profile');
 
-                if (move_uploaded_file($_FILES['profile']['tmp_name'], $target)) {
-                    // ⚠️ Méthode à ajouter dans UserManager
-                    $this->manager->updateProfile($id, $fileName);
+
+                if ($imagePath) {
+                    $this->manager->updateProfile($id, $imagePath);
                 }
             }
 
@@ -71,6 +72,7 @@ class UserController {
             exit;
         }
     }
+
 
     /**
      * Supprime un utilisateur (admin)

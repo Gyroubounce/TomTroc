@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Contrôleur de la page d'accueil.
+ * Récupère les derniers livres et les envoie à la vue.
+ */
 class HomeController {
     private $bookManager;
     private $userManager;
@@ -9,11 +12,8 @@ class HomeController {
         $this->userManager = new UserManager();
     }
 
-
     public function index() {
-
         $books = $this->bookManager->findLatest(4);
-
         View::render('home/index', ['books' => $books]);
     }
 }

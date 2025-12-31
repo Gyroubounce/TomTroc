@@ -59,6 +59,10 @@
   display: inline-block;
 }
 
+.hidden {
+    display: none;
+}
+
 /* Bloc 2 : infos */ 
 .account-info { 
   display: flex; 
@@ -182,12 +186,15 @@
 
 .account-table td:nth-child(4) {
   font-style: italic;
+  padding-right: 30px;
 }
 
 .account-book-pic {
   width: 78px;
   height: 100px;
 }
+
+
 .account-status {
   padding: 0.3rem 0.6rem;
   border-radius: 4px;

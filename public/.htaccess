@@ -1,8 +1,11 @@
 RewriteEngine On
 
-# Si le fichier ou dossier demandé existe, on le sert
+# Active la réécriture uniquement si mod_rewrite est disponible
+RewriteBase /
+
+# Si le fichier ou dossier demandé existe, on le sert normalement
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Sinon, on redirige vers index.php
+# Sinon, on redirige toutes les requêtes vers index.php (Front Controller)
 RewriteRule ^ index.php [QSA,L]

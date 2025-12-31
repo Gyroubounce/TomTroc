@@ -13,10 +13,10 @@
         <?php foreach ($conversations as $conv): ?>
 
           <article class="conversation-card"
-                   role="button"
+                   role="link"
                    tabindex="0"
                    aria-label="Ouvrir la conversation avec <?= htmlspecialchars($conv->other_username) ?>"
-                   onclick="window.location='/messages?conversation=<?= $conv->other_user_id ?>'">
+                   onclick="window.location='/messages?other=<?= $conv->other_user_id ?>'">
 
             <img src="/assets/uploads/profile/<?= htmlspecialchars($conv->other_profile ?? 'default.png') ?>"
                  alt="Photo de profil de <?= htmlspecialchars($conv->other_username) ?>"
@@ -26,7 +26,7 @@
               <header class="conversation-header">
                 <span class="conversation-username"><?= htmlspecialchars($conv->other_username) ?></span>
                 <time class="conversation-date" datetime="<?= date('c', strtotime($conv->created_at)) ?>">
-                  <?= date('d/m/Y H:i', strtotime($conv->created_at)) ?>
+                  <?= date('d.m.Y H:i', strtotime($conv->created_at)) ?>
                 </time>
               </header>
 
@@ -44,10 +44,18 @@
 
 
     <!-- Colonne droite : discussion -->
-
     <section class="messagerie-right" aria-label="Discussion en cours">
 
-      <?php if (isset($otherUser)): ?>
+
+    
+      <?php if (!$otherUser): ?>
+
+        <!-- 🔥 Aucune conversation sélectionnée -->
+        <p aria-live="polite">Pas de messages.</p>
+
+      <?php else: ?>
+
+        <!-- 🔥 En-tête de la conversation -->
         <header class="discussion-top-header">
 
             <?php 
@@ -65,45 +73,44 @@
             </span>
 
         </header>
-      <?php endif; ?>
 
 
-      <?php if (isset($messages)): ?>
-
-        <section class="discussion-thread" aria-live="polite">
-          <?php foreach ($messages as $message): ?>
-
-            <article class="discussion-message <?= $message->sender_id === $user->getId() ? 'sent' : 'received' ?>">
-
-              <!-- HEADER : photo de l'autre + date + heure -->
-              <div class="message-header">
-
-                  <?php if ($message->sender_id !== $user->getId()): ?>
-                      <!-- Photo seulement pour les messages reçus -->
-                      <img 
-                        src="/assets/uploads/profile/<?= htmlspecialchars($profile) ?>" 
-                        alt="Photo de profil de <?= htmlspecialchars($otherUser->getUsername()) ?>"
-                        class="discussion-profile"
-                      >
-                  <?php endif; ?>
-
-                  <div class="discussion-meta">
-                    <span class="discussion-date"><?= date('d.m', strtotime($message->created_at)) ?></span>
-                    <span class="discussion-time"><?= date('H:i', strtotime($message->created_at)) ?></span>
-                  </div>
-
-              </div>
 
 
-              <!-- CONTENU DU MESSAGE -->
-              <p class="discussion-content"><?= htmlspecialchars($message->content) ?></p>
+          <!-- 🔥 Affichage des messages -->
+          <section class="discussion-thread" aria-live="polite">
+            <?php foreach ($messages as $message): ?>
 
-            </article>
+              <article class="discussion-message <?= $message->sender_id === $currentUser->getId() ? 'sent' : 'received' ?>">
 
-          <?php endforeach; ?>
-        </section>
+                <div class="message-header">
+
+                    <?php if ($message->sender_id !== $currentUser->getId()): ?>
+                        <img 
+                          src="/assets/uploads/profile/<?= htmlspecialchars($profile) ?>" 
+                          alt="Photo de profil de <?= htmlspecialchars($otherUser->getUsername()) ?>"
+                          class="discussion-profile"
+                        >
+                    <?php endif; ?>
+
+                    <div class="discussion-meta">
+                      <span class="discussion-date"><?= date('d.m', strtotime($message->created_at)) ?></span>
+                      <span class="discussion-time"><?= date('H:i', strtotime($message->created_at)) ?></span>
+                    </div>
+
+                </div>
+
+                <p class="discussion-content"><?= htmlspecialchars($message->content) ?></p>
+
+              </article>
+
+            <?php endforeach; ?>
+          </section>
+
+   
 
 
+        <!-- 🔥 Formulaire d’envoi -->
         <form action="/messages/send-to/<?= $otherUser->getId() ?>"
               method="post"
               class="discussion-form"
@@ -117,10 +124,6 @@
 
           <button type="submit" class="btn">Envoyer</button>
         </form>
-
-      <?php else: ?>
-
-        <p aria-live="polite">Sélectionnez une conversation à gauche pour commencer.</p>
 
       <?php endif; ?>
 

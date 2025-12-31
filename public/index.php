@@ -55,18 +55,38 @@ $router->add('/users/update/:id', 'UserController', 'update', 'POST');
 // ----------------------
 $router->add('/books', 'BookController', 'index', 'GET');
 $router->add('/books/:id', 'BookController', 'show', 'GET');
+
+# --- Création ---
+$router->add('/books/create', 'BookController', 'create', 'GET');
+$router->add('/books/store', 'BookController', 'store', 'POST');
+
+# --- Edition ---
 $router->add('/books/edit/:id', 'BookController', 'edit', 'GET');
 $router->add('/books/update/:id', 'BookController', 'update', 'POST');
+
+# --- Mise à jour de l’image ---
+$router->add('/books/update-image/:id', 'BookController', 'updateImage', 'POST');
+
+# --- Suppression ---
+$router->add('/books/delete/:id', 'BookController', 'delete', 'GET');
+
 
 // ----------------------
 // Messagerie
 // ----------------------
 
-// Liste + conversation
+// Liste des conversations
 $router->add('/messages', 'MessageController', 'index', 'GET');
 
-// Envoi d’un message
-$router->add('/messages/send-to/:id', 'MessageController', 'sendToUser', 'POST');
+// Ouvrir une conversation
+$router->add('/messages/conversation/:id', 'MessageController', 'conversation', 'GET');
+
+// Démarrer une conversation depuis un livre (crée un message auto)
+$router->add('/messages/start/:id', 'MessageController', 'start', 'GET');
+
+// Envoyer un message dans une conversation
+$router->add('/messages/send/:id', 'MessageController', 'sendTo', 'POST');
+$router->add('/messages/send-to/:id', 'MessageController', 'sendTo', 'POST');
 
 // ----------------------
 // Dispatch

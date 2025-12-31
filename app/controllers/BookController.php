@@ -3,10 +3,12 @@
 class BookController {
     private BookManager $bookManager;
     private UserManager $userManager;
+    private ImageManager $imageManager;
 
     public function __construct() {
         $this->bookManager = new BookManager();
         $this->userManager = new UserManager();
+        $this->imageManager = new ImageManager();
     }
 
     /**
@@ -77,17 +79,11 @@ class BookController {
             $status      = 'disponible';
             $userId      = Session::get('user_id');
 
-            // Upload image
-            $image = null;
-            if (!empty($_FILES['image']['name'])) {
-                $uploadDir  = __DIR__ . '/../../public/assets/uploads/books/';
-                $fileName   = basename($_FILES['image']['name']);
-                $targetPath = $uploadDir . $fileName;
-
-                if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
-                    $image = $fileName;
-                }
-            }
+          // 🔥 Upload image via ImageManager 
+          $imagePath = null; 
+          if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) { 
+            $imagePath = $this->imageManager->processUpload($_FILES['image'], 'books'); 
+        }
 
             $this->bookManager->create($title, $author, $description, $status, $userId, $image);
 
@@ -142,25 +138,39 @@ class BookController {
             $book->setDescription(trim($_POST['description'] ?? ''));
             $book->setStatus($_POST['status'] ?? 'disponible');
 
-            // 3️⃣ Upload image
-            if (!empty($_FILES['image']['name'])) {
-                $uploadDir  = __DIR__ . '/../../public/assets/uploads/books/';
-                $fileName   = basename($_FILES['image']['name']);
-                $targetPath = $uploadDir . $fileName;
-
-                if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
-                    $book->setImage($fileName);
-                }
-            }
-
-            // 4️⃣ Mise à jour en base
+            // 3️⃣ Mise à jour en base
             $this->bookManager->update($book);
 
-            // 5️⃣ Redirection
-            header('Location: /books/' . $id);
+            // 4️⃣ Redirection
+            header('Location: /mon-compte');
+
             exit;
         }
     }
+
+
+
+    /**
+     * Met à jour l’image d’un livre
+     */
+    public function updateImage(int $id): void
+    {
+        if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+
+            // Traitement complet via ImageManager
+            $imagePath = $this->imageManager->processUpload($_FILES['image'], 'books');
+
+
+            if ($imagePath) {
+                $this->bookManager->updateImage($id, $imagePath);
+            }
+        }
+
+        header("Location: /books/edit/$id");
+        exit;
+    }
+
+
 
     /**
      * Supprime un livre

@@ -48,19 +48,22 @@
                        aria-label="Voir le livre <?= htmlspecialchars($book->getTitle()) ?>, écrit par <?= htmlspecialchars($book->getAuthor() ?? 'Auteur inconnu') ?>, proposé par <?= htmlspecialchars($book->getUser()?->getUsername() ?? 'Utilisateur inconnu') ?>"
                     >
 
-                        <?php if (!empty($book->getImage())): ?>
-                            <img
-                                src="<?= htmlspecialchars($book->getImage()) ?>"
+                     <?php
+                            $image = $book->getImage();
+
+                            // Si l'image contient déjà un chemin complet, on le garde tel quel
+                            if (str_starts_with($image, '/assets/uploads/books/')) {
+                                $src = $image;
+                            } else {
+                                $src = '/assets/uploads/books/' . $image;
+                            }
+                            ?>
+
+                            <img src="<?= htmlspecialchars($src) ?>"
                                 alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>"
-                                class="book-cover"
-                            >
-                        <?php else: ?>
-                            <img
-                                src="/assets/img/default-book.png"
-                                alt="Aucune couverture disponible pour <?= htmlspecialchars($book->getTitle()) ?>"
-                                class="book-cover"
-                            >
-                        <?php endif; ?>
+                                class="book-cover">
+
+
 
                         <h3 class="book-title"><?= htmlspecialchars($book->getTitle()) ?></h3>
 

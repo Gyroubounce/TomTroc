@@ -16,8 +16,8 @@ class UserManager {
         $user->setId($row['id']);
         $user->setUsername($row['username']);
         $user->setEmail($row['email']);
-        $user->setPassword($row['password']);       // IMPORTANT
-        $user->setCreatedAt($row['created_at']);    // IMPORTANT
+        $user->setPassword($row['password']);
+        $user->setCreatedAt($row['created_at']);
         $user->setProfile($row['profile']);
 
         return $user;
@@ -96,36 +96,52 @@ class UserManager {
         $stmt->execute([
             $username,
             $email,
-            $password,   // mot de passe déjà hashé
+            $password,
             $profile
         ]);
     }
 
     /**
-     * Met à jour email / username / password
+     * Met à jour email / username / password (tous optionnels)
      */
-    public function updateUser(int $id, string $email, ?string $password, string $username): void {
+    public function updateUser(int $id, ?string $email, ?string $password, ?string $username): void
+    {
+        $fields = [];
+        $params = [];
 
-        // Si pas de nouveau mot de passe → on ne modifie pas le password
-        if (empty($password)) {
-            $stmt = $this->db->prepare("
-                UPDATE users 
-                SET email = ?, username = ?
-                WHERE id = ?
-            ");
-            $stmt->execute([$email, $username, $id]);
+        if ($email !== null) {
+            $fields[] = "email = ?";
+            $params[] = $email;
+        }
+
+        if ($username !== null) {
+            $fields[] = "username = ?";
+            $params[] = $username;
+        }
+
+        if ($password !== null && $password !== "") {
+            $fields[] = "password = ?";
+            $params[] = password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        // Aucun champ à mettre à jour → on ne fait rien
+        if (empty($fields)) {
             return;
         }
 
-        // Sinon → on met à jour le mot de passe aussi
-        $hashed = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "UPDATE users SET " . implode(', ', $fields) . " WHERE id = ?";
+        $params[] = $id;
 
-        $stmt = $this->db->prepare("
-            UPDATE users 
-            SET email = ?, username = ?, password = ?
-            WHERE id = ?
-        ");
-        $stmt->execute([$email, $username, $hashed, $id]);
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+    }
+
+    /**
+     * Met à jour uniquement la photo de profil
+     */
+    public function updateProfile(int $id, string $fileName): void {
+        $stmt = $this->db->prepare("UPDATE users SET profile = ? WHERE id = ?");
+        $stmt->execute([$fileName, $id]);
     }
 
     /**
@@ -137,14 +153,6 @@ class UserManager {
             'password' => $hash,
             'id' => $id
         ]);
-    }
-
-    /**
-     * Met à jour la photo de profil
-     */
-    public function updateProfile(int $id, string $fileName): void {
-        $stmt = $this->db->prepare("UPDATE users SET profile = ? WHERE id = ?");
-        $stmt->execute([$fileName, $id]);
     }
 
     /**
