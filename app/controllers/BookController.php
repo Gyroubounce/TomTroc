@@ -35,9 +35,11 @@ class BookController {
 
         $book = $this->bookManager->findById($id);
 
-        if (!$book) {
-            http_response_code(404);
-            echo "Livre introuvable";
+        if (!$book) { 
+            // Option 1 : redirection vers une page 404 personnalisée 
+            View::render('errors/404', [ 
+                'message' => "Le livre demandé n'existe pas."
+            ]); 
             return;
         }
 

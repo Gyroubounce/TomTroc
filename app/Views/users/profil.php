@@ -1,4 +1,4 @@
-<main class="profil-main" role="main">
+<main class="profil-main">
 
   <div class="profil-container">
 

@@ -1,4 +1,4 @@
-<main class="book-show-body" role="main">
+<main class="book-show-body">
 
     <!-- Lien retour -->
     <a href="/books"
@@ -70,12 +70,12 @@
 
 
             <!-- Bouton message -->
+        <?php if ($user->getId() !== Session::get('user_id')): ?>
            <a href="/messages?other=<?= $user->getId() ?>" class="btn"
-
-
             aria-label="Envoyer un message au propriétaire du livre">
                 Envoyer un message
             </a>
+        <?php endif; ?>
 
 
         </div>

@@ -1,4 +1,4 @@
-<main class="account-body" role="main">
+<main class="account-body">
 
     <h1 class="account-title">Mon compte</h1>
 
@@ -8,7 +8,12 @@
     </p>
 
     <!-- SECTION 1 : Infos utilisateur -->
-    <section class="account-container" aria-labelledby="account-info-title">
+    <section class="account-container" aria-labelledby="account-title">
+
+    <h2 id="account-title" class="visually-hidden">
+        Informations du compte utilisateur
+    </h2>
+
 
         <!-- Bloc gauche -->
         <div class="account-left account-block">
@@ -36,7 +41,8 @@
                     <input type="file"
                         id="profile-input"
                         name="profile"
-                        accept="image/jpeg,image/png">
+                        accept="image/jpeg,image/png"
+                        title="Importer une photo de profil">
                 </form>
 
             </div>

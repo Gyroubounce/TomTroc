@@ -176,4 +176,6 @@ class BookManager {
 
         return array_map([$this, 'hydrateBook'], $rows);
     }
+
+
 }

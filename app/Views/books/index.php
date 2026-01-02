@@ -16,6 +16,7 @@
                     type="text"
                     name="q"
                     placeholder="Rechercher un livre"
+                    title="Rechercher un livre"
                     value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
                 >
 
@@ -29,7 +30,11 @@
                 </button>
             </form>
         </div>
-
+             <?php if (isset($_GET['q']) && empty($books)): ?>
+                <p class="no-results">
+                    Aucun livre ne correspond à « <?= htmlspecialchars($_GET['q']) ?> ».
+                </p>
+            <?php endif; ?>
 
         <!-- LISTE DES LIVRES -->
         <section class="books-grid"

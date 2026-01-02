@@ -6,7 +6,7 @@
       <a href="/mentions-legales">Mentions légales</a>
       <a href="/">TomTroc &copy;</a>
       <a href="/" class="footer-logo">
-        <img src="\assets\img\logo_f.png" alt="Logo TomTroc">
+        <img src="/assets/img/logo_f.png" alt="Logo TomTroc">
       </a>
     </div>
 

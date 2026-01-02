@@ -1,0 +1,40 @@
+/* --- Pages statiques --- */
+.static-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem 1.5rem;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    color: #333;
+    display: block;
+}
+
+.static-page h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.static-page h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
+}
+
+.static-page p {
+    margin-bottom: 1rem;
+}
+
+.static-page ul {
+    margin: 0 0 1.5rem 1.2rem;
+    padding-left: 1rem;
+}
+
+.static-page li {
+    margin-bottom: 0.5rem;
+}
+
+/* Accessibilité : contraste + lisibilité */
+.static-page strong {
+    font-weight: 600;
+}

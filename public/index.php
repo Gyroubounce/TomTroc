@@ -89,6 +89,13 @@ $router->add('/messages/send/:id', 'MessageController', 'sendTo', 'POST');
 $router->add('/messages/send-to/:id', 'MessageController', 'sendTo', 'POST');
 
 // ----------------------
+// Pages statiques
+// ----------------------
+$router->add('/confidentialite', 'StaticController', 'confidentialite', 'GET');
+$router->add('/mentions-legales', 'StaticController', 'mentionsLegales', 'GET');
+
+
+// ----------------------
 // Dispatch
 // ----------------------
 $router->dispatch($_SERVER['REQUEST_URI']);

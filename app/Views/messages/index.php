@@ -1,4 +1,4 @@
-<main role="main" class="messagerie-main">
+<main class="messagerie-main">
 
   <div class="messagerie-container">
 
@@ -13,7 +13,6 @@
         <?php foreach ($conversations as $conv): ?>
 
           <article class="conversation-card"
-                   role="link"
                    tabindex="0"
                    aria-label="Ouvrir la conversation avec <?= htmlspecialchars($conv->other_username) ?>"
                    onclick="window.location='/messages?other=<?= $conv->other_user_id ?>'">

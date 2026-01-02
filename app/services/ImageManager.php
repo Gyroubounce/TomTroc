@@ -22,35 +22,43 @@ class ImageManager {
             return null;
         }
 
+        // Vérification du type MIME
         $mime = mime_content_type($file['tmp_name']);
         if (!in_array($mime, $this->allowedTypes)) {
             return null;
         }
 
-        $basename = uniqid('img_', true);
+        // Nom d’origine sans extension
+        $originalName = pathinfo($file['name'], PATHINFO_FILENAME);
 
+        // Nettoyage du nom (accents, espaces, caractères spéciaux)
+        $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $originalName);
+
+        // 🔥 Petit suffixe aléatoire (4 caractères)
+        $suffix = substr(bin2hex(random_bytes(2)), 0, 4);
+
+        // Nom final
+        $finalName = $safeName . '_' . $suffix;
+
+        // Dossier de destination
         $uploadDir = __DIR__ . '/../../public/assets/uploads/' . $folder . '/';
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0775, true);
         }
 
-        $resizedPath = $uploadDir . $basename . '.jpg';
-        $webpPath    = $uploadDir . $basename . '.webp';
+        // Chemin final WebP
+        $webpPath = $uploadDir . $finalName . '.webp';
 
-        if (!$this->resizeAndCompress($file['tmp_name'], $resizedPath)) {
+        // Redimensionnement + conversion WebP
+        if (!$this->resizeAndConvertToWebp($file['tmp_name'], $webpPath)) {
             return null;
         }
 
-        if (!$this->convertToWebp($resizedPath, $webpPath)) {
-            return null;
-        }
-
-        unlink($resizedPath);
-
-        return '/assets/uploads/' . $folder . '/' . $basename . '.webp';
+        // Retourne le chemin web
+        return '/assets/uploads/' . $folder . '/' . $finalName . '.webp';
     }
 
-    private function resizeAndCompress(string $srcPath, string $destPath): bool
+    private function resizeAndConvertToWebp(string $srcPath, string $destPath): bool
     {
         list($width, $height) = getimagesize($srcPath);
         $ratio = $height / $width;
@@ -64,21 +72,12 @@ class ImageManager {
         $dst = imagecreatetruecolor($newWidth, $newHeight);
 
         imagecopyresampled($dst, $src, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-        imagejpeg($dst, $destPath, $this->quality);
+
+        // Conversion en WebP
+        imagewebp($dst, $destPath, $this->quality);
 
         imagedestroy($src);
         imagedestroy($dst);
-
-        return true;
-    }
-
-    private function convertToWebp(string $srcPath, string $destPath): bool
-    {
-        $img = imagecreatefromstring(file_get_contents($srcPath));
-        if (!$img) return false;
-
-        imagewebp($img, $destPath, $this->quality);
-        imagedestroy($img);
 
         return true;
     }

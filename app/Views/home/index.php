@@ -1,4 +1,4 @@
-<main class="home" role="main">
+<main class="home">
 
     <!-- SECTION 1 : HERO -->
     <section class="home-hero" aria-labelledby="hero-title">
@@ -43,7 +43,6 @@
                 <?php foreach ($books as $book): ?>
                     <a href="/books/<?= $book->getId() ?>"
                        class="book-card"
-                       role="listitem"
                        tabindex="0"
                        aria-label="Voir le livre <?= htmlspecialchars($book->getTitle()) ?>, écrit par <?= htmlspecialchars($book->getAuthor() ?? 'Auteur inconnu') ?>, proposé par <?= htmlspecialchars($book->getUser()?->getUsername() ?? 'Utilisateur inconnu') ?>"
                     >
