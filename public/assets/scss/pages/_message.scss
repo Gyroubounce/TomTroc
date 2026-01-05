@@ -17,10 +17,10 @@ background: var(--color-menu);
   background: var(--color-background);
 }
 
-.messagerie-left h2 {
+.messagerie-left h1 {
   font-size: 26px;
   font-weight: 400;
-  margin-top: 80px;
+  margin-top: 60px;
   margin-left: 30px;
 }
 
@@ -79,6 +79,7 @@ background: var(--color-menu);
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
+  margin-top: 40px;
 }
 
 .discussion-top-photo {
