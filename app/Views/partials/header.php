@@ -6,11 +6,14 @@
   <link rel="stylesheet" href="/assets/scss/main.css">
 </head>
 <body>
+
 <header class="site-header">
   <div class="header-container">
 
+    <!-- Bloc gauche : logo + navigation -->
     <div class="left-block">
       <div class="logo"></div>
+
       <nav class="main-nav">
         <ul>
           <li><a href="/">Accueil</a></li>
@@ -19,50 +22,61 @@
       </nav>
     </div>
 
+    <!-- Bloc droit : navigation utilisateur -->
     <nav class="user-nav">
       <ul>
 
-          <li>
-              <a href="/messages" class="messages-menu__btn">
-                  <img src="/assets/img/icon-messagerie.png" alt="Messagerie" class="messages-menu__icon">
-                  Messagerie
+        <?php
+            $currentUser = null;
 
-                  <?php if (Session::has('user_id')): ?>
-                      <?php
-                          $userId = Session::get('user_id');
-                          $messageManager = new MessageManager();
-                          $unreadCount = $messageManager->countUnreadMessages($userId);
-                      ?>
+            if (Session::has('user_id')) {
+                $currentUser = (new UserManager())->findById(Session::get('user_id'));
+            }
 
-                      <?php if ($unreadCount > 0): ?>
-                          <span class="messages-menu__badge"><?= $unreadCount ?></span>
-                      <?php endif; ?>
-                  <?php endif; ?>
+            // Si non connecté → redirection vers /connexion
+            $messagesLink = $currentUser ? "/messages" : "/connexion";
+            $accountLink  = $currentUser ? "/mon-compte" : "/connexion";
+        ?>
 
-              </a>
-          </li>
+        <!-- Messagerie -->
+        <li>
+          <a href="<?= $messagesLink ?>" class="messages-menu__btn">
+            <img src="/assets/img/icon-messagerie.png" alt="Messagerie" class="messages-menu__icon">
+            Messagerie
 
-          <li>
-              <a href="/mon-compte" class="messages-menu__btn">
-                  <img src="/assets/img/icon-mon-compte.png" alt="Mon compte" class="messages-menu__icon">
-                  Mon compte
-              </a>
-          </li>
+            <?php if ($currentUser): ?>
+                <?php
+                    $messageManager = new MessageManager();
+                    $unreadCount = $messageManager->countUnreadMessages($currentUser->getId());
+                ?>
 
-          <?php if (Session::has('user_id')): ?>
+                <?php if ($unreadCount > 0): ?>
+                    <span class="messages-menu__badge"><?= $unreadCount ?></span>
+                <?php endif; ?>
+            <?php endif; ?>
 
-              <?php $currentUser = (new UserManager())->findById(Session::get('user_id')); ?>
+          </a>
+        </li>
 
-              <li><a href="/logout">Déconnexion</a></li>
+        <!-- Mon compte -->
+        <li>
+          <a href="<?= $accountLink ?>" class="messages-menu__btn">
+            <img src="/assets/img/icon-mon-compte.png" alt="Mon compte" class="messages-menu__icon">
+            Mon compte
+          </a>
+        </li>
 
-              <!-- ✔️ Correction ici : utilisation du getter -->
-              <li><span>Bienvenue, <?= htmlspecialchars($currentUser->getUsername()) ?></span></li>
+        <!-- Connexion / Déconnexion + Bienvenue -->
+        <?php if ($currentUser): ?>
 
-          <?php else: ?>
+            <li><a href="/logout">Déconnexion</a></li>
+            <li><span>Bienvenue, <?= htmlspecialchars($currentUser->getUsername()) ?></span></li>
 
-              <li><a href="/inscription">Connexion</a></li>
+        <?php else: ?>
 
-          <?php endif; ?>
+            <li><a href="/inscription">Connexion</a></li>
+
+        <?php endif; ?>
 
       </ul>
     </nav>

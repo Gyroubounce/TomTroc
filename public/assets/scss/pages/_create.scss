@@ -1,0 +1,126 @@
+/* Page de création de livre */
+.create-body {
+  width: 1140px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-back { 
+  display: inline-block; 
+  font-size: 14px; 
+  color: var(--color-min); 
+  text-decoration: none; 
+  margin-bottom: 1rem; 
+  margin-top: 40px;
+} 
+
+.create-back:hover { 
+  text-decoration: underline; 
+}
+
+.create-title {
+  font-size: 26px;
+  color: var(--color-title);
+  font-weight: 400;
+  font-family: var(--font-title);
+  margin-bottom: 20px;
+}
+
+.create-container {
+  display: flex;
+  justify-content: space-between;
+  background: var(--color-block-background);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+/* Bloc gauche */
+.create-left {
+  flex: 0 0 720px; /* largeur fixe pour l'image */
+}
+
+.create-left p {
+  font-size: 14px; 
+  color: var(--color-min); 
+}
+
+/* Image + placeholder */
+.create-cover-detail {
+  width: 720px;
+  height: auto; /* ratio vertical (modifiable) */
+  border-radius: 6px;
+  object-fit: cover;
+  background: var(--color-input-background);
+  border: 1px solid var(--color-input-border);
+}
+
+/* Placeholder avant upload */
+.empty-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-min);
+  font-size: 14px;
+}
+
+/* Bouton "Ajouter une photo" */
+.create-photo-link {
+  margin-top: 1rem;
+  font-size: 14px;
+  color: var(--color-min);
+  text-decoration: underline;
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
+}
+
+/* Bloc droit */
+.create-right {
+  padding: 10px;
+  flex: 1;
+  max-width: calc(100% - 760px); /* 720px + padding */
+}
+
+/* Formulaire */
+.create-form { 
+  display: flex; 
+  flex-direction: column; 
+  height: 100%; 
+}
+
+.create-form label {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-min);
+}
+
+.create-form input,
+.create-form textarea,
+.create-form select {
+  width: 100%;
+  max-width: 435px;
+  height: 50px;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: var(--color-input-background);
+  border: 1px solid var(--color-input-border);
+  border-radius: 6px;
+}
+
+.create-form textarea {
+  min-height: 100px;
+}
+
+/* Bouton submit */
+.create-submit {
+  width: 322px;
+  height: 63px;
+  margin-top: 40px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  border: none;
+}

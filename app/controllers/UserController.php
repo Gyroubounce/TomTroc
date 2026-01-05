@@ -22,9 +22,8 @@ class UserController {
      */
     public function show(int $id): void {
         $user = $this->manager->findById($id);
-        if (!$user) {
-            http_response_code(404);
-            echo "Utilisateur introuvable";
+        if (!$user) { http_response_code(404); 
+            View::render('errors/404', ['message' => "Utilisateur introuvable"]); 
             return;
         }
         View::render('users/show', ['user' => $user]);
@@ -35,9 +34,8 @@ class UserController {
      */
     public function edit(int $id): void {
         $user = $this->manager->findById($id);
-        if (!$user) {
-            http_response_code(404);
-            echo "Utilisateur introuvable";
+       if (!$user) { http_response_code(404); 
+            View::render('errors/404', ['message' => "Utilisateur introuvable"]); 
             return;
         }
         View::render('users/edit', ['user' => $user]);
@@ -86,7 +84,9 @@ class UserController {
     /**
      * Affiche le compte de l’utilisateur connecté
      */
-    public function account(): void {
+    public function account(): void
+    {
+        // 1. Vérification de connexion
         if (!Session::has('user_id')) {
             header('Location: /connexion');
             exit;
@@ -95,21 +95,26 @@ class UserController {
         $userId = Session::get('user_id');
         $user = $this->manager->findById($userId);
 
+        // 2. Cas rare : session valide mais utilisateur supprimé
         if (!$user) {
             http_response_code(404);
-            echo "Utilisateur introuvable";
+            View::render('errors/404', [
+                'message' => "Utilisateur introuvable"
+            ]);
             return;
         }
 
-        // ✔️ Correction ici
+        // 3. Récupération des livres de l'utilisateur
         $bookManager = new BookManager();
         $books = $bookManager->findByUser($userId);
 
+        // 4. Affichage de la page Mon compte
         View::render('users/account', [
             'user'  => $user,
             'books' => $books
         ]);
     }
+
 
     /**
      * Affiche le profil public d’un utilisateur

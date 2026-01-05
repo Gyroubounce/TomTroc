@@ -49,11 +49,21 @@
 
             <div class="owner-info">
 
-                <?php if ($book->getUser() && $book->getUser()->getProfile()): ?>
-                    <img src="/assets/uploads/profile/<?= htmlspecialchars($book->getUser()->getProfile()) ?>" 
-                        alt="Photo de profil de <?= htmlspecialchars($book->getUser()->getUsername()) ?>" 
-                        class="owner-photo">
-                <?php endif; ?>
+              <?php
+                $profile = $book->getUser()->getProfile();
+
+                // Si l'image contient déjà un chemin complet, on le garde tel quel
+                if ($profile && str_starts_with($profile, '/assets/uploads/profile/')) {
+                    $src = $profile;
+                } else {
+                    // Sinon on construit le chemin complet
+                    $src = '/assets/uploads/profile/' . ($profile ?: 'default.png');
+                }
+                ?>
+                <img src="<?= htmlspecialchars($src) ?>"
+                    alt="Photo de profil de <?= htmlspecialchars($book->getUser()->getUsername()) ?>"
+                    class="owner-photo">
+
 
                 <?php if ($book->getUser()): ?>
                     <a href="/users/profil/<?= $book->getUser()->getId() ?>"

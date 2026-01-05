@@ -50,6 +50,10 @@ class BookController {
             'book' => $book,
             'user' => $user
         ]);
+         var_dump(Session::has('user_id')); 
+        var_dump(Session::get('user_id')); 
+        exit;
+        
     }
 
     /**
@@ -87,7 +91,8 @@ class BookController {
             $imagePath = $this->imageManager->processUpload($_FILES['image'], 'books'); 
         }
 
-            $this->bookManager->create($title, $author, $description, $status, $userId, $image);
+            $this->bookManager->create($title, $author, $description, $status, $userId, $imagePath);
+
 
             header('Location: /books');
             exit;

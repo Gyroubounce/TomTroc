@@ -39,17 +39,25 @@
   padding: 20px;
 }
 
+.edit-left {
+padding: 10px;
+}
+
+.edit-right {
+  padding: 10px;
+}
+
+
 .edit-block p {
   font-size: 14px; 
   color: var(--color-min); 
+  margin-bottom: 10px;
 }
 
-.edit-left {
-  width: 488px;
-}
 
 .edit-cover-detail {
-  width: 100%;
+  width: 488px;
+  height: auto;
   border-radius: 6px;
 }
 
@@ -70,6 +78,7 @@
 .edit-form label {
   display: block;
   margin-top: 15px;
+  margin-bottom: 10px;
   font-size: 14px;
   font-weight: 400;
   color: var( --color-min);
@@ -81,7 +90,6 @@
   width: 435px;
   height: 50px;
   padding: 10px;
-  margin-top: 5px;
   background-color: var(--color-input-background);
   border: 1px solid var( --color-input-border);
   border-radius: 6px;

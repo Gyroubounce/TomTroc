@@ -20,9 +20,21 @@
 
            <div class="account-top">
 
-                <img src="/assets/uploads/profile/<?= htmlspecialchars($user->getProfile() ?? 'default.png') ?>" 
+                 <?php
+                    $profile = $user->getProfile();
+
+                    // Si l'image contient déjà un chemin complet, on le garde tel quel
+                    if ($profile && str_starts_with($profile, '/assets/uploads/profile/')) {
+                        $src = $profile;
+                    } else {
+                        // Sinon on construit le chemin
+                        $src = '/assets/uploads/profile/' . ($profile ?: 'default.png');
+                    }
+                    ?>
+                <img src="<?= htmlspecialchars($src) ?>"
                     alt="Photo de profil de <?= htmlspecialchars($user->getUsername()) ?>"
                     class="account-profile-pic">
+                        
 
                 <a href="#" 
                 class="account-edit-link"
