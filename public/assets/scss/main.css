@@ -39,6 +39,12 @@ h1, h2, h3 {
   font-family: var(--font-title);
 }
 
+.active {
+  font-weight: bold;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+
 /* Header plein écran */
 .site-header {
   width: 100%;

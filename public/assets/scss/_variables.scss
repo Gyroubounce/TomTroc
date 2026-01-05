@@ -37,3 +37,9 @@ h1, h2, h3 {
   color: var(--color-title);
   font-family: var(--font-title);
 }
+
+.active {
+    font-weight: bold;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}

@@ -50,7 +50,7 @@
       <?php if (!$otherUser): ?>
 
         <!-- 🔥 Aucune conversation sélectionnée -->
-        <p aria-live="polite">Pas de messages.</p>
+        <p aria-live="polite">Pas de messages sélectionnés.</p>
 
       <?php else: ?>
 

@@ -82,4 +82,6 @@
     </nav>
 
   </div>
+  <script src="/assets/js/active-menu.js"></script>
+
 </header>
