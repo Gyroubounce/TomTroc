@@ -17,9 +17,20 @@
                    aria-label="Ouvrir la conversation avec <?= htmlspecialchars($conv->other_username) ?>"
                    onclick="window.location='/messages?other=<?= $conv->other_user_id ?>'">
 
-            <img src="/assets/uploads/profile/<?= htmlspecialchars($conv->other_profile ?? 'default.png') ?>"
-                 alt="Photo de profil de <?= htmlspecialchars($conv->other_username) ?>"
-                 class="conversation-photo">
+            <?php
+              $profile = $conv->other_profile;
+
+              // Si l'image contient déjà un chemin complet
+              if ($profile && str_starts_with($profile, '/assets/uploads/profile/')) {
+                  $src = $profile;
+              } else {
+                  $src = '/assets/uploads/profile/' . ($profile ?: 'default.png');
+              }
+            ?>
+              <img src="<?= htmlspecialchars($src) ?>"
+                  alt="Photo de profil de <?= htmlspecialchars($conv->other_username) ?>"
+                  class="conversation-photo">
+
 
             <div class="conversation-info">
               <header class="conversation-header">
@@ -57,15 +68,20 @@
         <!-- 🔥 En-tête de la conversation -->
         <header class="discussion-top-header">
 
-            <?php 
-                $profile = $otherUser->getProfile() ?: 'default.png';
-            ?>
+           <?php
+              $profile = $otherUser->getProfile();
 
-            <img 
-                src="/assets/uploads/profile/<?= htmlspecialchars($profile) ?>" 
-                alt="Photo de profil de <?= htmlspecialchars($otherUser->getUsername()) ?>"
-                class="discussion-top-photo"
-            >
+              // Si l'image contient déjà un chemin complet
+              if ($profile && str_starts_with($profile, '/assets/uploads/profile/')) {
+                  $src = $profile;
+              } else {
+                  $src = '/assets/uploads/profile/' . ($profile ?: 'default.png');
+              }
+            ?>
+              <img src="<?= htmlspecialchars($src) ?>"
+                  alt="Photo de profil de <?= htmlspecialchars($otherUser->getUsername()) ?>"
+                  class="discussion-top-photo">
+
 
             <span class="discussion-top-name">
                 <?= htmlspecialchars($otherUser->getUsername()) ?>
@@ -85,11 +101,19 @@
                 <div class="message-header">
 
                     <?php if ($message->sender_id !== $currentUser->getId()): ?>
-                        <img 
-                          src="/assets/uploads/profile/<?= htmlspecialchars($profile) ?>" 
-                          alt="Photo de profil de <?= htmlspecialchars($otherUser->getUsername()) ?>"
-                          class="discussion-profile"
-                        >
+                          <?php
+                            $profile = $otherUser->getProfile();
+
+                            // Si l'image contient déjà un chemin complet
+                            if ($profile && str_starts_with($profile, '/assets/uploads/profile/')) {
+                                $src = $profile;
+                            } else {
+                                $src = '/assets/uploads/profile/' . ($profile ?: 'default.png');
+                            }
+                          ?>
+                            <img src="<?= htmlspecialchars($src) ?>"
+                                alt="Photo de profil de <?= htmlspecialchars($otherUser->getUsername()) ?>"
+                                class="discussion-profile">
                     <?php endif; ?>
 
                     <div class="discussion-meta">
