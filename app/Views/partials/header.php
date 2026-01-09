@@ -74,7 +74,7 @@
 
         <?php else: ?>
 
-            <li><a href="/inscription">Connexion</a></li>
+            <li><a href="/connexion">Connexion</a></li>
 
         <?php endif; ?>
 
